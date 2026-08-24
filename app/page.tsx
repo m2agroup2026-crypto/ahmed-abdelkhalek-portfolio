@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 type Lang = "en" | "ar";
 type Bi = { en: string; ar: string };
