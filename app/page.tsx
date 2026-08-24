@@ -106,10 +106,16 @@ function IntelligenceConsole({ open, onClose, ar }: { open: boolean; onClose: ()
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Intelligence core unavailable");
       setMessages(current => [...current, { role:"assistant", text:data.text }]);
-    } catch {
-      setMessages(current => [...current, { role:"assistant", text: ar ? "نواة الذكاء جاهزة برمجيًا، لكنها تحتاج إضافة GEMINI_API_KEY على الخادم لتبدأ الإجابة الحية." : "The intelligence core is wired and ready. Add GEMINI_API_KEY on the server to activate live answers." }]);
-    } finally { setThinking(false); }
-  };
+    } catch (error) {
+    setMessages(current => [
+  ...current,
+  {
+    role:"assistant",
+    text: error instanceof Error 
+      ? error.message 
+      : "Unknown error"
+  }
+]);
 
   return <div className={`intelligence-console ${open?"is-open":""}`} aria-hidden={!open}>
     <div className="console-backdrop" onClick={onClose}/>
