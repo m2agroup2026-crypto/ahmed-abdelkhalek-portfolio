@@ -18,7 +18,6 @@ Production bilingual portfolio for Ahmed Abdelkhalek Sayed — Digital Transform
 npm install
 npm run dev
 ```
-
-Copy `.env.example` to `.env.local` and provide `OPENAI_API_KEY` to activate
+Copy .env.example to .env.local and provide GEMINI_API_KEY to activate M2A Intelligence.
 M2A Intelligence. The key is read only by the server route and is never sent
 to the browser.
