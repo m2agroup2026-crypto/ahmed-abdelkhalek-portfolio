@@ -26,130 +26,199 @@ export async function POST(request: NextRequest) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
 
+    console.log(
+      "Gemini Key Loaded:",
+      Boolean(apiKey)
+    );
+
     if (!apiKey) {
       return Response.json(
-        { error: "GEMINI_API_KEY is not configured" },
-        { status: 503 }
+        {
+          error: "GEMINI_API_KEY is missing on server"
+        },
+        {
+          status: 503
+        }
       );
     }
+
 
     const body = await request.json() as {
       messages?: ClientMessage[];
       language?: "ar" | "en";
     };
 
-    const messages = (body.messages || [])
+
+    const messages =
+      (body.messages || [])
       .filter(
         (message) =>
           message &&
           typeof message.text === "string" &&
-          message.text.trim().length > 0
+          message.text.trim()
       )
       .slice(-12);
 
+
+
     if (!messages.length) {
       return Response.json(
-        { error: "A message is required" },
-        { status: 400 }
-      );
-    }
-
-    const contents = messages.map((message) => ({
-      role: message.role === "assistant" ? "model" : "user",
-      parts: [
         {
-          text: message.text.slice(0, 4000),
-        },
-      ],
-    }));
-
-    const model =
-      process.env.GEMINI_MODEL || "gemini-2.5-flash";
-
-
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          systemInstruction: {
-            parts: [
-              {
-                text: SYSTEM,
-              },
-            ],
-          },
-
-          contents,
-
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 900,
-          },
-        }),
-      }
-    );
-
-
-    if (!response.ok) {
-      const error = await response.text();
-
-      console.error(
-        "Gemini API Error:",
-        response.status,
-        error
-      );
-
-      return Response.json(
-        {
-          error: "The intelligence core could not answer right now",
+          error: "Message required"
         },
         {
-          status: 502,
+          status:400
         }
       );
     }
 
 
-    const result = await response.json();
+
+    const contents = messages.map((message)=>({
+
+      role:
+        message.role === "assistant"
+        ? "model"
+        : "user",
+
+      parts:[
+        {
+          text:
+          message.text.slice(0,4000)
+        }
+      ]
+
+    }));
+
+
+
+    const model =
+      process.env.GEMINI_MODEL ||
+      "gemini-2.5-flash";
+
+
+
+    const gemini =
+      await fetch(
+
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json"
+          },
+
+          cache:"no-store",
+
+          body:JSON.stringify({
+
+            systemInstruction:{
+              parts:[
+                {
+                  text:SYSTEM
+                }
+              ]
+            },
+
+            contents,
+
+            generationConfig:{
+              temperature:0.7,
+              maxOutputTokens:900
+            }
+
+          })
+        }
+
+      );
+
+
+
+    const raw =
+      await gemini.text();
+
+
+
+    if(!gemini.ok){
+
+      console.error(
+        "Gemini Response Error:",
+        raw
+      );
+
+
+      return Response.json(
+        {
+          error:raw
+        },
+        {
+          status:502
+        }
+      );
+    }
+
+
+
+    const result =
+      JSON.parse(raw);
+
 
 
     const text =
-      result?.candidates?.[0]?.content?.parts
-        ?.map((part: { text?: string }) => part.text || "")
-        .join("")
-        .trim();
+      result
+      ?.candidates?.[0]
+      ?.content?.parts
+      ?.map(
+        (part:{text?:string}) =>
+        part.text || ""
+      )
+      .join("")
+      .trim();
 
 
-    return Response.json({
-      text:
-        text ||
-        (
-          body.language === "ar"
-            ? "لم أتمكن من تكوين إجابة الآن."
-            : "I could not synthesize an answer right now."
-        ),
-    });
+
+    return Response.json(
+      {
+        text:
+          text ||
+          (
+            body.language === "ar"
+            ?
+            "لم يتم إنشاء رد."
+            :
+            "No response generated."
+          )
+      },
+      {
+        headers:{
+          "Cache-Control":"no-store"
+        }
+      }
+    );
 
 
-  } catch (error) {
+
+  } catch(error){
 
     console.error(
-      "M2A Intelligence Server Error:",
+      "M2A Intelligence Error:",
       error
     );
 
 
     return Response.json(
       {
-        error: "Internal server error",
+        error:
+        error instanceof Error
+        ? error.message
+        : "Unknown server error"
       },
       {
-        status: 500,
+        status:500
       }
     );
+
   }
 }
