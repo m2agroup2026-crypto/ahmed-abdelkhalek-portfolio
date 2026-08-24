@@ -106,16 +106,22 @@ function IntelligenceConsole({ open, onClose, ar }: { open: boolean; onClose: ()
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Intelligence core unavailable");
       setMessages(current => [...current, { role:"assistant", text:data.text }]);
-    } catch (error) {
-    setMessages(current => [
-  ...current,
-  {
-    role:"assistant",
-    text: error instanceof Error 
-      ? error.message 
-      : "Unknown error"
-  }
-]);
+       } catch (error) {
+      setMessages(current => [
+        ...current,
+        {
+          role: "assistant",
+          text:
+            error instanceof Error
+              ? error.message
+              : "Unknown error"
+        }
+      ]);
+
+    } finally {
+      setThinking(false);
+    }
+  };
 
   return <div className={`intelligence-console ${open?"is-open":""}`} aria-hidden={!open}>
     <div className="console-backdrop" onClick={onClose}/>
