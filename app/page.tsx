@@ -106,18 +106,19 @@ function IntelligenceConsole({ open, onClose, ar }: { open: boolean; onClose: ()
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Intelligence core unavailable");
       setMessages(current => [...current, { role:"assistant", text:data.text }]);
-       } catch (error) {
-      setMessages(current => [
-        ...current,
-        {
-          role: "assistant",
-          text:
-            error instanceof Error
-              ? error.message
-              : "Unknown error"
-        }
-      ]);
+       }catch (error) {
+  console.error("M2A Intelligence Error:", error);
 
+  setMessages(current => [
+    ...current,
+    {
+      role:"assistant",
+      text: ar
+        ? "حدث خطأ مؤقت أثناء معالجة الطلب. يرجى المحاولة مرة أخرى."
+        : "A temporary error occurred while processing your request. Please try again."
+    }
+  ]);
+}
     } finally {
       setThinking(false);
     }
