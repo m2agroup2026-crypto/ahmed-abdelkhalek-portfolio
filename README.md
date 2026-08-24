@@ -1,14 +1,16 @@
 # Ahmed Abdelkhalek Portfolio
 
-Production portfolio for **Ahmed Abdelkhalek Sayed** — Digital Transformation Engineer, Full-Stack Developer, and Automation Systems Architect.
+Production bilingual portfolio for Ahmed Abdelkhalek Sayed — Digital Transformation Engineer, Full-Stack Developer, and Automation Systems Architect.
 
-## Experience
+## Features
 
-- Responsive across mobile, tablet, laptop, and wide desktop
-- Bilingual English/Arabic interface with directional transitions
-- Adaptive light and dark modes with preserved electronic contrast
-- Premium Lime, Cyan, and Violet systems cards
-- M2A Digital OS flagship transformation case study
+- Complete English and Arabic interfaces
+- Cairo typography and true RTL layout
+- Responsive mobile-first design
+- Light and dark modes
+- Futuristic animated language rail
+- Premium electronic system cards
+- Social links and professional portrait
 
 ## Run locally
 
@@ -16,7 +18,3 @@ Production portfolio for **Ahmed Abdelkhalek Sayed** — Digital Transformation 
 npm install
 npm run dev
 ```
-
-## Production site
-
-https://ahmed-abdelkhalek-portfolio.guvsbcyc906.chatgpt.site
