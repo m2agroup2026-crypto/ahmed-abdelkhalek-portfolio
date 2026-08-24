@@ -24,12 +24,12 @@ Rules:
 
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = process.env.GEMINI_API_KEY;
+   const apiKey = process.env.GEMINI_API_KEY;
 
-    console.log(
-      "Gemini Key Loaded:",
-      Boolean(apiKey)
-    );
+console.log("ENV TEST:", {
+  exists: !!apiKey,
+  length: apiKey?.length
+});
 
     if (!apiKey) {
       return Response.json(
