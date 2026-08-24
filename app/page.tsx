@@ -61,11 +61,79 @@ const social = [
   {label:"LinkedIn",url:"https://www.linkedin.com/in/ahmed-abdelkhalek-3baab5414/"},
 ];
 
+type IntelligenceMessage = { role: "user" | "assistant"; text: string };
+
+function CinematicIntro({ onComplete }: { onComplete: () => void }) {
+  const [stage, setStage] = useState(0);
+  useEffect(() => {
+    const marks = [450, 1150, 1900, 2800, 3800];
+    const timers = marks.map((delay, index) => setTimeout(() => {
+      setStage(index + 1);
+      if (index === marks.length - 1) setTimeout(onComplete, 720);
+    }, delay));
+    return () => timers.forEach(clearTimeout);
+  }, [onComplete]);
+
+  return <div className={`cinematic-intro intro-stage-${stage}`} role="dialog" aria-label="M2A Digital OS initialization">
+    <button onClick={onComplete}>SKIP INTRO</button>
+    <div className="intro-grid"/><div className="intro-vignette"/>
+    <div className="intro-core"><div className="intro-orbit orbit-a"/><div className="intro-orbit orbit-b"/><div className="intro-orbit orbit-c"/><span>M2A</span></div>
+    <div className="intro-copy">
+      <small>SYSTEM GENESIS / 2026</small>
+      <h2>{stage < 2 ? "A SIGNAL BECOMES" : stage < 4 ? "AN INTELLIGENCE" : "A LIVING SYSTEM"}</h2>
+      <div className="intro-status"><i/><span>{stage < 1 ? "AWAITING SIGNAL" : stage < 2 ? "ARCHITECTURE MAPPED" : stage < 3 ? "AGENTS SYNCHRONIZED" : stage < 4 ? "OPERATIONS CONNECTED" : "M2A DIGITAL OS / ONLINE"}</span></div>
+    </div>
+    <div className="intro-readout"><span>AI CORE</span><span>AGENT MESH</span><span>AUTOMATION</span><span>ENTERPRISE OS</span></div>
+  </div>;
+}
+
+function IntelligenceConsole({ open, onClose, ar }: { open: boolean; onClose: () => void; ar: boolean }) {
+  const [messages, setMessages] = useState<IntelligenceMessage[]>([{
+    role:"assistant",
+    text: ar ? "أنا M2A Intelligence. اسألني عن أي معرفة عامة، أو أعطني مشكلة مؤسسية وسأحوّلها إلى تصور نظام قابل للتنفيذ." : "I am M2A Intelligence. Ask me anything, or give me an institutional problem and I will architect a system around it."
+  }]);
+  const [value, setValue] = useState("");
+  const [thinking, setThinking] = useState(false);
+
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const text = value.trim();
+    if (!text || thinking) return;
+    const next = [...messages, { role:"user" as const, text }];
+    setMessages(next); setValue(""); setThinking(true);
+    try {
+      const response = await fetch("/api/intelligence", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ messages:next, language:ar?"ar":"en" }) });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Intelligence core unavailable");
+      setMessages(current => [...current, { role:"assistant", text:data.text }]);
+    } catch {
+      setMessages(current => [...current, { role:"assistant", text: ar ? "نواة الذكاء جاهزة برمجيًا، لكنها تحتاج إضافة OPENAI_API_KEY على الخادم لتبدأ الإجابة الحية." : "The intelligence core is wired and ready. Add OPENAI_API_KEY on the server to activate live answers." }]);
+    } finally { setThinking(false); }
+  };
+
+  return <div className={`intelligence-console ${open?"is-open":""}`} aria-hidden={!open}>
+    <div className="console-backdrop" onClick={onClose}/>
+    <section role="dialog" aria-modal="true" aria-label="M2A Intelligence">
+      <header><div className="console-brand"><span><i/></span><div><small>M2A / COGNITIVE SYSTEM</small><strong>M2A INTELLIGENCE</strong></div></div><div className="console-state"><i/>LIVE REASONING</div><button onClick={onClose} aria-label="Close intelligence console">×</button></header>
+      <div className="console-layout">
+        <aside><small>CAPABILITY MATRIX</small>{["GENERAL KNOWLEDGE","ENTERPRISE STRATEGY","SYSTEM ARCHITECTURE","AI & AUTOMATION","M2A CONTEXT"].map((item,i)=><div key={item}><span>0{i+1}</span>{item}<i/></div>)}</aside>
+        <div className="conversation">
+          <div className="conversation-stream">{messages.map((message,index)=><article className={message.role} key={`${message.role}-${index}`}><small>{message.role==="assistant"?"M2A INTELLIGENCE":"OPERATOR"}</small><p>{message.text}</p></article>)}{thinking&&<article className="assistant thinking"><small>M2A INTELLIGENCE</small><p><i/><i/><i/> Synthesizing knowledge and context</p></article>}</div>
+          <div className="prompt-suggestions">{(ar?["الذرة فيها كام نواة؟","صمم نظامًا لإدارة شركة متعددة الفروع","كيف تعمل أنظمة AI Agents؟"]:["How many nuclei does an atom have?","Architect a multi-branch company OS","How do AI agents work?"]).map(prompt=><button onClick={()=>setValue(prompt)} key={prompt}>{prompt}</button>)}</div>
+          <form onSubmit={submit}><span>COMMAND</span><textarea value={value} onChange={e=>setValue(e.target.value)} placeholder={ar?"اسأل عن أي شيء أو صف تحديًا معقدًا...":"Ask anything or describe a complex challenge..."} rows={2}/><button type="submit" disabled={thinking} aria-label="Send command">↗</button></form>
+        </div>
+      </div>
+    </section>
+  </div>;
+}
+
 export default function Home() {
   const [lang,setLang] = useState<Lang>("ar");
   const [menuOpen,setMenuOpen] = useState(false);
   const [transition,setTransition] = useState<"to-ar"|"to-en"|null>(null);
   const [dark,setDark] = useState(false);
+  const [intro,setIntro] = useState(true);
+  const [intelligenceOpen,setIntelligenceOpen] = useState(false);
   const ar = lang === "ar";
 
   useEffect(() => { document.documentElement.lang=lang; document.documentElement.dir=ar?"rtl":"ltr"; },[lang,ar]);
@@ -93,6 +161,8 @@ export default function Home() {
   ];
 
   return <main className={ar?"arabic-ui":"english-ui"}>
+    {intro&&<CinematicIntro onComplete={()=>setIntro(false)}/>}
+    <IntelligenceConsole open={intelligenceOpen} onClose={()=>setIntelligenceOpen(false)} ar={ar}/>
     <nav className="nav shell" aria-label="Primary navigation">
       <a className="brand" href="#top"><span>AA</span><b>{ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}</b></a>
       <button className="menu-button" onClick={()=>setMenuOpen(!menuOpen)}>{t(copy.nav.menu,lang)}</button>
@@ -103,9 +173,10 @@ export default function Home() {
     <div className={`language-ticker ${ar?"ticker-ar":"ticker-en"}`} aria-label={ar?"مجالات الخبرة":"Expertise areas"}><div>{[0,1].map(loop=><div className="ticker-set" aria-hidden={loop===1} key={loop}>{tickerItems.map((item,i)=><span className={`ticker-card ticker-tone-${i%3}`} key={`${loop}-${item}`}><i>0{(i%9)+1}</i>{item}<b>↗</b></span>)}</div>)}</div></div>
     {transition&&<div className={`language-wipe ${transition}`}><div className="wipe-grid"/><div className="wipe-copy"><small>{ar?"لغة الواجهة":"INTERFACE LANGUAGE"}</small><strong>{transition==="to-ar"?"العربية":"ENGLISH"}</strong><span>{transition==="to-ar"?"تجربة رقمية بلا حدود":"DIGITAL EXPERIENCE / RELOADED"}</span></div></div>}
 
-    <section id="top" className="hero shell">
-      <div className="hero-copy"><p className="eyebrow"><span/>{t(copy.hero.label,lang)}</p><h1><span>{t(copy.hero.title,lang)}</span><em>{t(copy.hero.accent,lang)}</em></h1><p className="hero-summary">{t(copy.hero.summary,lang)}</p><div className="hero-actions"><a className="button primary" href="#case-study">{t(copy.hero.work,lang)} ↗</a><a className="button secondary" href="#contact">{t(copy.hero.talk,lang)}</a></div></div>
-      <div className="portrait-wrap"><div className="portrait-orbit"/><div className="portrait-frame"><img src="/ahmed-abdelkhalek.jpg" alt={ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}/><div className="portrait-shade"/><div className="portrait-tag"><span>01</span><strong>{ar?"مهندس التحول الرقمي":"DIGITAL TRANSFORMATION ENGINEER"}</strong></div></div><span className="portrait-node node-one">AI</span><span className="portrait-node node-two">CRM</span></div>
+    <section id="top" className="hero future-hero shell">
+      <div className="future-field"><div className="field-grid"/><div className="field-horizon"/><span className="data-ray ray-a"/><span className="data-ray ray-b"/><span className="data-ray ray-c"/></div>
+      <div className="hero-copy future-copy"><p className="eyebrow"><span/>M2A DIGITAL OPERATING SYSTEM / ONLINE</p><h1><span>{ar?"لا أبني برمجيات.":"I DON’T BUILD SOFTWARE."}</span><em>{ar?"بل أهندس ذكاءً يشغّل المؤسسات.":"I ENGINEER INTELLIGENCE THAT RUNS ENTERPRISES."}</em></h1><p className="hero-summary">{ar?"من هندسة الأوامر ووكلاء الذكاء الاصطناعي، إلى التطبيقات والمنصات والأتمتة وأنظمة التحكم المؤسسية — أحوّل أعقد العمليات إلى نظام رقمي واحد يفكر ويتطور ويتوسع.":"From prompt engineering and autonomous AI agents to applications, platforms, automation and enterprise command systems—I transform complex operations into one digital organism that thinks, adapts and scales."}</p><div className="hero-actions"><button className="button primary intelligence-trigger" onClick={()=>setIntelligenceOpen(true)}><i/> {ar?"ادخل إلى نواة الذكاء":"ENTER THE INTELLIGENCE"} ↗</button><a className="button secondary" href="#case-study">{ar?"استكشف الأنظمة":"EXPLORE SYSTEMS"}</a></div><div className="future-metrics"><span><b>01</b>INTELLIGENCE</span><span><b>∞</b>AUTOMATION</span><span><b>24/7</b>OPERATIONS</span></div></div>
+      <div className="intelligence-visual" onClick={()=>setIntelligenceOpen(true)} role="button" tabIndex={0} aria-label="Open M2A Intelligence"><div className="visual-shell shell-one"/><div className="visual-shell shell-two"/><div className="visual-shell shell-three"/><div className="neural-ring ring-one"/><div className="neural-ring ring-two"/><div className="neural-core"><img src="/m2a-logo.png" alt="M2A Group"/><span/></div>{["AI AGENTS","AUTOMATION","DIGITAL TWINS","ENTERPRISE OS","APPS","DATA"].map((x,i)=><span className={`neural-node neural-node-${i+1}`} key={x}><i/>{x}</span>)}<div className="visual-caption"><small>COGNITIVE CORE</small><strong>TOUCH TO INTERACT</strong></div></div>
       <div className="capability-strip">{(ar?["التحول الرقمي","منصات Full-Stack","الذكاء والأتمتة","هندسة CRM","تكامل API","تصميم العمليات"]:["Digital Transformation","Full-Stack Platforms","AI & Automation","CRM Architecture","API Integrations","Business Process Design"]).map(x=><span key={x}>{x}</span>)}</div>
     </section>
 
