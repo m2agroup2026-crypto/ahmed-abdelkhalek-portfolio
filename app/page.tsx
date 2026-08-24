@@ -86,30 +86,66 @@ function CinematicIntro({ onComplete }: { onComplete: () => void }) {
     <div className="intro-readout"><span>AI CORE</span><span>AGENT MESH</span><span>AUTOMATION</span><span>ENTERPRISE OS</span></div>
   </div>;
 }
+const submit = async (event: React.FormEvent) => {
+  event.preventDefault();
 
-function IntelligenceConsole({ open, onClose, ar }: { open: boolean; onClose: () => void; ar: boolean }) {
-  const [messages, setMessages] = useState<IntelligenceMessage[]>([{
-    role:"assistant",
-    text: ar ? "أنا M2A Intelligence. اسألني عن أي معرفة عامة، أو أعطني مشكلة مؤسسية وسأحوّلها إلى تصور نظام قابل للتنفيذ." : "I am M2A Intelligence. Ask me anything, or give me an institutional problem and I will architect a system around it."
-  }]);
-  const [value, setValue] = useState("");
-  const [thinking, setThinking] = useState(false);
+  const text = value.trim();
 
-  const submit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const text = value.trim();
-    if (!text || thinking) return;
-    const next = [...messages, { role:"user" as const, text }];
-    setMessages(next); setValue(""); setThinking(true);
-    try {
-      const response = await fetch("/api/intelligence", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ messages:next, language:ar?"ar":"en" }) });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Intelligence core unavailable");
-      setMessages(current => [...current, { role:"assistant", text:data.text }]);
-    } catch {
-      setMessages(current => [...current, { role:"assistant", text: ar ? "نواة الذكاء جاهزة برمجيًا، لكنها تحتاج إضافة OPENAI_API_KEY على الخادم لتبدأ الإجابة الحية." : "The intelligence core is wired and ready. Add OPENAI_API_KEY on the server to activate live answers." }]);
-    } finally { setThinking(false); }
-  };
+  if (!text || thinking) return;
+
+  const nextMessages = [
+    ...messages,
+    {
+      role: "user" as const,
+      text,
+    },
+  ];
+
+  setMessages(nextMessages);
+  setValue("");
+  setThinking(true);
+
+  try {
+    const response = await fetch("/api/intelligence", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        messages: nextMessages,
+        language: ar ? "ar" : "en",
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error);
+    }
+
+    setMessages((current) => [
+      ...current,
+      {
+        role: "assistant",
+        text: data.text,
+      },
+    ]);
+
+  } catch (error) {
+    setMessages((current) => [
+      ...current,
+      {
+        role: "assistant",
+        text: ar
+          ? "حدث خطأ في الاتصال بنواة الذكاء."
+          : "Intelligence core connection failed.",
+      },
+    ]);
+
+  } finally {
+    setThinking(false);
+  }
+};
 
   return <div className={`intelligence-console ${open?"is-open":""}`} aria-hidden={!open}>
     <div className="console-backdrop" onClick={onClose}/>
