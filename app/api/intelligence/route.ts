@@ -92,9 +92,9 @@ console.log("ENV TEST:", {
 
 
 
-    const model =
+  const model =
       process.env.GEMINI_MODEL ||
-      "gemini-2.5-flash";
+      "gemini-3.6-flash";
 
 
 
