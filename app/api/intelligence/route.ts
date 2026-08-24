@@ -15,9 +15,11 @@ You are a capable general-purpose AI:
 
 Ahmed Abdelkhalek is a digital transformation engineer, full-stack developer, automation systems architect and creator of M2A Digital OS.
 
-Never invent achievements.
-Never claim access to private company data.
-Be clear, premium, concise, and reply in the user's language.
+Rules:
+- Never invent achievements.
+- Never claim access to private company data.
+- Be clear, premium, concise.
+- Reply in the user's language.
 `;
 
 export async function POST(request: NextRequest) {
@@ -37,13 +39,13 @@ export async function POST(request: NextRequest) {
     };
 
     const messages = (body.messages || [])
-      .slice(-12)
       .filter(
-        (m) =>
-          m &&
-          typeof m.text === "string" &&
-          m.text.trim()
-      );
+        (message) =>
+          message &&
+          typeof message.text === "string" &&
+          message.text.trim().length > 0
+      )
+      .slice(-12);
 
     if (!messages.length) {
       return Response.json(
@@ -51,7 +53,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
 
     const contents = messages.map((message) => ({
       role: message.role === "assistant" ? "model" : "user",
@@ -62,7 +63,6 @@ export async function POST(request: NextRequest) {
       ],
     }));
 
-
     const model =
       process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
@@ -71,45 +71,44 @@ export async function POST(request: NextRequest) {
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
       {
         method: "POST",
-        headers:{
-          "Content-Type":"application/json",
+        headers: {
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify({
-          systemInstruction:{
-            parts:[
+        body: JSON.stringify({
+          systemInstruction: {
+            parts: [
               {
-                text:SYSTEM
-              }
-            ]
+                text: SYSTEM,
+              },
+            ],
           },
 
           contents,
 
-          generationConfig:{
-            maxOutputTokens:700,
-            temperature:0.7
-          }
-        })
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 900,
+          },
+        }),
       }
     );
 
 
-    if(!response.ok){
-
+    if (!response.ok) {
       const error = await response.text();
 
       console.error(
-        "Gemini Error:",
+        "Gemini API Error:",
         response.status,
         error
       );
 
       return Response.json(
         {
-          error:"The intelligence core could not answer right now"
+          error: "The intelligence core could not answer right now",
         },
         {
-          status:502
+          status: 502,
         }
       );
     }
@@ -120,9 +119,9 @@ export async function POST(request: NextRequest) {
 
     const text =
       result?.candidates?.[0]?.content?.parts
-      ?.map((p:{text?:string})=>p.text || "")
-      .join("")
-      .trim();
+        ?.map((part: { text?: string }) => part.text || "")
+        .join("")
+        .trim();
 
 
     return Response.json({
@@ -130,25 +129,26 @@ export async function POST(request: NextRequest) {
         text ||
         (
           body.language === "ar"
-          ? "لم أتمكن من تكوين إجابة الآن."
-          : "I could not synthesize an answer right now."
-        )
+            ? "لم أتمكن من تكوين إجابة الآن."
+            : "I could not synthesize an answer right now."
+        ),
     });
 
 
-  } catch(error){
+  } catch (error) {
 
     console.error(
-      "M2A Intelligence Server Error",
+      "M2A Intelligence Server Error:",
       error
     );
 
+
     return Response.json(
       {
-        error:"Internal server error"
+        error: "Internal server error",
       },
       {
-        status:500
+        status: 500,
       }
     );
   }
