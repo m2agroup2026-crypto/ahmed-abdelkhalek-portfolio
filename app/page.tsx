@@ -101,49 +101,28 @@ function IntelligenceConsole({ open, onClose, ar }: { open: boolean; onClose: ()
     if (!text || thinking) return;
     const next = [...messages, { role:"user" as const, text }];
     setMessages(next); setValue(""); setThinking(true);
-  try {
-  const response = await fetch("/api/intelligence", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      messages:next,
-      language:ar?"ar":"en"
-    })
-  });
+    try {
+      const response = await fetch("/api/intelligence", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ messages:next, language:ar?"ar":"en" }) });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Intelligence core unavailable");
+      setMessages(current => [...current, { role:"assistant", text:data.text }]);
+       } catch (error) {
+      setMessages(current => [
+        ...current,
+        {
+          role: "assistant",
+          text:
+            error instanceof Error
+              ? error.message
+              : "Unknown error"
+        }
+      ]);
 
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.error || "Intelligence core unavailable");
-  }
-
-  setMessages(current => [
-    ...current,
-    {
-      role:"assistant",
-      text:data.text
+    } finally {
+      setThinking(false);
     }
-  ]);
+  };
 
-} catch (error) {
-
-  console.error("M2A Intelligence Error:", error);
-
-  setMessages(current => [
-    ...current,
-    {
-      role:"assistant",
-      text: error instanceof Error
-        ? error.message
-        : "Unknown error"
-    }
-  ]);
-
-} finally {
-
-  setThinking(false);
-
-}
   return <div className={`intelligence-console ${open?"is-open":""}`} aria-hidden={!open}>
     <div className="console-backdrop" onClick={onClose}/>
     <section role="dialog" aria-modal="true" aria-label="M2A Intelligence">
