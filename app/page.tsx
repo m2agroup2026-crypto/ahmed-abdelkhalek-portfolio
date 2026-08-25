@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import HeroSequence from "./components/HeroSequence";
 
 type Lang = "en" | "ar";
 type Bi = { en: string; ar: string };
@@ -151,6 +152,18 @@ export default function Home() {
   const [dark,setDark] = useState(false);
   const [intro,setIntro] = useState(true);
   const [intelligenceOpen,setIntelligenceOpen] = useState(false);
+  const [scrolled,setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const ar = lang === "ar";
 
   useEffect(() => { document.documentElement.lang=lang; document.documentElement.dir=ar?"rtl":"ltr"; },[lang,ar]);
@@ -180,7 +193,7 @@ export default function Home() {
   return <main className={ar?"arabic-ui":"english-ui"}>
     {intro&&<CinematicIntro onComplete={()=>setIntro(false)}/>}
     <IntelligenceConsole open={intelligenceOpen} onClose={()=>setIntelligenceOpen(false)} ar={ar}/>
-    <nav className="nav shell" aria-label="Primary navigation">
+    <nav className={`nav shell ${scrolled ? "nav-scrolled" : ""}`} aria-label="Primary navigation">
       <a className="brand" href="#top"><span>AA</span><b>{ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}</b></a>
       <button className="menu-button" onClick={()=>setMenuOpen(!menuOpen)}>{t(copy.nav.menu,lang)}</button>
       <div className={`nav-links ${menuOpen?"open":""}`}><a href="#journey">{t(copy.nav.journey,lang)}</a><a href="#case-study">{t(copy.nav.caseStudy,lang)}</a><a href="#expertise">{t(copy.nav.expertise,lang)}</a><a href="#contact">{t(copy.nav.contact,lang)}</a></div>
@@ -189,6 +202,11 @@ export default function Home() {
     </nav>
     <div className={`language-ticker ${ar?"ticker-ar":"ticker-en"}`} aria-label={ar?"مجالات الخبرة":"Expertise areas"}><div>{[0,1].map(loop=><div className="ticker-set" aria-hidden={loop===1} key={loop}>{tickerItems.map((item,i)=><span className={`ticker-card ticker-tone-${i%3}`} key={`${loop}-${item}`}><i>0{(i%9)+1}</i>{item}<b>↗</b></span>)}</div>)}</div></div>
     {transition&&<div className={`language-wipe ${transition}`}><div className="wipe-grid"/><div className="wipe-copy"><small>{ar?"لغة الواجهة":"INTERFACE LANGUAGE"}</small><strong>{transition==="to-ar"?"العربية":"ENGLISH"}</strong><span>{transition==="to-ar"?"تجربة رقمية بلا حدود":"DIGITAL EXPERIENCE / RELOADED"}</span></div></div>}
+
+    <HeroSequence />
+
+
+
 
     <section id="top" className="hero future-hero shell">
       <div className="future-field"><div className="field-grid"/><div className="field-horizon"/><span className="data-ray ray-a"/><span className="data-ray ray-b"/><span className="data-ray ray-c"/></div>
