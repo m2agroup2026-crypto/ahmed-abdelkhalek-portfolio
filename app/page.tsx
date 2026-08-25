@@ -94,6 +94,11 @@ function IntelligenceConsole({ open, onClose, ar }: { open: boolean; onClose: ()
   }]);
   const [value, setValue] = useState("");
   const [thinking, setThinking] = useState(false);
+  const conversationEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    conversationEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, thinking]);
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -130,7 +135,7 @@ function IntelligenceConsole({ open, onClose, ar }: { open: boolean; onClose: ()
       <div className="console-layout">
         <aside><small>CAPABILITY MATRIX</small>{["GENERAL KNOWLEDGE","ENTERPRISE STRATEGY","SYSTEM ARCHITECTURE","AI & AUTOMATION","M2A CONTEXT"].map((item,i)=><div key={item}><span>0{i+1}</span>{item}<i/></div>)}</aside>
         <div className="conversation">
-          <div className="conversation-stream">{messages.map((message,index)=><article className={message.role} key={`${message.role}-${index}`}><small>{message.role==="assistant"?"M2A INTELLIGENCE":"OPERATOR"}</small><p>{message.text}</p></article>)}{thinking&&<article className="assistant thinking"><small>M2A INTELLIGENCE</small><p><i/><i/><i/> Synthesizing knowledge and context</p></article>}</div>
+          <div className="conversation-stream">{messages.map((message,index)=><article className={message.role} key={`${message.role}-${index}`}><small>{message.role==="assistant"?"M2A INTELLIGENCE":"OPERATOR"}</small><p>{message.text}</p></article>)}{thinking&&<article className="assistant thinking"><small>M2A INTELLIGENCE</small><p><i/><i/><i/> Synthesizing knowledge and context</p></article>}<div ref={conversationEndRef}/></div>
           <div className="prompt-suggestions">{(ar?["الذرة فيها كام نواة؟","صمم نظامًا لإدارة شركة متعددة الفروع","كيف تعمل أنظمة AI Agents؟"]:["How many nuclei does an atom have?","Architect a multi-branch company OS","How do AI agents work?"]).map(prompt=><button onClick={()=>setValue(prompt)} key={prompt}>{prompt}</button>)}</div>
           <form onSubmit={submit}><span>COMMAND</span><textarea value={value} onChange={e=>setValue(e.target.value)} placeholder={ar?"اسأل عن أي شيء أو صف تحديًا معقدًا...":"Ask anything or describe a complex challenge..."} rows={2}/><button type="submit" disabled={thinking} aria-label="Send command">↗</button></form>
         </div>
