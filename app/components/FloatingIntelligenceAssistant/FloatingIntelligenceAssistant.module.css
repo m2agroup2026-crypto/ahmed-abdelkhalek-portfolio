@@ -1,0 +1,667 @@
+.assistant {
+  --fia-cyan: #43dbea;
+  --fia-cyan-soft: rgba(67, 219, 234, 0.18);
+  --fia-gold: #e1b94f;
+  --fia-green: #a5e329;
+  --fia-surface: rgba(4, 14, 12, 0.94);
+  --fia-surface-strong: rgba(7, 21, 18, 0.98);
+  --fia-border: rgba(104, 225, 235, 0.22);
+  --fia-border-strong: rgba(225, 185, 79, 0.48);
+  --fia-text: #f3f5ef;
+  --fia-muted: #94a39d;
+  --fia-shadow: rgba(0, 0, 0, 0.46);
+
+  position: fixed;
+  z-index: 8990;
+  bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  left: 18px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  max-width: min(390px, calc(100vw - 36px));
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.9);
+  transform-origin: bottom left;
+  transition:
+    opacity 320ms ease,
+    visibility 320ms ease,
+    transform 480ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.assistant[data-language="ar"] {
+  right: 18px;
+  left: auto;
+  flex-direction: row-reverse;
+  transform-origin: bottom right;
+}
+
+.assistant[data-visible="true"] {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.trigger {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  padding: 7px;
+  border: 1px solid var(--fia-border);
+  border-radius: 999px;
+  color: var(--fia-text);
+  background:
+    radial-gradient(
+      circle at 18% 22%,
+      rgba(67, 219, 234, 0.13),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(8, 25, 21, 0.98),
+      var(--fia-surface)
+    );
+  box-shadow:
+    0 18px 54px var(--fia-shadow),
+    0 0 0 1px rgba(255, 255, 255, 0.025) inset,
+    0 0 30px rgba(67, 219, 234, 0.08);
+  cursor: pointer;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition:
+    width 520ms cubic-bezier(.16, 1, .3, 1),
+    border-color 320ms ease,
+    box-shadow 420ms ease,
+    transform 360ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.trigger::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  opacity: 0;
+  background:
+    linear-gradient(
+      110deg,
+      transparent 18%,
+      rgba(67, 219, 234, 0.08) 48%,
+      transparent 76%
+    );
+  transform: translateX(-110%);
+  transition: opacity 300ms ease;
+}
+
+.assistant[data-language="ar"] .trigger::before {
+  transform: translateX(110%);
+}
+
+.trigger:hover,
+.trigger:focus-visible {
+  width: 270px;
+  border-color: var(--fia-border-strong);
+  box-shadow:
+    0 24px 68px var(--fia-shadow),
+    0 0 34px rgba(67, 219, 234, 0.13),
+    0 0 0 1px rgba(225, 185, 79, 0.07) inset;
+  transform: translateY(-3px);
+}
+
+.trigger:hover::before,
+.trigger:focus-visible::before {
+  opacity: 1;
+  animation: fiaSurfaceSignal 1200ms ease both;
+}
+
+.trigger:focus-visible,
+.dismiss:focus-visible,
+.invitationAction:focus-visible {
+  outline: 3px solid var(--fia-cyan);
+  outline-offset: 4px;
+}
+
+.core {
+  position: relative;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  place-items: center;
+  border: 1px solid rgba(225, 185, 79, 0.32);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(67, 219, 234, 0.13),
+      transparent 63%
+    ),
+    rgba(1, 9, 8, 0.9);
+  box-shadow:
+    0 0 24px rgba(67, 219, 234, 0.12),
+    0 0 0 5px rgba(67, 219, 234, 0.025);
+}
+
+.core::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(67, 219, 234, 0.12);
+  border-radius: 50%;
+}
+
+.core svg {
+  width: 38px;
+  height: 38px;
+  overflow: visible;
+  fill: none;
+}
+
+.coreOuter {
+  stroke: rgba(67, 219, 234, 0.36);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+  transform-origin: center;
+}
+
+.coreOrbit {
+  stroke: rgba(225, 185, 79, 0.72);
+  stroke-width: 1.2;
+  stroke-dasharray: 18 9;
+  transform-origin: center;
+}
+
+.coreSignal {
+  stroke: rgba(67, 219, 234, 0.74);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+}
+
+.coreCenter {
+  fill: rgba(67, 219, 234, 0.09);
+  stroke: var(--fia-cyan);
+  stroke-width: 1.5;
+}
+
+.corePulse {
+  fill: var(--fia-gold);
+  filter:
+    drop-shadow(0 0 4px rgba(225, 185, 79, 0.9))
+    drop-shadow(0 0 9px rgba(225, 185, 79, 0.58));
+}
+
+.onlineIndicator {
+  position: absolute;
+  right: -1px;
+  bottom: 4px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid #06110e;
+  border-radius: 50%;
+  background: var(--fia-green);
+  box-shadow: 0 0 12px rgba(165, 227, 41, 0.78);
+}
+
+.assistant[data-language="ar"] .onlineIndicator {
+  right: auto;
+  left: -1px;
+}
+
+.triggerCopy {
+  display: grid;
+  min-width: 180px;
+  gap: 3px;
+  text-align: left;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-9px);
+  transition:
+    opacity 260ms ease 40ms,
+    transform 420ms cubic-bezier(.16, 1, .3, 1) 40ms;
+}
+
+.assistant[data-language="ar"] .triggerCopy {
+  text-align: right;
+  transform: translateX(9px);
+}
+
+.trigger:hover .triggerCopy,
+.trigger:focus-visible .triggerCopy {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.triggerCopy small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fia-green);
+  font: 800 9px/1.2 "Cairo", system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.triggerCopy small i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 9px currentColor;
+}
+
+.triggerCopy strong {
+  overflow: hidden;
+  color: var(--fia-text);
+  font: 800 13px/1.35 "Cairo", system-ui, sans-serif;
+  text-overflow: ellipsis;
+}
+
+.triggerCopy em {
+  color: var(--fia-muted);
+  font: 600 10px/1.4 "Cairo", system-ui, sans-serif;
+  font-style: normal;
+}
+
+.invitation {
+  position: absolute;
+  bottom: 78px;
+  left: 0;
+  width: min(340px, calc(100vw - 36px));
+  padding: 6px;
+  border: 1px solid var(--fia-border-strong);
+  border-radius: 22px;
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(67, 219, 234, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      var(--fia-surface-strong),
+      var(--fia-surface)
+    );
+  box-shadow:
+    0 26px 80px var(--fia-shadow),
+    0 0 34px rgba(225, 185, 79, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.035) inset;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.assistant[data-language="ar"] .invitation {
+  right: 0;
+  left: auto;
+}
+
+.invitation::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 26px;
+  width: 13px;
+  height: 13px;
+  border-right: 1px solid var(--fia-border-strong);
+  border-bottom: 1px solid var(--fia-border-strong);
+  background: var(--fia-surface);
+  transform: rotate(45deg);
+}
+
+.assistant[data-language="ar"] .invitation::after {
+  right: 26px;
+  left: auto;
+}
+
+.dismiss {
+  position: absolute;
+  z-index: 3;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: var(--fia-muted);
+  background: rgba(255, 255, 255, 0.035);
+  font: 500 20px/1 system-ui, sans-serif;
+  cursor: pointer;
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.assistant[data-language="ar"] .dismiss {
+  right: auto;
+  left: 10px;
+}
+
+.dismiss:hover {
+  color: var(--fia-text);
+  border-color: rgba(67, 219, 234, 0.34);
+  transform: rotate(8deg);
+}
+
+.invitationAction {
+  width: 100%;
+  padding: 20px 44px 18px 18px;
+  border: 0;
+  border-radius: 17px;
+  color: var(--fia-text);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.assistant[data-language="ar"] .invitationAction {
+  padding: 20px 18px 18px 44px;
+  text-align: right;
+}
+
+.invitationAction > span {
+  display: grid;
+  gap: 7px;
+}
+
+.invitationAction small {
+  color: var(--fia-cyan);
+  font: 800 9px/1.4 "Cairo", system-ui, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.invitationAction strong {
+  max-width: 260px;
+  color: var(--fia-text);
+  font: 750 15px/1.65 "Cairo", system-ui, sans-serif;
+}
+
+.invitationAction em {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  margin-top: 2px;
+  color: var(--fia-gold);
+  font: 750 11px/1.4 "Cairo", system-ui, sans-serif;
+  font-style: normal;
+}
+
+.invitationAction em i {
+  font: 700 14px/1 system-ui, sans-serif;
+  font-style: normal;
+  transition: transform 220ms ease;
+}
+
+.invitationAction:hover em i {
+  transform: translate(3px, -3px);
+}
+
+.assistant[data-language="ar"]
+.invitationAction:hover em i {
+  transform: translate(-3px, -3px);
+}
+
+:global([data-theme="light"]) .assistant {
+  --fia-surface: rgba(250, 251, 246, 0.96);
+  --fia-surface-strong: rgba(255, 255, 252, 0.99);
+  --fia-border: rgba(15, 113, 125, 0.25);
+  --fia-border-strong: rgba(151, 112, 19, 0.45);
+  --fia-text: #10201c;
+  --fia-muted: #64736d;
+  --fia-shadow: rgba(31, 48, 42, 0.2);
+  --fia-cyan: #087f90;
+  --fia-gold: #9b7017;
+  --fia-green: #5c9500;
+}
+
+:global([data-theme="light"]) .trigger,
+:global([data-theme="light"]) .invitation {
+  box-shadow:
+    0 22px 58px var(--fia-shadow),
+    0 0 0 1px rgba(255, 255, 255, 0.72) inset;
+}
+
+:global([data-theme="light"]) .core {
+  background:
+    radial-gradient(
+      circle,
+      rgba(8, 127, 144, 0.13),
+      transparent 63%
+    ),
+    rgba(245, 249, 244, 0.96);
+}
+
+:global([data-theme="light"]) .onlineIndicator {
+  border-color: #f6f9f4;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .assistant[data-visible="true"] .coreOuter {
+    animation: fiaCoreRotate 13s linear infinite;
+  }
+
+  .assistant[data-visible="true"] .coreOrbit {
+    animation: fiaCoreRotateReverse 8s linear infinite;
+  }
+
+  .assistant[data-visible="true"] .corePulse {
+    animation: fiaCorePulse 2600ms ease-in-out infinite;
+  }
+
+  .assistant[data-visible="true"] .core::before {
+    animation: fiaCoreHalo 3200ms ease-in-out infinite;
+  }
+
+  .assistant[data-invitation="true"] .invitation {
+    animation:
+      fiaInvitationOnline 620ms cubic-bezier(.16, 1, .3, 1) both;
+  }
+}
+
+@media (max-width: 700px) {
+  .assistant {
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    left: 14px;
+    max-width: calc(100vw - 28px);
+  }
+
+  .assistant[data-language="ar"] {
+    right: 14px;
+    left: auto;
+  }
+
+  .trigger {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    padding: 6px;
+  }
+
+  .trigger:hover,
+  .trigger:focus-visible {
+    width: 56px;
+    transform: translateY(-2px);
+  }
+
+  .core {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+  }
+
+  .core svg {
+    width: 33px;
+    height: 33px;
+  }
+
+  .triggerCopy {
+    display: none;
+  }
+
+  .invitation {
+    bottom: 70px;
+    width: min(316px, calc(100vw - 28px));
+    border-radius: 20px;
+  }
+
+  .invitationAction strong {
+    max-width: 238px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 380px) {
+  .invitation {
+    width: calc(100vw - 28px);
+  }
+
+  .invitationAction {
+    padding-top: 17px;
+    padding-bottom: 16px;
+  }
+
+  .invitationAction strong {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .assistant[data-visible="true"] {
+    animation: fiaAssistantOnline 620ms
+      cubic-bezier(.16, 1, .3, 1) both;
+  }
+
+  .coreOuter {
+    animation: fiaCoreRotate 13s linear infinite;
+  }
+
+  .coreOrbit {
+    animation: fiaCoreRotateReverse 8s linear infinite;
+  }
+
+  .corePulse {
+    animation: fiaCorePulse 2600ms ease-in-out infinite;
+  }
+
+  .core::before {
+    animation: fiaCoreHalo 3200ms ease-in-out infinite;
+  }
+
+  .assistant[data-invitation="true"] .invitation {
+    animation: fiaInvitationOnline 620ms
+      cubic-bezier(.16, 1, .3, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .assistant,
+  .assistant *,
+  .assistant *::before,
+  .assistant *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes fiaAssistantOnline {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fiaCoreRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fiaCoreRotateReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes fiaCorePulse {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: scale(0.86);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes fiaCoreHalo {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes fiaInvitationOnline {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes fiaSurfaceSignal {
+  from {
+    transform: translateX(-110%);
+  }
+
+  to {
+    transform: translateX(110%);
+  }
+}
+
+.assistant[data-language="ar"]
+.trigger:hover::before,
+.assistant[data-language="ar"]
+.trigger:focus-visible::before {
+  animation-name: fiaSurfaceSignalRtl;
+}
+
+@keyframes fiaSurfaceSignalRtl {
+  from {
+    transform: translateX(110%);
+  }
+
+  to {
+    transform: translateX(-110%);
+  }
+}

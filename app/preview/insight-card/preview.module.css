@@ -1,0 +1,235 @@
+.preview {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: hidden;
+  padding:
+    clamp(110px, 14vw, 170px)
+    clamp(18px, 5vw, 72px)
+    72px;
+  color: #f1f4ee;
+  background:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(73, 220, 232, 0.11),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 86% 84%,
+      rgba(217, 180, 75, 0.11),
+      transparent 30%
+    ),
+    #020706;
+}
+
+.preview[data-preview-theme="light"] {
+  color: #13211d;
+  background:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(8, 127, 144, 0.1),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 86% 84%,
+      rgba(155, 112, 23, 0.1),
+      transparent 30%
+    ),
+    #f3f4ee;
+}
+
+.ambient {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      rgba(73, 220, 232, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(73, 220, 232, 0.055) 1px,
+      transparent 1px
+    );
+  background-size: 58px 58px;
+}
+
+.ambient span {
+  position: absolute;
+  border:
+    1px solid rgba(73, 220, 232, 0.1);
+  border-radius: 50%;
+}
+
+.ambient span:nth-child(1) {
+  top: -280px;
+  right: -190px;
+  width: 560px;
+  height: 560px;
+}
+
+.ambient span:nth-child(2) {
+  bottom: -300px;
+  left: -220px;
+  width: 610px;
+  height: 610px;
+  border-color:
+    rgba(217, 180, 75, 0.13);
+}
+
+.ambient span:nth-child(3) {
+  top: 38%;
+  left: 36%;
+  width: 190px;
+  height: 190px;
+  opacity: 0.4;
+}
+
+.toolbar {
+  position: fixed;
+  z-index: 100;
+  top: 14px;
+  left: 50%;
+  display: flex;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px;
+  border:
+    1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  color: #f4f5ef;
+  background: rgba(5, 14, 12, 0.91);
+  box-shadow:
+    0 18px 54px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(18px);
+  transform: translateX(-50%);
+}
+
+.toolbar strong {
+  padding-inline: 10px;
+  font: 800 10px/1
+    system-ui, sans-serif;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.toolbar > div {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.toolbar button {
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #aab4af;
+  background: transparent;
+  font: 750 11px/1
+    system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.toolbar button[aria-pressed="true"] {
+  border-color:
+    rgba(217, 180, 75, 0.42);
+  color: #ffffff;
+  background:
+    rgba(217, 180, 75, 0.18);
+}
+
+.toolbar button:focus-visible {
+  outline: 3px solid #49dce8;
+  outline-offset: 3px;
+}
+
+.intro {
+  width: min(100%, 1180px);
+  margin: 0 auto 38px;
+}
+
+.intro p {
+  margin: 0 0 12px;
+  color: #49dce8;
+  font: 850 10px/1.5
+    system-ui, sans-serif;
+  letter-spacing: 0.15em;
+}
+
+.preview[data-preview-theme="light"]
+.intro p {
+  color: #087f90;
+}
+
+.intro h1 {
+  margin: 0;
+  font:
+    760 clamp(36px, 6vw, 72px) /
+    1.15 "Cairo", system-ui, sans-serif;
+  letter-spacing: -0.045em;
+}
+
+.intro span {
+  display: block;
+  max-width: 650px;
+  margin-top: 16px;
+  color: #93a19b;
+  font: 550 14px/1.8
+    "Cairo", system-ui, sans-serif;
+}
+
+.preview[data-preview-theme="light"]
+.intro span {
+  color: #65746d;
+}
+
+.stage {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+}
+
+.notice {
+  width: min(100%, 1180px);
+  margin: 18px auto 0;
+  color: #7f8d87;
+  font: 600 10px/1.7
+    "Cairo", system-ui, sans-serif;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .preview {
+    padding:
+      155px 14px
+      calc(40px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .toolbar {
+    top: 8px;
+  }
+
+  .toolbar strong {
+    width: 100%;
+    padding-block: 3px;
+    text-align: center;
+  }
+
+  .intro {
+    margin-bottom: 28px;
+    padding-inline: 5px;
+  }
+
+  .intro h1 {
+    font-size: clamp(34px, 11vw, 52px);
+    letter-spacing: -0.025em;
+  }
+}

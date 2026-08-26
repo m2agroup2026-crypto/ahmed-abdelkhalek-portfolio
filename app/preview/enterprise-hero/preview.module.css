@@ -1,0 +1,81 @@
+.preview {
+  min-height: 100vh;
+  margin: 0;
+  background: #020605;
+}
+
+.toolbar {
+  position: fixed;
+  z-index: 1000;
+  top: 14px;
+  left: 50%;
+  display: flex;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  color: #f4f5ef;
+  background: rgba(4, 10, 8, 0.88);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(18px);
+  transform: translateX(-50%);
+}
+
+.toolbar strong {
+  padding-inline: 10px;
+  font: 700 11px/1 system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.controlGroup {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.controlGroup button {
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: #aeb7b2;
+  background: transparent;
+  font: 700 12px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.controlGroup button:hover {
+  color: #ffffff;
+}
+
+.controlGroup button:focus-visible {
+  outline: 2px solid #73ecff;
+  outline-offset: 2px;
+}
+
+.controlGroup button[aria-pressed="true"] {
+  border-color: rgba(242, 210, 116, 0.42);
+  color: #ffffff;
+  background: rgba(212, 170, 73, 0.2);
+}
+
+@media (max-width: 620px) {
+  .toolbar {
+    top: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .toolbar strong {
+    width: 100%;
+    padding-block: 4px;
+    text-align: center;
+  }
+}

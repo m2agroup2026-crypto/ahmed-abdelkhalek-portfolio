@@ -1,0 +1,162 @@
+.preview {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  overflow: hidden;
+  padding: 24px;
+  color: #f3f4ee;
+  background:
+    radial-gradient(
+      circle at 18% 16%,
+      rgba(42, 205, 224, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 84% 82%,
+      rgba(213, 171, 75, 0.14),
+      transparent 32%
+    ),
+    #020605;
+}
+
+.ambient {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px
+    );
+  background-size: 54px 54px;
+}
+
+.ambient span {
+  position: absolute;
+  width: 420px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(115, 236, 255, 0.13);
+  border-radius: 50%;
+}
+
+.ambient span:first-child {
+  top: -210px;
+  right: -180px;
+}
+
+.ambient span:last-child {
+  bottom: -240px;
+  left: -190px;
+  border-color: rgba(242, 210, 116, 0.16);
+}
+
+.card {
+  width: min(100%, 720px);
+  padding: clamp(28px, 5vw, 54px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 28px;
+  background: rgba(7, 16, 14, 0.82);
+  box-shadow:
+    0 36px 100px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+}
+
+.card > p {
+  margin: 0 0 16px;
+  color: #2acde0;
+  font: 800 10px/1.5 system-ui, sans-serif;
+  letter-spacing: 0.16em;
+}
+
+.card h1 {
+  margin: 0;
+  color: #f3f4ee;
+  font: 750 clamp(36px, 6vw, 64px)/1.02
+    system-ui, sans-serif;
+  letter-spacing: -0.055em;
+}
+
+.card > span {
+  display: block;
+  max-width: 600px;
+  margin-top: 22px;
+  color: #a6afaa;
+  font: 500 14px/1.8 system-ui, sans-serif;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.controls > div {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.controls button {
+  min-height: 36px;
+  padding: 8px 13px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: #a6afaa;
+  background: transparent;
+  font: 700 12px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.controls button[aria-pressed="true"] {
+  border-color: rgba(242, 210, 116, 0.4);
+  color: #ffffff;
+  background: rgba(213, 171, 75, 0.18);
+}
+
+.openButton {
+  display: flex;
+  width: 100%;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 28px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 16px;
+  color: #07100d;
+  background:
+    linear-gradient(135deg, #d9aa38, #f5df8c);
+  box-shadow: 0 18px 44px rgba(213, 171, 75, 0.22);
+  font: 850 13px/1.4 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.openButton i {
+  font-size: 18px;
+  font-style: normal;
+}
+
+.card > small {
+  display: block;
+  margin-top: 14px;
+  color: #7f8984;
+  font: 600 9px/1.5 system-ui, sans-serif;
+}
+
+button:focus-visible {
+  outline: 3px solid #73ecff;
+  outline-offset: 3px;
+}

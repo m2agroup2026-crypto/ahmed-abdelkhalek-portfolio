@@ -1,0 +1,82 @@
+.toolbar {
+  position: fixed;
+  z-index: 1000;
+  top: 112px;
+  left: 50%;
+  display: flex;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 17px;
+  color: #f4f6f0;
+  background: rgba(3, 12, 10, 0.9);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(20px);
+  transform: translateX(-50%);
+}
+
+.toolbar > strong {
+  padding-inline: 10px;
+  font: 800 10px/1 system-ui, sans-serif;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.controlGroup {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.controlGroup button {
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #a6b1ab;
+  background: transparent;
+  font: 750 11px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.controlGroup button:hover {
+  color: #ffffff;
+}
+
+.controlGroup button:focus-visible {
+  outline: 2px solid #4adce7;
+  outline-offset: 2px;
+}
+
+.controlGroup button[aria-pressed="true"] {
+  border-color: rgba(220, 183, 78, 0.5);
+  color: #ffffff;
+  background: rgba(220, 183, 78, 0.2);
+}
+
+@media (max-width: 720px) {
+  .toolbar {
+    top: 92px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .toolbar > strong {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .toolbar {
+    top: 82px;
+  }
+
+  .controlGroup button {
+    padding-inline: 10px;
+  }
+}
