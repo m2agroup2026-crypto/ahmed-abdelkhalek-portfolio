@@ -2,99 +2,82 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const videos = [
-  "/hero/system-init-fixed.mp4",
-  "/hero/core-awakening-fixed.mp4",
-  "/hero/system-connect-fixed.mp4",
-  "/hero/architecture-fixed.mp4",
-  "/hero/enterprise-fixed.mp4",
-  "/hero/final-reveal-fixed.mp4",
-];
+const cinematicVideo = "/hero/final-reveal-fixed.mp4";
 
-export default function HeroSequence() {
-  const [current, setCurrent] = useState(0);
+type HeroSequenceProps = {
+  ar: boolean;
+  active?: boolean;
+  skipSequence?: boolean;
+  onReveal?: () => void;
+};
+
+export default function HeroSequence({
+  ar,
+  active = true,
+  skipSequence = false,
+  onReveal,
+}: HeroSequenceProps) {
   const [fade, setFade] = useState(false);
-  const [finished, setFinished] = useState(false);
+  const [finished, setFinished] = useState(skipSequence);
   const mainRef = useRef<HTMLVideoElement>(null);
-  const leftRef = useRef<HTMLVideoElement>(null);
-  const rightRef = useRef<HTMLVideoElement>(null);
+  const finishTimerRef = useRef<number | null>(null);
 
-  const nextVideo = () => {
-    if (current >= videos.length - 1) {
-      setFade(true);
-
-      setTimeout(() => {
-        setFinished(true);
-
-        [mainRef,leftRef,rightRef].forEach((ref)=>{
-          if(ref.current){
-            ref.current.pause();
-          }
-        });
-
-      }, 1200);
-
-      return;
-    }
+  const finishSequence = () => {
+    if (finished || finishTimerRef.current !== null) return;
 
     setFade(true);
 
-    setTimeout(() => {
-      setCurrent((prev) => prev + 1);
-      setFade(false);
-    }, 220);
+    finishTimerRef.current = window.setTimeout(() => {
+      setFinished(true);
+      mainRef.current?.pause();
+      onReveal?.();
+      finishTimerRef.current = null;
+    }, 650);
   };
 
   useEffect(() => {
-    const refs = [mainRef, leftRef, rightRef];
+    if (!skipSequence) return;
 
-    refs.forEach((ref) => {
-      const video = ref.current;
-      if (!video) return;
-      video.load();
-      video.playbackRate = 3;
+    mainRef.current?.pause();
+    setFade(false);
+    setFinished(true);
+    onReveal?.();
+  }, [skipSequence, onReveal]);
+
+  useEffect(() => {
+    const video = mainRef.current;
+    if (!video || skipSequence || finished) return;
+
+    video.load();
+    video.playbackRate = 2;
+
+    if (active) {
+      video.currentTime = 0;
       video.play().catch(() => {});
-    });
-  }, [current]);
+    } else {
+      video.pause();
+    }
+  }, [active, skipSequence, finished]);
+
+  useEffect(() => {
+    return () => {
+      if (finishTimerRef.current !== null) {
+        window.clearTimeout(finishTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
-    <section className={`hero-sequence hero-sequence--final ${fade ? "is-fading" : ""} ${finished ? "finished" : ""}`}>
-      <div className="hero-column hero-column--mirror hero-column--left">
-        <video
-          ref={leftRef}
-          key={`left-${videos[current]}`}
-          src={videos[current]}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
-      </div>
-
+    <section className={`hero-sequence hero-sequence--final hero-sequence--cinematic-bridge ${fade ? "is-fading" : ""} ${finished ? "finished" : ""}`}>
       <div className="hero-column hero-column--main">
         <video
           ref={mainRef}
-          key={`main-${videos[current]}`}
-          src={videos[current]}
-          autoPlay
+          key={cinematicVideo}
+          src={cinematicVideo}
           muted
           playsInline
           preload="auto"
-          onEnded={nextVideo}
-        />
-      </div>
-
-      <div className="hero-column hero-column--mirror hero-column--right">
-        <video
-          ref={rightRef}
-          key={`right-${videos[current]}`}
-          src={videos[current]}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
+          onEnded={finishSequence}
         />
       </div>
 
@@ -147,17 +130,24 @@ export default function HeroSequence() {
               DIGITAL SYSTEMS ARCHITECT
             </p>
 
-            <h1>
-              أحمد عبد الخالق
-            </h1>
+            <h1>{ar ? "أحمد عبد الخالق" : "Ahmed Abdelkhalek"}</h1>
 
             <h2>
-              AI Systems & Digital Transformation Architect
+              {ar
+                ? "مهندس أنظمة الذكاء الاصطناعي والتحول الرقمي"
+                : "AI Systems & Digital Transformation Architect"}
             </h2>
 
             <p className="reveal-description">
-              أبني أنظمة رقمية ذكية تجمع بين الذكاء الاصطناعي،
-              الأتمتة وهندسة المنصات القابلة للتوسع.
+              {ar ? (
+                <>
+                  أبني أنظمة رقمية ذكية تجمع بين الذكاء الاصطناعي،
+                  <br className="desktop-description-break" />
+                  الأتمتة وهندسة المنصات القابلة للتوسع.
+                </>
+              ) : (
+                "I build intelligent digital systems that combine AI, automation, and scalable platform engineering."
+              )}
             </p>
 
             <div className="reveal-systems">
@@ -176,7 +166,63 @@ export default function HeroSequence() {
                 <strong>READY</strong>
               </div>
             </div>
+
           </div>
+
+          <div className="mobile-m2a-core-block">
+            <div className="mobile-m2a-stage">
+              <div className="mobile-m2a-visual-shell mobile-shell-one" />
+              <div className="mobile-m2a-visual-shell mobile-shell-two" />
+              <div className="mobile-m2a-visual-shell mobile-shell-three" />
+
+              <div className="mobile-m2a-neural-ring mobile-ring-one" />
+              <div className="mobile-m2a-neural-ring mobile-ring-two" />
+
+              <div className="mobile-neural-core">
+                <img src="/m2a-logo.png" alt="M2A Group" />
+                <span />
+              </div>
+
+              <div className="mobile-neural-node mobile-node-1">
+                <i />
+                <span>AI AGENTS</span>
+              </div>
+
+              <div className="mobile-neural-node mobile-node-2">
+                <i />
+                <span>DATA</span>
+              </div>
+
+              <div className="mobile-neural-node mobile-node-3">
+                <i />
+                <span>AUTOMATION</span>
+              </div>
+
+              <div className="mobile-neural-node mobile-node-4">
+                <i />
+                <span>DIGITAL TWINS</span>
+              </div>
+
+              <div className="mobile-neural-node mobile-node-5">
+                <i />
+                <span>ENTERPRISE OS</span>
+              </div>
+
+              <div className="mobile-neural-node mobile-node-6">
+                <i />
+                <span>APPS</span>
+              </div>
+            </div>
+
+            <div className="mobile-visual-caption">
+                <small>M2A DIGITAL OPERATING SYSTEM / ONLINE</small>
+                <strong>COGNITIVE CORE</strong>
+              </div>
+
+
+
+          </div>
+
         </div>
       )}
     </section>
