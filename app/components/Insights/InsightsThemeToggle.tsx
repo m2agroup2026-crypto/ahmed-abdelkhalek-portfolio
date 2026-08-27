@@ -19,9 +19,14 @@ export default function InsightsThemeToggle({
       ? saved === "dark"
       : window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    setDark(nextDark);
     document.documentElement.dataset.theme =
       nextDark ? "dark" : "light";
+
+    const frame = window.requestAnimationFrame(() => {
+      setDark(nextDark);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const toggleTheme = () => {
