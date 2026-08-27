@@ -3,10 +3,15 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import EnterpriseHero from "@/app/components/EnterpriseHero/EnterpriseHero";
-
 import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod";
 import FloatingIntelligenceAssistant from "@/app/components/FloatingIntelligenceAssistant/FloatingIntelligenceAssistant";
 import IntelligenceModal from "@/app/components/IntelligenceExperience/IntelligenceModal";
+import {
+  getPortfolioHomePath,
+  getPortfolioSectionFromPath,
+  getPortfolioSectionPath,
+} from "@/app/content/portfolio-navigation";
+
 type Lang = "en" | "ar";
 type Bi = { en: string; ar: string };
 
@@ -102,9 +107,34 @@ export default function PortfolioHome() {
     document.documentElement.lang = lang;
     document.documentElement.dir = ar ? "rtl" : "ltr";
   }, [lang, ar]);
-  useEffect(() => { const saved=localStorage.getItem("ahmed-portfolio-theme"); setDark(saved?saved==="dark":matchMedia("(prefers-color-scheme: dark)").matches); },[]);
-  useEffect(() => { document.documentElement.dataset.theme=dark?"dark":"light"; },[dark]);
-  const switchLanguage=()=>{if(transition)return;const next:Lang=ar?"en":"ar";setTransition(ar?"to-en":"to-ar");localStorage.setItem("ahmed-portfolio-language",next);setTimeout(()=>window.location.assign(next==="en"?"/en":"/"),340);setTimeout(()=>setTransition(null),850);};
+
+  useEffect(() => {
+    const saved = localStorage.getItem("ahmed-portfolio-theme");
+    const nextDark = saved
+      ? saved === "dark"
+      : matchMedia("(prefers-color-scheme: dark)").matches;
+
+    document.documentElement.dataset.theme =
+      nextDark ? "dark" : "light";
+
+    const frame = window.requestAnimationFrame(() => {
+      setDark(nextDark);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  const switchLanguage=()=>{
+    if(transition)return;
+    const next:Lang=ar?"en":"ar";
+    const section=getPortfolioSectionFromPath(pathname);
+    const destination=section
+      ? getPortfolioSectionPath(section,next)
+      : getPortfolioHomePath(next);
+    setTransition(ar?"to-en":"to-ar");
+    setTimeout(()=>window.location.assign(destination),340);
+    setTimeout(()=>setTransition(null),850);
+  };
   const sendMessage=(event:React.FormEvent<HTMLFormElement>)=>{event.preventDefault();const data=new FormData(event.currentTarget);const subject=encodeURIComponent(`${data.get("project")} — ${data.get("name")}`);const body=encodeURIComponent(`${data.get("message")}\n\n${data.get("name")}\n${data.get("email")}`);window.location.href=`mailto:ahmed@m2agroupeg.com?subject=${subject}&body=${body}`;};
 
   const premium = [
@@ -116,7 +146,6 @@ export default function PortfolioHome() {
     ? ["هندسة التحول الرقمي","تطوير منصات Full-Stack","أتمتة العمليات المؤسسية","حلول الذكاء الاصطناعي","هندسة CRM","تكامل الأنظمة وواجهات API","تصميم تجارب رقمية متجاوبة","تحليل وتطوير مسارات العمل","منصات بيانات مترابطة","حلول رقمية قابلة للتوسع"]
     : ["Digital Transformation Engineering","Full-Stack Platform Development","Enterprise Process Automation","AI-Powered Solutions","CRM Architecture","Systems & API Integration","Responsive Digital Experiences","Workflow Design & Optimization","Connected Data Platforms","Scalable Digital Operations"];
   return <main className={ar?"arabic-ui":"english-ui"}>
-
 
     <nav className={`nav shell ${scrolled ? "nav-scrolled" : ""} nav-cinematic-visible`} aria-label={ar?"التنقل الرئيسي":"Primary navigation"}>
       <a className="brand" href="#top"><span>AA</span><b>{ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}</b></a>
@@ -143,7 +172,7 @@ export default function PortfolioHome() {
           <i aria-hidden="true">↗</i>
         </a>
       </div>
-      <button className="theme-toggle" onClick={()=>{const next=!dark;setDark(next);localStorage.setItem("ahmed-portfolio-theme",next?"dark":"light")}} aria-label={ar?(dark?"تفعيل الوضع الفاتح":"تفعيل الوضع الداكن"):(dark?"Light mode":"Dark mode")}><span className="theme-halo"/><span>{dark?"☾":"☼"}</span></button>
+      <button className="theme-toggle" onClick={()=>{const next=!dark;setDark(next);document.documentElement.dataset.theme=next?"dark":"light";localStorage.setItem("ahmed-portfolio-theme",next?"dark":"light")}} aria-label={ar?(dark?"تفعيل الوضع الفاتح":"تفعيل الوضع الداكن"):(dark?"Light mode":"Dark mode")}><span className="theme-halo"/><span>{dark?"☾":"☼"}</span></button>
       <button className={`language-rail ${ar?"is-ar":"is-en"}`} aria-label={ar?"التبديل إلى الإنجليزية":"Switch to Arabic"} onClick={switchLanguage}><span className="language-glow"/><span className="language-option">EN</span><span className="language-option">ع</span><span className="language-thumb">{ar?"ع":"EN"}</span></button>
     </nav>
     <div className={`language-ticker mobile-language-ticker ${ar?"ticker-ar":"ticker-en"}`} aria-label={ar?"مجالات الخبرة":"Expertise areas"}><div>{[0,1].map(loop=><div className="ticker-set" aria-hidden={loop===1} key={loop}>{tickerItems.map((item,i)=><span className={`ticker-card ticker-tone-${i%3}`} key={`${loop}-${item}`}><i>0{(i%9)+1}</i>{item}<b>↗</b></span>)}</div>)}</div></div>
@@ -154,10 +183,6 @@ export default function PortfolioHome() {
     />
 
     <div className={`language-ticker desktop-language-ticker ${ar?"ticker-ar":"ticker-en"}`} aria-label={ar?"مجالات الخبرة":"Expertise areas"}><div>{[0,1].map(loop=><div className="ticker-set" aria-hidden={loop===1} key={loop}>{tickerItems.map((item,i)=><span className={`ticker-card ticker-tone-${i%3}`} key={`${loop}-${item}`}><i>0{(i%9)+1}</i>{item}<b>↗</b></span>)}</div>)}</div></div>
-
-
-
-
 
     <EnterpriseSystemsMethod
       language={ar ? "ar" : "en"}
