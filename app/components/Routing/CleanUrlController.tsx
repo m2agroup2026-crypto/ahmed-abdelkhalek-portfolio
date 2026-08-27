@@ -8,8 +8,12 @@ import {
   getPortfolioSectionFromId,
   getPortfolioSectionFromPath,
   getPortfolioSectionPath,
+  isPortfolioSection,
   portfolioSectionIds,
 } from "@/app/content/portfolio-navigation";
+
+const LANGUAGE_SWITCH_SECTION_KEY =
+  "ahmed-portfolio-language-switch-section";
 
 function prefersReducedMotion() {
   return window.matchMedia(
@@ -67,18 +71,109 @@ export default function CleanUrlController() {
     const section =
       getPortfolioSectionFromPath(pathname);
 
-    if (!section) {
+    if (section) {
+      const frame = window.requestAnimationFrame(() => {
+        scrollToTarget(portfolioSectionIds[section]);
+      });
+
+      return () => {
+        window.cancelAnimationFrame(frame);
+      };
+    }
+
+    const language =
+      getPortfolioLanguageFromPath(pathname);
+    const homePath = getPortfolioHomePath(language);
+
+    if (pathname !== homePath) {
       return;
     }
 
+    const pendingSection = sessionStorage.getItem(
+      LANGUAGE_SWITCH_SECTION_KEY
+    );
+
+    if (
+      !pendingSection ||
+      !isPortfolioSection(pendingSection)
+    ) {
+      return;
+    }
+
+    sessionStorage.removeItem(
+      LANGUAGE_SWITCH_SECTION_KEY
+    );
+
+    const cleanPath = getPortfolioSectionPath(
+      pendingSection,
+      language
+    );
+
+    window.history.replaceState(
+      null,
+      "",
+      cleanPath
+    );
+
     const frame = window.requestAnimationFrame(() => {
-      scrollToTarget(portfolioSectionIds[section]);
+      scrollToTarget(
+        portfolioSectionIds[pendingSection]
+      );
     });
 
     return () => {
       window.cancelAnimationFrame(frame);
     };
   }, [pathname]);
+
+  useEffect(() => {
+    const rememberLanguageSwitchSection = (
+      event: MouseEvent
+    ) => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) {
+        return;
+      }
+
+      const languageButton = target.closest(
+        "button.language-rail"
+      );
+
+      if (!languageButton) {
+        return;
+      }
+
+      const section = getPortfolioSectionFromPath(
+        window.location.pathname
+      );
+
+      if (section) {
+        sessionStorage.setItem(
+          LANGUAGE_SWITCH_SECTION_KEY,
+          section
+        );
+      } else {
+        sessionStorage.removeItem(
+          LANGUAGE_SWITCH_SECTION_KEY
+        );
+      }
+    };
+
+    document.addEventListener(
+      "click",
+      rememberLanguageSwitchSection,
+      true
+    );
+
+    return () => {
+      document.removeEventListener(
+        "click",
+        rememberLanguageSwitchSection,
+        true
+      );
+    };
+  }, []);
 
   useEffect(() => {
     const normalizeLegacyHash = () => {
