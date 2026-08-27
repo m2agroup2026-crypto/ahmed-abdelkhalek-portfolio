@@ -6,6 +6,7 @@ import EnterpriseHero from "@/app/components/EnterpriseHero/EnterpriseHero";
 import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod";
 import ProfessionalIdentity from "@/app/components/ProfessionalIdentity/ProfessionalIdentity";
 import JourneyExperience from "@/app/components/JourneyExperience/JourneyExperience";
+import CaseStudyExperience from "@/app/components/CaseStudyExperience/CaseStudyExperience";
 import FloatingIntelligenceAssistant from "@/app/components/FloatingIntelligenceAssistant/FloatingIntelligenceAssistant";
 import IntelligenceModal from "@/app/components/IntelligenceExperience/IntelligenceModal";
 import {
@@ -19,18 +20,8 @@ type Bi = { en: string; ar: string };
 
 const t = (value: Bi, lang: Lang) => value[lang];
 
-const architecture: Array<{ title: Bi; text: Bi; icon: string }> = [
-  { icon:"spark",title:{en:"Digital Identity",ar:"الهوية الرقمية"},text:{en:"A unified, credible presence across every customer touchpoint.",ar:"حضور موحّد وموثوق عبر جميع نقاط التواصل مع العملاء."} },
-  { icon:"layers",title:{en:"Corporate Platform",ar:"المنصة المؤسسية"},text:{en:"A responsive website engineered as the public layer of a larger business system.",ar:"موقع متجاوب تم تصميمه كواجهة عامة لمنظومة أعمال متكاملة."} },
-  { icon:"brain",title:{en:"Lead Intelligence",ar:"ذكاء العملاء المحتملين"},text:{en:"Website leads flow into an AI-assisted CRM instead of disconnected inboxes.",ar:"تنتقل طلبات العملاء إلى نظام CRM مدعوم بالذكاء الاصطناعي بدلًا من صناديق منفصلة."} },
-  { icon:"message",title:{en:"Connected Conversations",ar:"محادثات مترابطة"},text:{en:"WhatsApp and Messenger integrations bring communication into one workflow.",ar:"ربط واتساب وماسنجر داخل مسار عمل موحّد ومنظم."} },
-  { icon:"flow",title:{en:"Automation Layer",ar:"طبقة الأتمتة"},text:{en:"Event-driven workflows remove repetitive tasks and accelerate follow-up.",ar:"مسارات عمل قائمة على الأحداث تلغي المهام المتكررة وتسرّع المتابعة."} },
-  { icon:"database",title:{en:"Central Data",ar:"البيانات المركزية"},text:{en:"Supabase, APIs, and structured data create a reliable source of truth.",ar:"Supabase وواجهات API والبيانات المنظمة تصنع مصدرًا مركزيًا موثوقًا."} },
-];
-
 const copy = {
   nav:{journey:{en:"Journey",ar:"الرحلة"},caseStudy:{en:"Case Study",ar:"دراسة الحالة"},expertise:{en:"Expertise",ar:"الخبرات"},contact:{en:"Contact",ar:"تواصل"},menu:{en:"Menu",ar:"القائمة"}},
-  caseStudy:{index:{en:"03 / Flagship Transformation",ar:"03 / مشروع التحول الرئيسي"},live:{en:"Live system",ar:"نظام فعّال"},name:{en:"M2A Digital OS",ar:"نظام M2A الرقمي"},intro:{en:"A connected operating system for the company—not simply a corporate website.",ar:"نظام تشغيل رقمي مترابط للشركة، وليس مجرد موقع مؤسسي."},visit:{en:"Visit M2A Group",ar:"زيارة موقع M2A Group"},challenge:{en:"THE CHALLENGE",ar:"التحدي"},challengeText:{en:"Brand, leads, conversations, follow-up, and operational data lived in separate places. The goal was one digital architecture connecting the full customer journey.",ar:"كانت الهوية والعملاء المحتملون والمحادثات والمتابعة والبيانات التشغيلية موزعة في أماكن منفصلة. كان الهدف بناء معمارية رقمية واحدة تربط رحلة العميل بالكامل."},outcome:{en:"THE OUTCOME",ar:"النتيجة"},outcomeTitle:{en:"One ecosystem. Every interaction connected.",ar:"منظومة واحدة. كل تفاعل مترابط."}},
   systems:{index:{en:"04 / Selected Systems",ar:"04 / أنظمة مختارة"},title:{en:"Premium interfaces.",ar:"واجهات فائقة الجودة."},accent:{en:"Serious infrastructure.",ar:"وبنية تحتية حقيقية."},intro:{en:"Selected layers from the M2A transformation ecosystem—designed to work as one connected operating model.",ar:"طبقات مختارة من منظومة التحول في M2A، صُممت لتعمل كنموذج تشغيلي واحد مترابط."}},
   expertise:{index:{en:"05 / Technical Expertise",ar:"05 / الخبرات التقنية"},title:{en:"From business logic to",ar:"من منطق الأعمال إلى"},accent:{en:"working systems.",ar:"أنظمة تعمل فعليًا."}},
   contact:{index:{en:"06 / Contact",ar:"06 / تواصل معي"},title:{en:"Let’s build the system",ar:"لنبنِ النظام"},accent:{en:"behind your next move.",ar:"خلف خطوتك القادمة."},intro:{en:"Have a transformation challenge, a platform idea, or an operation that needs to work smarter? Let’s talk.",ar:"لديك تحدٍ في التحول الرقمي، أو فكرة منصة، أو عملية تحتاج إلى أن تعمل بذكاء أكبر؟ لنتحدث."}},
@@ -189,7 +180,9 @@ export default function PortfolioHome() {
       language={ar ? "ar" : "en"}
     />
 
-    <section id="case-study" className="case-study shell section"><div className="case-intro"><p className="section-index">{t(copy.caseStudy.index,lang)}</p><span className="live-pill">{t(copy.caseStudy.live,lang)}</span><h2>{t(copy.caseStudy.name,lang)}</h2><p>{t(copy.caseStudy.intro,lang)}</p><a className="text-link" href="https://m2agroupeg.com" target="_blank" rel="noreferrer">{t(copy.caseStudy.visit,lang)} ↗</a></div><div className="case-statement"><span>{t(copy.caseStudy.challenge,lang)}</span><p>{t(copy.caseStudy.challengeText,lang)}</p></div><div className="architecture-grid">{architecture.map((item,i)=><article key={item.title.en}><div className="card-top"><SystemIcon name={item.icon}/><span>0{i+1}</span></div><h3>{t(item.title,lang)}</h3><p>{t(item.text,lang)}</p></article>)}</div><div className="outcome"><p className="section-index">{t(copy.caseStudy.outcome,lang)}</p><h3>{t(copy.caseStudy.outcomeTitle,lang)}</h3><div>{(ar?["الموقع","CRM","المحادثات","الأتمتة","الذكاء"]:["Website","Lead CRM","Messaging","Automation","Intelligence"]).map((x,i)=><span key={x}>{i>0&&<i>←</i>}{x}</span>)}</div></div></section>
+    <CaseStudyExperience
+      language={ar ? "ar" : "en"}
+    />
 
     <section className="selected-systems section"><div className="shell"><div className="systems-heading"><div><p className="section-index">{t(copy.systems.index,lang)}</p><h2>{t(copy.systems.title,lang)}<br/><em>{t(copy.systems.accent,lang)}</em></h2></div><p>{t(copy.systems.intro,lang)}</p></div><div className="premium-cards">{premium.map(card=><article className={`premium-card ${card.cls}`} key={card.visual}><div className="card-scan"/><div className="premium-card-top"><SystemIcon name={card.icon}/><span>{t(card.code,lang)}</span></div><div className="premium-visual"><span className="visual-ring"/><strong>{card.visual}</strong></div><div className="premium-card-copy"><h3>{t(card.title,lang)}</h3><p>{t(card.text,lang)}</p><div>{card.tags.map(x=><span key={x}>{x}</span>)}</div></div></article>)}</div></div></section>
 
