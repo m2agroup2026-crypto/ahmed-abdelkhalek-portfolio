@@ -21,13 +21,19 @@ export function useSectionMotion<T extends HTMLElement>() {
     );
 
     if (reducedMotionQuery.matches) {
-      setMotionState("reduced");
-      return;
+      const frame = window.requestAnimationFrame(() => {
+        setMotionState("reduced");
+      });
+
+      return () => window.cancelAnimationFrame(frame);
     }
 
     if (!("IntersectionObserver" in window)) {
-      setMotionState("active");
-      return;
+      const frame = window.requestAnimationFrame(() => {
+        setMotionState("active");
+      });
+
+      return () => window.cancelAnimationFrame(frame);
     }
 
     const observer = new IntersectionObserver(
