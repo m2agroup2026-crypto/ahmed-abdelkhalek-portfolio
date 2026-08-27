@@ -6,28 +6,3 @@
 @media(max-width:850px){.shell{width:min(100% - 30px,1460px)}.header{grid-template-columns:1fr;gap:30px}.body{grid-template-columns:1fr}.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:18px;border-inline-end:0;border-bottom:1px solid var(--line)}.track{display:none}.rail button{grid-template-columns:1fr;justify-items:center;text-align:center}.map{min-height:410px;border-inline-end:0;border-bottom:1px solid var(--line)}.orbit{width:330px}.card{min-height:520px}.convergence{grid-template-columns:1fr}.summary{grid-column:auto}}
 @media(max-width:520px){.section{padding:62px 0}.header h2{font-size:39px}.section[data-language="ar"] .header h2{font-size:33px}.deck{border-radius:22px}.status{grid-template-columns:1fr auto;padding:13px}.status>span:last-child{display:none}.rail{padding:14px 8px}.rail button>span{font-size:7px}.map{min-height:330px}.orbit{width:265px}.core{width:105px}.card{min-height:540px;padding:25px 20px}.controls button span{display:none}.convergence h3{font-size:31px}}
 @media(prefers-reduced-motion:reduce){.ambient i,.ambient span,.orbit,.orbit i{animation:none}.header h2 span,.header h2 em,.deck{opacity:1;transform:none;transition:none}.card{animation:none}}
-
-/* Contrast pass: explicit surfaces prevent theme bleed from neighboring scenes. */
-.card{background:color-mix(in srgb,var(--strong) 86%,transparent);border-inline-start:1px solid var(--line)}
-.card h3,.layer p,.controls button,.rail .active,.core b{color:var(--ink)}
-.card>p,.cardTop b,.card li,.core small,.node,.intro,.convergence>div:nth-child(2)>span,.summary>span{color:var(--muted)}
-.map{background-color:color-mix(in srgb,var(--bg) 88%,transparent)}
-
-:global(:root[data-theme="dark"]) .section{--muted:#c0cbc5;--line:rgba(255,255,255,.16);--line2:rgba(255,255,255,.29)}
-:global(:root[data-theme="dark"]) .deck{background:#07110e;border-color:rgba(114,235,250,.24)}
-:global(:root[data-theme="dark"]) .card{background:linear-gradient(155deg,#111b18 0%,#0a1310 100%);box-shadow:inset 1px 0 rgba(255,255,255,.04)}
-:global(:root[data-theme="dark"]) .layer{background:#16201d;border-color:rgba(213,170,75,.28)}
-:global(:root[data-theme="dark"]) .card li{color:#d4ddd8;border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.035)}
-:global(:root[data-theme="dark"]) .map{background-color:#030b09;background-image:radial-gradient(circle,rgba(114,235,250,.1),transparent 50%)}
-:global(:root[data-theme="dark"]) .map path{stroke:rgba(192,203,197,.35)}
-:global(:root[data-theme="dark"]) .orbit{border-color:rgba(192,203,197,.25)}
-:global(:root[data-theme="dark"]) .rail button{color:#aebbb5}
-:global(:root[data-theme="dark"]) .rail .active{color:#fff}
-:global(:root[data-theme="dark"]) .status{color:#b7c2bc}
-
-:global(:root[data-theme="light"]) .section{--muted:#46534e;--line:rgba(7,17,14,.18);--line2:rgba(7,17,14,.32)}
-:global(:root[data-theme="light"]) .deck{background:rgba(250,250,246,.96)}
-:global(:root[data-theme="light"]) .card{background:linear-gradient(155deg,#fff 0%,#f1f2ec 100%)}
-:global(:root[data-theme="light"]) .layer{background:#e7e9e2;border-color:rgba(169,120,31,.3)}
-:global(:root[data-theme="light"]) .map{background-color:#e7ebe5}
-:global(:root[data-theme="light"]) .map path{stroke:rgba(7,17,14,.37)}

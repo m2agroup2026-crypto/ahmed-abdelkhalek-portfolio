@@ -4435,72 +4435,6 @@ body:has(.cinematic-intro),body:has(.intelligence-console.is-open){overflow:hidd
 /* DESKTOP HERO DETAILS ALIGNMENT END */
 
 /* DESKTOP HERO DESCRIPTION RHYTHM START */
-
-/* GLOBAL THEME CONTRAST PASS */
-[data-theme="dark"] body,
-[data-theme="dark"] main{
-  color:#f4f7f3;
-}
-
-[data-theme="dark"] .nav{
-  color:#f5f8f5 !important;
-  background:rgba(4,10,8,.94) !important;
-  border-color:rgba(114,235,250,.22) !important;
-  box-shadow:0 18px 60px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.06) !important;
-}
-
-[data-theme="dark"] .nav .brand,
-[data-theme="dark"] .nav .brand b,
-[data-theme="dark"] .nav-links,
-[data-theme="dark"] .nav-links a,
-[data-theme="dark"] .nav .menu-button,
-[data-theme="dark"] .nav .theme-toggle{
-  color:#f5f8f5 !important;
-}
-
-[data-theme="dark"] .nav-links a{
-  opacity:.88 !important;
-  font-weight:650;
-  text-shadow:0 1px 14px rgba(0,0,0,.65);
-}
-
-[data-theme="dark"] .nav-links a:hover,
-[data-theme="dark"] .nav-links a:focus-visible{
-  color:#c7ff32 !important;
-  opacity:1 !important;
-}
-
-[data-theme="dark"] .language-option{
-  color:#e7eee9 !important;
-  opacity:.9 !important;
-}
-
-[data-theme="light"] .nav{
-  color:#07110e !important;
-  background:rgba(250,251,247,.95) !important;
-  border-color:rgba(7,17,14,.16) !important;
-}
-
-[data-theme="light"] .nav-links a{
-  color:#17231f !important;
-  opacity:.86 !important;
-  font-weight:650;
-}
-
-[data-theme="light"] .nav-links a:hover,
-[data-theme="light"] .nav-links a:focus-visible{
-  color:#075d79 !important;
-  opacity:1 !important;
-}
-
-.nav a:focus-visible,
-.nav button:focus-visible,
-main button:focus-visible,
-main a:focus-visible{
-  outline:2px solid #72ebfa;
-  outline-offset:4px;
-}
-
 @media(min-width:901px){
 
   /* Intentional Arabic desktop line break */
@@ -4786,3 +4720,4 @@ html:not(.dark) h3 {
     var(--text-light);
 
 }
+
