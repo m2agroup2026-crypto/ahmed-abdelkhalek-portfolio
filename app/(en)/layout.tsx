@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { rootMetadata } from "@/app/content/root-metadata";
+import { createRootMetadata } from "@/app/content/root-metadata";
 import "@/app/globals.css";
 
-export const metadata: Metadata = rootMetadata;
+export const metadata: Metadata = createRootMetadata("en");
 
 export default function EnglishRootLayout({
   children,

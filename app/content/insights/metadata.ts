@@ -127,7 +127,7 @@ export function createInsightsIndexMetadata(
           : "THE EDGE",
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
     },
@@ -223,7 +223,7 @@ export function createInsightMetadata(
       tags: [...article.tags],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: content.seo.title,
       description: content.seo.description,
     },

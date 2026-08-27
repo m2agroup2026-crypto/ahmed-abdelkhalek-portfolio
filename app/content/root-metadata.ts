@@ -1,24 +1,39 @@
 import type { Metadata } from "next";
 import { absoluteUrl, siteConfig } from "./site";
 
-export const rootMetadata: Metadata = {
+export function createRootMetadata(
+  language: "ar" | "en",
+): Metadata {
+  const isArabic = language === "ar";
+  const title = isArabic
+    ? siteConfig.arabicTitle
+    : siteConfig.title;
+  const description = isArabic
+    ? siteConfig.arabicDescription
+    : siteConfig.description;
+  const authorName = isArabic
+    ? siteConfig.arabicName
+    : siteConfig.name;
+
+  return {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: siteConfig.title,
-    template: "%s | Ahmed Abdelkhalek",
+    default: title,
+    template: isArabic ? "%s | أحمد عبد الخالق" : "%s | Ahmed Abdelkhalek",
   },
-  description: siteConfig.description,
-  applicationName: siteConfig.name,
+  description,
+  applicationName: authorName,
   authors: [
     {
-      name: siteConfig.name,
+      name: authorName,
       url: absoluteUrl(siteConfig.authorPath),
     },
   ],
-  creator: siteConfig.name,
-  publisher: siteConfig.name,
+  creator: authorName,
+  publisher: authorName,
   keywords: [
     "Ahmed Abdelkhalek",
+    "Enterprise Systems & Platform Architect",
     "Digital Transformation Engineer",
     "Enterprise AI",
     "AI Agents",
@@ -44,21 +59,22 @@ export const rootMetadata: Metadata = {
   openGraph: {
     type: "website",
     url: absoluteUrl("/"),
-    locale: siteConfig.locale,
+    locale: isArabic ? siteConfig.alternateLocale : siteConfig.locale,
     alternateLocale: [
-      siteConfig.alternateLocale,
+      isArabic ? siteConfig.locale : siteConfig.alternateLocale,
     ],
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+    title,
+    description,
+    siteName: authorName,
   },
   twitter: {
     card: "summary",
-    title: siteConfig.title,
-    description: siteConfig.description,
+    title,
+    description,
   },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
-};
+  };
+}
