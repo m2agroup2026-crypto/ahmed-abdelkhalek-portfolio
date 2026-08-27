@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import EnterpriseHero from "@/app/components/EnterpriseHero/EnterpriseHero";
 import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod";
+import ProfessionalIdentity from "@/app/components/ProfessionalIdentity/ProfessionalIdentity";
 import FloatingIntelligenceAssistant from "@/app/components/FloatingIntelligenceAssistant/FloatingIntelligenceAssistant";
 import IntelligenceModal from "@/app/components/IntelligenceExperience/IntelligenceModal";
 import {
@@ -188,7 +189,9 @@ export default function PortfolioHome() {
       language={ar ? "ar" : "en"}
     />
 
-    <section className="identity shell section"><div><p className="section-index">{t(copy.identity.index,lang)}</p><h2>{t(copy.identity.title,lang)}<br/><em>{t(copy.identity.accent,lang)}</em></h2></div><div className="identity-copy"><p>{t(copy.identity.p1,lang)}</p><p>{t(copy.identity.p2,lang)}</p><div className="quote">“{t(copy.identity.quote,lang)}”</div></div></section>
+    <ProfessionalIdentity
+      language={ar ? "ar" : "en"}
+    />
 
     <section id="journey" className="journey section"><div className="shell"><div className="section-heading"><div><p className="section-index">{t(copy.journey.index,lang)}</p><h2>{t(copy.journey.title,lang)}<br/><em>{t(copy.journey.accent,lang)}</em></h2></div><p>{t(copy.journey.intro,lang)}</p></div><div className="timeline">{journey.map((item,i)=><article key={item.role.en}><span className="timeline-number">0{i+1}</span><div><p className="timeline-org">{t(item.org,lang)}</p><h3>{t(item.role,lang)}</h3><p>{t(item.text,lang)}</p></div></article>)}</div></div></section>
 
