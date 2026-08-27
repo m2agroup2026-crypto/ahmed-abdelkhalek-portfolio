@@ -1,13 +1,67 @@
 import type { Metadata } from "next";
+import { absoluteUrl, siteConfig } from "./content/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ahmed Abdelkhalek | Digital Transformation Engineer",
-  description: "Portfolio of Ahmed Abdelkhalek Sayed — Full-Stack Developer, Automation Systems Architect, and Digital Transformation Engineer.",
-  keywords: ["Ahmed Abdelkhalek", "Digital Transformation", "Full-Stack Developer", "Automation", "CRM", "Egypt"],
-  openGraph: { title: "Ahmed Abdelkhalek | Digital Transformation Engineer", description: "Beyond websites. I engineer transformation.", type: "website" },
-  twitter: { card: "summary", title: "Ahmed Abdelkhalek | Digital Transformation Engineer", description: "Beyond websites. I engineer transformation." },
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: "%s | Ahmed Abdelkhalek",
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [
+    {
+      name: siteConfig.name,
+      url: absoluteUrl(siteConfig.authorPath),
+    },
+  ],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  keywords: [
+    "Ahmed Abdelkhalek",
+    "Digital Transformation Engineer",
+    "Enterprise AI",
+    "AI Agents",
+    "Enterprise Platforms",
+    "Automation Systems",
+    "CRM Architecture",
+    "Egypt",
+  ],
+  alternates: {
+    canonical: absoluteUrl("/"),
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    url: absoluteUrl("/"),
+    locale: siteConfig.locale,
+    alternateLocale: [
+      siteConfig.alternateLocale,
+    ],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
+  twitter: {
+    card: "summary",
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -1,0 +1,92 @@
+.toggle {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  background: rgba(255,255,255,.055);
+  color: #dce5e0;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 18px rgba(255,255,255,.025),
+    0 8px 24px rgba(0,0,0,.12);
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    color .3s ease,
+    background .3s ease;
+}
+
+.toggle:hover {
+  transform: rotate(10deg) scale(1.06);
+  color: #c7ff32;
+  border-color: rgba(199,255,50,.48);
+  background: rgba(199,255,50,.07);
+}
+
+.halo {
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    rgba(199,255,50,.22),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.toggle:hover .halo {
+  opacity: 1;
+}
+
+.icon {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  transition:
+    opacity .35s ease,
+    transform .45s cubic-bezier(.16,1,.3,1);
+}
+
+.sun {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
+.moon {
+  opacity: 0;
+  transform: translateY(18px) rotate(80deg);
+}
+
+:global([data-theme="dark"]) .sun {
+  opacity: 0;
+  transform: translateY(-18px) rotate(-80deg);
+}
+
+:global([data-theme="dark"]) .moon {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
+@media (max-width: 560px) {
+  .toggle {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle,
+  .halo,
+  .icon {
+    transition: none;
+  }
+}

@@ -2,6 +2,9 @@ import {
   enterpriseAiOperatingModel,
 } from "./articles/enterprise-ai-operating-model";
 import {
+  aiAgentsRealBusinessValue,
+} from "./articles/ai-agents-real-business-value";
+import {
   insightArticleRoadmap,
   insightCategories,
 } from "./catalog";
@@ -12,6 +15,7 @@ import type {
 } from "./types";
 
 const insightRegistry = [
+  aiAgentsRealBusinessValue,
   enterpriseAiOperatingModel,
 ] as const satisfies readonly InsightArticle[];
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import InsightsThemeToggle from "./InsightsThemeToggle";
 import {
   getFeaturedInsights,
   getInsightsIndexPath,
@@ -108,6 +109,10 @@ export default function InsightsIndexPage({
           <Link href="/">
             {ui.article.home}
           </Link>
+
+          <InsightsThemeToggle
+            language={language}
+          />
 
           <Link
             href={alternateHref}

@@ -9,6 +9,9 @@ import {
 import {
   insightsUiContent,
 } from "../../content/insights/ui";
+import {
+  absoluteUrl,
+} from "../../content/site";
 import type {
   InsightLanguage,
 } from "../../content/insights/types";
@@ -41,29 +44,68 @@ export default function InsightArticleRoute({
   const articlePath =
     getInsightPath(article.slug, language);
 
+  const articleUrl =
+    absoluteUrl(articlePath);
+
+  const indexUrl = absoluteUrl(
+    language === "ar"
+      ? "/insights"
+      : "/en/insights"
+  );
+
+  const personId =
+    `${absoluteUrl("/")}#person`;
+
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "@id": `${articleUrl}#article`,
+    url: articleUrl,
     headline: content.title,
     description: content.seo.description,
     inLanguage:
-      language === "ar" ? "ar" : "en",
+      language === "ar" ? "ar-EG" : "en-US",
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
-    mainEntityOfPage: articlePath,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    isPartOf: {
+      "@type": "CollectionPage",
+      "@id": indexUrl,
+      name:
+        language === "ar"
+          ? "السَّبْق"
+          : "THE EDGE",
+    },
     articleSection:
       category?.label[language] ??
       content.categoryLabel,
-    keywords: content.seo.keywords.join(", "),
+    keywords: [
+      ...content.seo.keywords,
+      ...article.tags,
+    ],
     author: {
       "@type": "Person",
+      "@id": personId,
       name: ui.author.name,
+      url: absoluteUrl("/"),
       jobTitle: ui.author.role,
     },
     publisher: {
       "@type": "Person",
+      "@id": personId,
       name: ui.author.name,
+      url: absoluteUrl("/"),
     },
+    copyrightHolder: {
+      "@id": personId,
+    },
+    copyrightYear:
+      new Date(article.publishedAt)
+        .getUTCFullYear(),
+    isAccessibleForFree: true,
   };
 
   return (

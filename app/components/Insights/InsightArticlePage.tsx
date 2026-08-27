@@ -1,4 +1,5 @@
 import Link from "next/link";
+import InsightsThemeToggle from "./InsightsThemeToggle";
 import {
   getInsightCategory,
   getInsightContent,
@@ -122,6 +123,10 @@ export default function InsightArticlePage({
             {ui.article.backToInsights}
           </Link>
 
+          <InsightsThemeToggle
+            language={language}
+          />
+
           <Link
             href={alternateHref}
             hrefLang={alternateLanguage}
@@ -139,17 +144,6 @@ export default function InsightArticlePage({
       >
         <header className={styles.hero}>
           <div className={styles.heroCopy}>
-            <Link
-              className={styles.back}
-              href={insightsHref}
-            >
-              <i aria-hidden="true">
-                {isArabic ? "→" : "←"}
-              </i>
-
-              {ui.article.backToInsights}
-            </Link>
-
             <p className={styles.eyebrow}>
               {content.heroEyebrow}
             </p>

@@ -128,7 +128,28 @@ export default function Home() {
     <nav className={`nav shell ${scrolled ? "nav-scrolled" : ""} nav-cinematic-visible`} aria-label="Primary navigation">
       <a className="brand" href="#top"><span>AA</span><b>{ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}</b></a>
       <button className="menu-button" onClick={()=>setMenuOpen(!menuOpen)}>{t(copy.nav.menu,lang)}</button>
-      <div className={`nav-links ${menuOpen?"open":""}`}><a href="#journey">{t(copy.nav.journey,lang)}</a><a href="#case-study">{t(copy.nav.caseStudy,lang)}</a><a href="#expertise">{t(copy.nav.expertise,lang)}</a><a href="#contact">{t(copy.nav.contact,lang)}</a></div>
+      <div className={`nav-links ${menuOpen?"open":""}`}><a href="#journey">{t(copy.nav.journey,lang)}</a><a href="#case-study">{t(copy.nav.caseStudy,lang)}</a><a href="#expertise">{t(copy.nav.expertise,lang)}</a><a href="#contact">{t(copy.nav.contact,lang)}</a>
+        <a
+          className="edge-gateway"
+          href={ar ? "/insights" : "/en/insights"}
+          aria-label={ar ? "السَّبْق — بوابتك إلى المعرفة" : "THE EDGE — Your gateway to knowledge"}
+        >
+          <span className="edge-gateway-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 21V4.8A1.8 1.8 0 0 1 6.8 3h10.4A1.8 1.8 0 0 1 19 4.8V21"/>
+              <path d="M9 21V7h7v14M3 21h18"/>
+              <circle cx="14" cy="14" r=".7" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+
+          <span className="edge-gateway-copy">
+            <strong>{ar ? "السَّبْق" : "THE EDGE"}</strong>
+            <small>{ar ? "بوابتك إلى المعرفة" : "Gateway to knowledge"}</small>
+          </span>
+
+          <i aria-hidden="true">↗</i>
+        </a>
+      </div>
       <button className="theme-toggle" onClick={()=>{const next=!dark;setDark(next);localStorage.setItem("ahmed-portfolio-theme",next?"dark":"light")}} aria-label={dark?"Light mode":"Dark mode"}><span className="theme-halo"/><span>{dark?"☾":"☼"}</span></button>
       <button className={`language-rail ${ar?"is-ar":"is-en"}`} onClick={switchLanguage}><span className="language-glow"/><span className="language-option">EN</span><span className="language-option">ع</span><span className="language-thumb">{ar?"ع":"EN"}</span></button>
     </nav>

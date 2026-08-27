@@ -2,26 +2,26 @@ export const insightsUiContent = {
   ar: {
     brand: {
       eyebrow:
-        "AHMED ABDELKHALEK / KNOWLEDGE SYSTEM",
-      name: "الرؤى والهندسة الرقمية",
+        "AHMED ABDELKHALEK / THE EDGE",
+      name: "السَّبْق",
     },
     index: {
       eyebrow:
-        "INSIGHTS & DIGITAL ENGINEERING",
+        "THE EDGE / KNOWLEDGE GATEWAY",
       title: "معرفة تساعدك على",
       accent:
         "رؤية النظام خلف التقنية.",
       introduction:
         "رؤى عملية في الذكاء الاصطناعي والتحول الرقمي وهندسة التطبيقات والمنصات المؤسسية؛ تربط التقنية بالعمليات والقرارات والحوكمة والقيمة.",
-      allCategories: "جميع الرؤى",
-      featuredLabel: "رؤية مختارة",
-      latestLabel: "أحدث المقالات",
+      allCategories: "كل موضوعات السَّبْق",
+      featuredLabel: "من السَّبْق",
+      latestLabel: "أحدث ما في السَّبْق",
       empty:
         "لا توجد مقالات منشورة في هذا المسار حاليًا.",
     },
     article: {
       backToInsights:
-        "العودة إلى جميع الرؤى",
+        "العودة إلى السَّبْق",
       published: "نُشر",
       updated: "آخر تحديث",
       authorLabel: "كتبه",
@@ -32,7 +32,7 @@ export const insightsUiContent = {
       relatedEyebrow:
         "CONTINUE EXPLORING",
       relatedTitle:
-        "رؤى مرتبطة بالموضوع",
+        "موضوعات أخرى من السَّبْق",
       switchLanguage:
         "Read in English",
       home: "العودة إلى الموقع",
@@ -49,28 +49,28 @@ export const insightsUiContent = {
   en: {
     brand: {
       eyebrow:
-        "AHMED ABDELKHALEK / KNOWLEDGE SYSTEM",
+        "AHMED ABDELKHALEK / THE EDGE",
       name:
-        "Insights & Digital Engineering",
+        "THE EDGE",
     },
     index: {
       eyebrow:
-        "INSIGHTS & DIGITAL ENGINEERING",
+        "THE EDGE / KNOWLEDGE GATEWAY",
       title:
         "Knowledge that reveals",
       accent:
         "the system behind the technology.",
       introduction:
         "Practical thinking on enterprise AI, digital transformation, application engineering, and enterprise platforms—connecting technology with operations, decisions, governance, and value.",
-      allCategories: "All insights",
-      featuredLabel: "Featured insight",
-      latestLabel: "Latest articles",
+      allCategories: "All topics",
+      featuredLabel: "From THE EDGE",
+      latestLabel: "Latest from THE EDGE",
       empty:
         "No published articles are available in this track yet.",
     },
     article: {
       backToInsights:
-        "Back to all insights",
+        "Back to THE EDGE",
       published: "Published",
       updated: "Last updated",
       authorLabel: "Written by",
@@ -81,7 +81,7 @@ export const insightsUiContent = {
       relatedEyebrow:
         "CONTINUE EXPLORING",
       relatedTitle:
-        "Related insights",
+        "More from THE EDGE",
       switchLanguage:
         "اقرأ المقال بالعربية",
       home: "Back to website",
