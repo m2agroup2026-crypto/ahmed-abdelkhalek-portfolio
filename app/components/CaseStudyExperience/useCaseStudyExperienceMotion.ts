@@ -18,29 +18,22 @@ export function useCaseStudyExperienceMotion<T extends HTMLElement>() {
   const [activePhase, setActivePhase] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    if (motionState === "reduced") return;
 
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const nextState: CaseStudyMotionState = media.matches ? "reduced" : "active";
+    let layer = 0;
+    let phase = 0;
 
-    if (typeof globalThis.IntersectionObserver === "undefined") {
-      const frame = globalThis.requestAnimationFrame(() => setMotionState(nextState));
-      return () => globalThis.cancelAnimationFrame(frame);
-    }
+    const timer = window.setInterval(() => {
+      layer = Math.min(LAYER_COUNT - 1, layer + 1);
+      phase = Math.min(PHASE_COUNT - 1, phase + 1);
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        setMotionState(nextState);
-        observer.disconnect();
-      },
-      { threshold: 0.06, rootMargin: "10% 0px -8% 0px" }
-    );
+      setActiveLayer(layer);
+      setActivePhase(phase);
+    }, 4500);
 
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
+    return () => window.clearInterval(timer);
+
+  }, [motionState]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -130,20 +123,8 @@ export function useCaseStudyExperienceMotion<T extends HTMLElement>() {
     };
   }, [motionState]);
 
-  const jumpToLayer = useCallback((index: number) => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const safeIndex = Math.max(0, Math.min(LAYER_COUNT - 1, index));
-    const sectionTop = window.scrollY + section.getBoundingClientRect().top;
-    const scrollable = Math.max(0, section.offsetHeight - window.innerHeight);
-    const target = (safeIndex + 0.12) / LAYER_COUNT;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    window.scrollTo({
-      top: sectionTop + scrollable * target,
-      behavior: reduced ? "auto" : "smooth",
-    });
+  const jumpToLayer = useCallback((_index: number) => {
+    return;
   }, []);
 
   return {

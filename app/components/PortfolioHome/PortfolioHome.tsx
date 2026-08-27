@@ -6,6 +6,10 @@ import EnterpriseHero from "@/app/components/EnterpriseHero/EnterpriseHero";
 import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod";
 import ProfessionalIdentity from "@/app/components/ProfessionalIdentity/ProfessionalIdentity";
 import JourneyExperience from "@/app/components/JourneyExperience/JourneyExperience";
+import ExperienceSystemTransition from "@/app/components/ExperienceSystemTransition/ExperienceSystemTransition";
+import SystemActivationBridge from "@/app/components/SystemActivationBridge/SystemActivationBridge";
+import GlassCommandRoom from "@/app/components/GlassCommandRoom/GlassCommandRoom";
+import OperationsCenter from "@/app/components/OperationsCenter/OperationsCenter";
 import CaseStudyExperience from "@/app/components/CaseStudyExperience/CaseStudyExperience";
 import SystemsExperience from "@/app/components/SystemsExperience/SystemsExperience";
 import ExpertiseExperience from "@/app/components/ExpertiseExperience/ExpertiseExperience";
@@ -147,10 +151,25 @@ export default function PortfolioHome() {
       language={ar ? "ar" : "en"}
     />
 
-    <CaseStudyExperience
+    <ExperienceSystemTransition
       language={ar ? "ar" : "en"}
     />
 
+    <SystemActivationBridge
+      language={ar ? "ar" : "en"}
+    />
+
+    <GlassCommandRoom
+      language={ar ? "ar" : "en"}
+    />
+
+    <OperationsCenter
+      language={ar ? "ar" : "en"}
+    />
+
+    <CaseStudyExperience
+      language={ar ? "ar" : "en"}
+    />
     <SystemsExperience language={ar ? "ar" : "en"} />
 
     <ExpertiseExperience language={ar ? "ar" : "en"} />

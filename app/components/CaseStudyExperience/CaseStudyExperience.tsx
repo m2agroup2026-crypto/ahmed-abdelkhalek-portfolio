@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./CaseStudyExperience.module.css";
+import CinematicHandoff from "./CinematicHandoff/CinematicHandoff";
 import {
   caseStudyExperienceContent,
   type CaseStudyLanguage,
@@ -214,19 +215,17 @@ export default function CaseStudyExperience({ language }: CaseStudyExperiencePro
                 </div>
 
                 {content.layers.map((layer, index) => (
-                  <button
-                    type="button"
+                  <div
                     className={styles.mapLabel}
                     data-position={index + 1}
                     data-active={index === activeLayer ? "true" : "false"}
                     data-complete={index <= activeLayer ? "true" : "false"}
-                    onClick={() => jumpToLayer(index)}
                     aria-label={`${layer.code} — ${layer.title}`}
                     key={layer.code}
                   >
                     <span>{layer.code}</span>
                     <b>{layer.short}</b>
-                  </button>
+                  </div>
                 ))}
               </div>
 
@@ -236,7 +235,7 @@ export default function CaseStudyExperience({ language }: CaseStudyExperiencePro
                 <ol>
                   {content.layers.map((layer, index) => (
                     <li data-active={index === activeLayer ? "true" : "false"} key={layer.code}>
-                      <button type="button" onClick={() => jumpToLayer(index)}>
+                      <div>
                         <span className={styles.layerCode}>{layer.code}</span>
                         <span className={styles.layerIcon}><LayerIcon layer={layer.key} /></span>
                         <span className={styles.layerCopy}>
@@ -244,7 +243,7 @@ export default function CaseStudyExperience({ language }: CaseStudyExperiencePro
                           <small>{layer.description}</small>
                         </span>
                         <i className={styles.layerStatus} aria-hidden="true" />
-                      </button>
+                      </div>
                     </li>
                   ))}
                 </ol>
@@ -267,6 +266,32 @@ export default function CaseStudyExperience({ language }: CaseStudyExperiencePro
                 {content.visit}<b aria-hidden="true">↗</b>
               </a>
             </aside>
+
+            <div
+              className={
+                activePhase === 3
+                  ? styles.handoffReveal
+                  : styles.handoffHidden
+              }
+            >
+              <div
+              className={
+                activePhase === 3
+                  ? styles.handoffReveal
+                  : styles.handoffHidden
+              }
+            >
+              <div
+  className={
+    activePhase === 3
+      ? styles.handoffReveal
+      : styles.handoffHidden
+  }
+>
+  <CinematicHandoff />
+</div>
+            </div>
+            </div>
           </div>
         </div>
       </div>

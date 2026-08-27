@@ -21,7 +21,7 @@ export default function SystemsExperience({ language }: Props) {
     <section
       ref={rootRef}
       id="systems"
-      className={styles.section}
+      className={`${styles.section} ${styles.controlReveal}`}
       dir={ar ? "rtl" : "ltr"}
       aria-labelledby="systems-title"
     >

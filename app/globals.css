@@ -4613,3 +4613,111 @@ body:has(.cinematic-intro),body:has(.intelligence-console.is-open){overflow:hidd
 
 }
 /* DESKTOP CINEMATIC BRIDGE END */
+
+
+/* GLOBAL LIGHT MODE GLASS SYSTEM */
+
+:root {
+
+  --surface-light:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.92),
+      rgba(245,248,246,.72)
+    );
+
+  --glass-light:
+    rgba(255,255,255,.58);
+
+  --border-light:
+    rgba(7,17,14,.08);
+
+  --text-light:
+    #07110e;
+
+  --muted-light:
+    #66716c;
+
+}
+
+
+/* prevent dark blocks leaking into light mode */
+
+html:not(.dark) body {
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(19,185,218,.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(113,157,22,.08),
+      transparent 35%
+    ),
+    #f7f7f2;
+
+  color:var(--text-light);
+
+}
+
+
+html:not(.dark) section {
+
+  background-color:transparent;
+
+}
+
+
+html:not(.dark) .glass,
+html:not(.dark) [class*="card"],
+html:not(.dark) [class*="panel"] {
+
+  background:
+    var(--surface-light);
+
+  border-color:
+    var(--border-light);
+
+  color:
+    var(--text-light);
+
+}
+
+
+/* fix black surfaces */
+
+html:not(.dark) .bg-black,
+html:not(.dark) .bg-neutral-950,
+html:not(.dark) .bg-zinc-950 {
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f2f5f3
+    ) !important;
+
+}
+
+
+/* readable typography */
+
+html:not(.dark) p {
+
+  color:
+    var(--muted-light);
+
+}
+
+
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3 {
+
+  color:
+    var(--text-light);
+
+}
+
