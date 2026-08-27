@@ -64,6 +64,19 @@ function getCleanPathForTarget(
   return pathname;
 }
 
+function isFormControl(
+  target: EventTarget | null
+): target is
+  | HTMLInputElement
+  | HTMLTextAreaElement
+  | HTMLSelectElement {
+  return (
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    target instanceof HTMLSelectElement
+  );
+}
+
 export default function CleanUrlController() {
   const pathname = usePathname();
 
@@ -321,6 +334,84 @@ export default function CleanUrlController() {
           anchor.setAttribute("href", href);
         }
       }
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    const language =
+      getPortfolioLanguageFromPath(pathname);
+    const requiredMessage =
+      language === "ar"
+        ? "يرجى تعبئة هذا الحقل."
+        : "Please complete this field.";
+    const emailMessage =
+      language === "ar"
+        ? "يرجى إدخال بريد إلكتروني صالح."
+        : "Please enter a valid email address.";
+
+    const handleInvalid = (event: Event) => {
+      if (!isFormControl(event.target)) {
+        return;
+      }
+
+      const control = event.target;
+
+      control.setCustomValidity("");
+
+      if (control.validity.valueMissing) {
+        control.setCustomValidity(requiredMessage);
+        return;
+      }
+
+      if (
+        control instanceof HTMLInputElement &&
+        control.type === "email" &&
+        control.validity.typeMismatch
+      ) {
+        control.setCustomValidity(emailMessage);
+      }
+    };
+
+    const clearValidation = (event: Event) => {
+      if (!isFormControl(event.target)) {
+        return;
+      }
+
+      event.target.setCustomValidity("");
+    };
+
+    document.addEventListener(
+      "invalid",
+      handleInvalid,
+      true
+    );
+    document.addEventListener(
+      "input",
+      clearValidation,
+      true
+    );
+    document.addEventListener(
+      "change",
+      clearValidation,
+      true
+    );
+
+    return () => {
+      document.removeEventListener(
+        "invalid",
+        handleInvalid,
+        true
+      );
+      document.removeEventListener(
+        "input",
+        clearValidation,
+        true
+      );
+      document.removeEventListener(
+        "change",
+        clearValidation,
+        true
+      );
     };
   }, [pathname]);
 
