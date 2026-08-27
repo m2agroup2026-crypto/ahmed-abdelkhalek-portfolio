@@ -1,0 +1,47 @@
+.viewportDock {
+  padding-bottom: 78px;
+}
+
+.controlsDock {
+  inset-inline: clamp(22px, 2.4vw, 34px);
+  bottom: 16px;
+  align-items: center;
+  min-height: 42px;
+  padding-top: 12px;
+  border-top: 1px solid var(--journey-line);
+}
+
+.controlsDock button {
+  min-width: 88px;
+}
+
+.controlsDock button:first-child {
+  justify-content: flex-start;
+}
+
+.controlsDock button:last-child {
+  justify-content: flex-end;
+}
+
+@media (max-height: 820px) and (min-width: 961px) {
+  .viewportDock {
+    padding-bottom: 64px;
+  }
+
+  .controlsDock {
+    bottom: 10px;
+    min-height: 36px;
+    padding-top: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .viewportDock {
+    padding-bottom: 68px;
+  }
+
+  .controlsDock {
+    inset-inline: 18px;
+    bottom: 12px;
+  }
+}
