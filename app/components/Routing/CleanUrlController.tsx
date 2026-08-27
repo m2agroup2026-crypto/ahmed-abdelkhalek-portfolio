@@ -36,6 +36,30 @@ function scrollToTarget(targetId: string) {
   });
 }
 
+function getCleanPathForTarget(
+  targetId: string,
+  pathname: string
+) {
+  const language =
+    getPortfolioLanguageFromPath(pathname);
+  const homePath = getPortfolioHomePath(language);
+  const section =
+    getPortfolioSectionFromId(targetId);
+
+  if (targetId === "top") {
+    return homePath;
+  }
+
+  if (section) {
+    return getPortfolioSectionPath(
+      section,
+      language
+    );
+  }
+
+  return pathname;
+}
+
 export default function CleanUrlController() {
   const pathname = usePathname();
 
@@ -57,9 +81,45 @@ export default function CleanUrlController() {
   }, [pathname]);
 
   useEffect(() => {
-    const language =
-      getPortfolioLanguageFromPath(pathname);
-    const homePath = getPortfolioHomePath(language);
+    const normalizeLegacyHash = () => {
+      const targetId = window.location.hash.slice(1);
+
+      if (!targetId) {
+        return;
+      }
+
+      const cleanPath = getCleanPathForTarget(
+        targetId,
+        window.location.pathname
+      );
+
+      window.history.replaceState(
+        null,
+        "",
+        cleanPath
+      );
+
+      window.requestAnimationFrame(() => {
+        scrollToTarget(targetId);
+      });
+    };
+
+    normalizeLegacyHash();
+
+    window.addEventListener(
+      "hashchange",
+      normalizeLegacyHash
+    );
+
+    return () => {
+      window.removeEventListener(
+        "hashchange",
+        normalizeLegacyHash
+      );
+    };
+  }, [pathname]);
+
+  useEffect(() => {
     const anchors = Array.from(
       document.querySelectorAll<HTMLAnchorElement>(
         'a[href^="#"]'
@@ -79,17 +139,10 @@ export default function CleanUrlController() {
       }
 
       const targetId = href.slice(1);
-      const section =
-        getPortfolioSectionFromId(targetId);
-      const cleanHref =
-        targetId === "top"
-          ? homePath
-          : section
-            ? getPortfolioSectionPath(
-                section,
-                language
-              )
-            : pathname;
+      const cleanHref = getCleanPathForTarget(
+        targetId,
+        pathname
+      );
 
       anchor.dataset.cleanScrollTarget = targetId;
       anchor.setAttribute("href", cleanHref);
@@ -132,17 +185,10 @@ export default function CleanUrlController() {
       event.preventDefault();
       event.stopPropagation();
 
-      const section =
-        getPortfolioSectionFromId(targetId);
-      const cleanPath =
-        targetId === "top"
-          ? homePath
-          : section
-            ? getPortfolioSectionPath(
-                section,
-                language
-              )
-            : pathname;
+      const cleanPath = getCleanPathForTarget(
+        targetId,
+        window.location.pathname
+      );
 
       if (
         cleanPath !== window.location.pathname ||
