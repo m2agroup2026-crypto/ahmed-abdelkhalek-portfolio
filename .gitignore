@@ -5,4 +5,6 @@ dist
 .env*
 !.env.example
 *.log
+*.tsbuildinfo
+app/globals.css.save
 .DS_Store
