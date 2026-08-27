@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import EnterpriseHero from "@/app/components/EnterpriseHero/EnterpriseHero";
 
 import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod";
@@ -29,7 +30,6 @@ const architecture: Array<{ title: Bi; text: Bi; icon: string }> = [
 
 const copy = {
   nav:{journey:{en:"Journey",ar:"الرحلة"},caseStudy:{en:"Case Study",ar:"دراسة الحالة"},expertise:{en:"Expertise",ar:"الخبرات"},contact:{en:"Contact",ar:"تواصل"},menu:{en:"Menu",ar:"القائمة"}},
-  hero:{label:{en:"Digital Transformation Engineer",ar:"مهندس التحول الرقمي"},title:{en:"Beyond websites.",ar:"أبعد من مجرد مواقع."},accent:{en:"I engineer transformation.",ar:"أنا أهندس التحول."},summary:{en:"I’m Ahmed Abdelkhalek Sayed — a Full-Stack Developer and Automation Systems Architect turning complex institutional operations into connected, scalable digital platforms.",ar:"أنا أحمد عبد الخالق سيد — مطور Full-Stack ومهندس أنظمة أتمتة، أحوّل العمليات المؤسسية المعقدة إلى منصات رقمية مترابطة وقابلة للتوسع."},work:{en:"Explore the work",ar:"استكشف أعمالي"},talk:{en:"Start a conversation",ar:"ابدأ محادثة"}},
   identity:{index:{en:"01 / Professional Identity",ar:"01 / الهوية المهنية"},title:{en:"Technology shaped by",ar:"تكنولوجيا يصنعها"},accent:{en:"institutional insight.",ar:"الفهم المؤسسي."},p1:{en:"My work sits at the intersection of technology, administration, communication, and operations. I don’t begin with screens. I begin with how the institution actually works.",ar:"يقع عملي عند نقطة التقاء التكنولوجيا والإدارة والاتصال والتشغيل. لا أبدأ من الشاشات، بل أبدأ من فهم الطريقة الحقيقية التي تعمل بها المؤسسة."},p2:{en:"I map workflows, data, decisions, and customer touchpoints—then engineer the digital system that connects them into one measurable experience.",ar:"أحلل مسارات العمل والبيانات والقرارات ونقاط التواصل مع العملاء، ثم أبني النظام الرقمي الذي يربطها في تجربة واحدة واضحة وقابلة للقياس."},quote:{en:"The best digital solution doesn’t add software. It removes friction.",ar:"أفضل الحلول الرقمية لا تضيف برمجيات فقط، بل تزيل التعقيد."}},
   journey:{index:{en:"02 / Digital Journey",ar:"02 / الرحلة الرقمية"},title:{en:"Experience became",ar:"تحوّلت الخبرة إلى"},accent:{en:"architecture.",ar:"هندسة رقمية."},intro:{en:"Each chapter added a new layer: communication, governance, operations, and finally the ability to connect them through technology.",ar:"أضافت كل مرحلة طبقة جديدة: الاتصال، والحوكمة، والتشغيل، ثم القدرة على ربطها جميعًا بالتكنولوجيا."}},
   caseStudy:{index:{en:"03 / Flagship Transformation",ar:"03 / مشروع التحول الرئيسي"},live:{en:"Live system",ar:"نظام فعّال"},name:{en:"M2A Digital OS",ar:"نظام M2A الرقمي"},intro:{en:"A connected operating system for the company—not simply a corporate website.",ar:"نظام تشغيل رقمي مترابط للشركة، وليس مجرد موقع مؤسسي."},visit:{en:"Visit M2A Group",ar:"زيارة موقع M2A Group"},challenge:{en:"THE CHALLENGE",ar:"التحدي"},challengeText:{en:"Brand, leads, conversations, follow-up, and operational data lived in separate places. The goal was one digital architecture connecting the full customer journey.",ar:"كانت الهوية والعملاء المحتملون والمحادثات والمتابعة والبيانات التشغيلية موزعة في أماكن منفصلة. كان الهدف بناء معمارية رقمية واحدة تربط رحلة العميل بالكامل."},outcome:{en:"THE OUTCOME",ar:"النتيجة"},outcomeTitle:{en:"One ecosystem. Every interaction connected.",ar:"منظومة واحدة. كل تفاعل مترابط."}},
@@ -66,7 +66,8 @@ const social = [
 ];
 
 export default function Home() {
-  const [lang,setLang] = useState<Lang>("ar");
+  const pathname = usePathname();
+  const lang: Lang = pathname === "/en" || pathname.startsWith("/en/") ? "en" : "ar";
   const [menuOpen,setMenuOpen] = useState(false);
   const [transition,setTransition] = useState<"to-ar"|"to-en"|null>(null);
   const [dark,setDark] = useState(false);
@@ -98,20 +99,12 @@ export default function Home() {
   const ar = lang === "ar";
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem("ahmed-portfolio-language");
-
-    if (savedLanguage === "ar" || savedLanguage === "en") {
-      setLang(savedLanguage);
-    }
-  }, []);
-
-  useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = ar ? "rtl" : "ltr";
   }, [lang, ar]);
   useEffect(() => { const saved=localStorage.getItem("ahmed-portfolio-theme"); setDark(saved?saved==="dark":matchMedia("(prefers-color-scheme: dark)").matches); },[]);
   useEffect(() => { document.documentElement.dataset.theme=dark?"dark":"light"; },[dark]);
-  const switchLanguage=()=>{if(transition)return;const next:Lang=ar?"en":"ar";setTransition(ar?"to-en":"to-ar");setTimeout(()=>{setLang(next);localStorage.setItem("ahmed-portfolio-language",next);},340);setTimeout(()=>setTransition(null),850);};
+  const switchLanguage=()=>{if(transition)return;const next:Lang=ar?"en":"ar";setTransition(ar?"to-en":"to-ar");localStorage.setItem("ahmed-portfolio-language",next);setTimeout(()=>window.location.assign(next==="en"?"/en":"/"),340);setTimeout(()=>setTransition(null),850);};
   const sendMessage=(event:React.FormEvent<HTMLFormElement>)=>{event.preventDefault();const data=new FormData(event.currentTarget);const subject=encodeURIComponent(`${data.get("project")} — ${data.get("name")}`);const body=encodeURIComponent(`${data.get("message")}\n\n${data.get("name")}\n${data.get("email")}`);window.location.href=`mailto:ahmed@m2agroupeg.com?subject=${subject}&body=${body}`;};
 
   const premium = [
@@ -125,10 +118,10 @@ export default function Home() {
   return <main className={ar?"arabic-ui":"english-ui"}>
 
 
-    <nav className={`nav shell ${scrolled ? "nav-scrolled" : ""} nav-cinematic-visible`} aria-label="Primary navigation">
+    <nav className={`nav shell ${scrolled ? "nav-scrolled" : ""} nav-cinematic-visible`} aria-label={ar?"التنقل الرئيسي":"Primary navigation"}>
       <a className="brand" href="#top"><span>AA</span><b>{ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}</b></a>
-      <button className="menu-button" onClick={()=>setMenuOpen(!menuOpen)}>{t(copy.nav.menu,lang)}</button>
-      <div className={`nav-links ${menuOpen?"open":""}`}><a href="#journey">{t(copy.nav.journey,lang)}</a><a href="#case-study">{t(copy.nav.caseStudy,lang)}</a><a href="#expertise">{t(copy.nav.expertise,lang)}</a><a href="#contact">{t(copy.nav.contact,lang)}</a>
+      <button className="menu-button" aria-expanded={menuOpen} aria-controls="primary-nav-links" onClick={()=>setMenuOpen(!menuOpen)}>{t(copy.nav.menu,lang)}</button>
+      <div id="primary-nav-links" className={`nav-links ${menuOpen?"open":""}`}><a href="#journey">{t(copy.nav.journey,lang)}</a><a href="#case-study">{t(copy.nav.caseStudy,lang)}</a><a href="#expertise">{t(copy.nav.expertise,lang)}</a><a href="#contact">{t(copy.nav.contact,lang)}</a>
         <a
           className="edge-gateway"
           href={ar ? "/insights" : "/en/insights"}
@@ -150,8 +143,8 @@ export default function Home() {
           <i aria-hidden="true">↗</i>
         </a>
       </div>
-      <button className="theme-toggle" onClick={()=>{const next=!dark;setDark(next);localStorage.setItem("ahmed-portfolio-theme",next?"dark":"light")}} aria-label={dark?"Light mode":"Dark mode"}><span className="theme-halo"/><span>{dark?"☾":"☼"}</span></button>
-      <button className={`language-rail ${ar?"is-ar":"is-en"}`} onClick={switchLanguage}><span className="language-glow"/><span className="language-option">EN</span><span className="language-option">ع</span><span className="language-thumb">{ar?"ع":"EN"}</span></button>
+      <button className="theme-toggle" onClick={()=>{const next=!dark;setDark(next);localStorage.setItem("ahmed-portfolio-theme",next?"dark":"light")}} aria-label={ar?(dark?"تفعيل الوضع الفاتح":"تفعيل الوضع الداكن"):(dark?"Light mode":"Dark mode")}><span className="theme-halo"/><span>{dark?"☾":"☼"}</span></button>
+      <button className={`language-rail ${ar?"is-ar":"is-en"}`} aria-label={ar?"التبديل إلى الإنجليزية":"Switch to Arabic"} onClick={switchLanguage}><span className="language-glow"/><span className="language-option">EN</span><span className="language-option">ع</span><span className="language-thumb">{ar?"ع":"EN"}</span></button>
     </nav>
     <div className={`language-ticker mobile-language-ticker ${ar?"ticker-ar":"ticker-en"}`} aria-label={ar?"مجالات الخبرة":"Expertise areas"}><div>{[0,1].map(loop=><div className="ticker-set" aria-hidden={loop===1} key={loop}>{tickerItems.map((item,i)=><span className={`ticker-card ticker-tone-${i%3}`} key={`${loop}-${item}`}><i>0{(i%9)+1}</i>{item}<b>↗</b></span>)}</div>)}</div></div>
     {transition&&<div className={`language-wipe ${transition}`}><div className="wipe-grid"/><div className="wipe-copy"><small>{ar?"لغة الواجهة":"INTERFACE LANGUAGE"}</small><strong>{transition==="to-ar"?"العربية":"ENGLISH"}</strong><span>{transition==="to-ar"?"تجربة رقمية بلا حدود":"DIGITAL EXPERIENCE / RELOADED"}</span></div></div>}
@@ -174,7 +167,7 @@ export default function Home() {
 
     <section id="journey" className="journey section"><div className="shell"><div className="section-heading"><div><p className="section-index">{t(copy.journey.index,lang)}</p><h2>{t(copy.journey.title,lang)}<br/><em>{t(copy.journey.accent,lang)}</em></h2></div><p>{t(copy.journey.intro,lang)}</p></div><div className="timeline">{journey.map((item,i)=><article key={item.role.en}><span className="timeline-number">0{i+1}</span><div><p className="timeline-org">{t(item.org,lang)}</p><h3>{t(item.role,lang)}</h3><p>{t(item.text,lang)}</p></div></article>)}</div></div></section>
 
-    <section id="case-study" className="case-study shell section"><div className="case-intro"><p className="section-index">{t(copy.caseStudy.index,lang)}</p><span className="live-pill">{t(copy.caseStudy.live,lang)}</span><h2>{t(copy.caseStudy.name,lang)}</h2><p>{t(copy.caseStudy.intro,lang)}</p><a className="text-link" href="https://m2agroupeg.com/" target="_blank" rel="noreferrer">{t(copy.caseStudy.visit,lang)} ↗</a></div><div className="case-statement"><span>{t(copy.caseStudy.challenge,lang)}</span><p>{t(copy.caseStudy.challengeText,lang)}</p></div><div className="architecture-grid">{architecture.map((item,i)=><article key={item.title.en}><div className="card-top"><SystemIcon name={item.icon}/><span>0{i+1}</span></div><h3>{t(item.title,lang)}</h3><p>{t(item.text,lang)}</p></article>)}</div><div className="outcome"><p className="section-index">{t(copy.caseStudy.outcome,lang)}</p><h3>{t(copy.caseStudy.outcomeTitle,lang)}</h3><div>{(ar?["الموقع","CRM","المحادثات","الأتمتة","الذكاء"]:["Website","Lead CRM","Messaging","Automation","Intelligence"]).map((x,i)=><span key={x}>{i>0&&<i>←</i>}{x}</span>)}</div></div></section>
+    <section id="case-study" className="case-study shell section"><div className="case-intro"><p className="section-index">{t(copy.caseStudy.index,lang)}</p><span className="live-pill">{t(copy.caseStudy.live,lang)}</span><h2>{t(copy.caseStudy.name,lang)}</h2><p>{t(copy.caseStudy.intro,lang)}</p><a className="text-link" href="https://m2agroupeg.com" target="_blank" rel="noreferrer">{t(copy.caseStudy.visit,lang)} ↗</a></div><div className="case-statement"><span>{t(copy.caseStudy.challenge,lang)}</span><p>{t(copy.caseStudy.challengeText,lang)}</p></div><div className="architecture-grid">{architecture.map((item,i)=><article key={item.title.en}><div className="card-top"><SystemIcon name={item.icon}/><span>0{i+1}</span></div><h3>{t(item.title,lang)}</h3><p>{t(item.text,lang)}</p></article>)}</div><div className="outcome"><p className="section-index">{t(copy.caseStudy.outcome,lang)}</p><h3>{t(copy.caseStudy.outcomeTitle,lang)}</h3><div>{(ar?["الموقع","CRM","المحادثات","الأتمتة","الذكاء"]:["Website","Lead CRM","Messaging","Automation","Intelligence"]).map((x,i)=><span key={x}>{i>0&&<i>←</i>}{x}</span>)}</div></div></section>
 
     <section className="selected-systems section"><div className="shell"><div className="systems-heading"><div><p className="section-index">{t(copy.systems.index,lang)}</p><h2>{t(copy.systems.title,lang)}<br/><em>{t(copy.systems.accent,lang)}</em></h2></div><p>{t(copy.systems.intro,lang)}</p></div><div className="premium-cards">{premium.map(card=><article className={`premium-card ${card.cls}`} key={card.visual}><div className="card-scan"/><div className="premium-card-top"><SystemIcon name={card.icon}/><span>{t(card.code,lang)}</span></div><div className="premium-visual"><span className="visual-ring"/><strong>{card.visual}</strong></div><div className="premium-card-copy"><h3>{t(card.title,lang)}</h3><p>{t(card.text,lang)}</p><div>{card.tags.map(x=><span key={x}>{x}</span>)}</div></div></article>)}</div></div></section>
 
@@ -197,7 +190,6 @@ export default function Home() {
       open={intelligenceOpen}
       onOpen={() => setIntelligenceOpen(true)}
     />
-
     <IntelligenceModal
       open={intelligenceOpen}
       language={ar ? "ar" : "en"}
@@ -224,7 +216,7 @@ export default function Home() {
       </svg>
     </button>
 
-    <footer className="footer shell"><div className="footer-signature"><span className="footer-monogram">AA</span><h2>Ahmed Abdelkhalek</h2><strong>Digital Transformation<br/>Engineer</strong><p>Full-Stack Web Developer <i/> Automation &amp; AI Solutions Architect</p><small>{ar?"أسيوط، مصر — أبني أنظمة رقمية تربط الرؤية بالتنفيذ":"Assiut, Egypt — Engineering the connection between vision and execution"}</small></div><a
+    <footer className="footer shell"><div className="footer-signature"><span className="footer-monogram">AA</span><h2>{ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}</h2><strong>{ar?<>مهندس أنظمة ومنصات<br/>مؤسسية</>:<>Enterprise Systems &amp;<br/>Platform Architect</>}</strong><p>{ar?<>هندسة منصات Full-Stack <i/> الأتمتة وحلول الذكاء الاصطناعي</>:<>Full-Stack Platform Engineering <i/> Automation &amp; AI Solutions</>}</p><small>{ar?"أسيوط، مصر — أبني أنظمة رقمية تربط الرؤية بالتنفيذ":"Assiut, Egypt — Engineering the connection between vision and execution"}</small></div><a
       className={`back-top ${showBackTop ? "is-visible" : ""}`}
       href="#top"
       aria-label={ar ? "العودة إلى أعلى الصفحة" : "Back to page top"}
