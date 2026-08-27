@@ -81,19 +81,19 @@ export function useProfessionalIdentityMotion<
       frame = 0;
       section.style.setProperty(
         "--pi-pointer-x",
-        `${pointerX}px`
+        `${pointerX * 24}px`
       );
       section.style.setProperty(
         "--pi-pointer-y",
-        `${pointerY}px`
+        `${pointerY * 18}px`
       );
       section.style.setProperty(
         "--pi-tilt-x",
-        `${pointerY * -2.8}deg`
+        `${pointerY * -3.4}deg`
       );
       section.style.setProperty(
         "--pi-tilt-y",
-        `${pointerX * 3.8}deg`
+        `${pointerX * 4.6}deg`
       );
     };
 
