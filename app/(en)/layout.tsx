@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CleanUrlController from "@/app/components/Routing/CleanUrlController";
+import PortfolioStructuredData from "@/app/components/SEO/PortfolioStructuredData";
 import { createRootMetadata } from "@/app/content/root-metadata";
 import "@/app/globals.css";
 
@@ -13,6 +14,7 @@ export default function EnglishRootLayout({
   return (
     <html lang="en" dir="ltr">
       <body>
+        <PortfolioStructuredData language="en" />
         <CleanUrlController />
         {children}
       </body>

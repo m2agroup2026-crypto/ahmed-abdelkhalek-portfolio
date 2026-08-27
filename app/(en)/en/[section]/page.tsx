@@ -4,6 +4,7 @@ import PortfolioHome from "@/app/components/PortfolioHome/PortfolioHome";
 import {
   isPortfolioSection,
   portfolioSections,
+  portfolioSectionSeo,
 } from "@/app/content/portfolio-navigation";
 import { absoluteUrl } from "@/app/content/site";
 
@@ -31,6 +32,8 @@ export async function generateMetadata({
   }
 
   return {
+    title: portfolioSectionSeo[section].en.title,
+    description: portfolioSectionSeo[section].en.description,
     alternates: {
       canonical: absoluteUrl("/en"),
       languages: {

@@ -7,6 +7,10 @@ import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/En
 import ProfessionalIdentity from "@/app/components/ProfessionalIdentity/ProfessionalIdentity";
 import JourneyExperience from "@/app/components/JourneyExperience/JourneyExperience";
 import CaseStudyExperience from "@/app/components/CaseStudyExperience/CaseStudyExperience";
+import SystemsExperience from "@/app/components/SystemsExperience/SystemsExperience";
+import ExpertiseExperience from "@/app/components/ExpertiseExperience/ExpertiseExperience";
+import ContactExperience from "@/app/components/ContactExperience/ContactExperience";
+import FooterExperience from "@/app/components/FooterExperience/FooterExperience";
 import FloatingIntelligenceAssistant from "@/app/components/FloatingIntelligenceAssistant/FloatingIntelligenceAssistant";
 import IntelligenceModal from "@/app/components/IntelligenceExperience/IntelligenceModal";
 import {
@@ -21,38 +25,8 @@ type Bi = { en: string; ar: string };
 const t = (value: Bi, lang: Lang) => value[lang];
 
 const copy = {
-  nav:{journey:{en:"Journey",ar:"الرحلة"},caseStudy:{en:"Case Study",ar:"دراسة الحالة"},expertise:{en:"Expertise",ar:"الخبرات"},contact:{en:"Contact",ar:"تواصل"},menu:{en:"Menu",ar:"القائمة"}},
-  systems:{index:{en:"04 / Selected Systems",ar:"04 / أنظمة مختارة"},title:{en:"Premium interfaces.",ar:"واجهات فائقة الجودة."},accent:{en:"Serious infrastructure.",ar:"وبنية تحتية حقيقية."},intro:{en:"Selected layers from the M2A transformation ecosystem—designed to work as one connected operating model.",ar:"طبقات مختارة من منظومة التحول في M2A، صُممت لتعمل كنموذج تشغيلي واحد مترابط."}},
-  expertise:{index:{en:"05 / Technical Expertise",ar:"05 / الخبرات التقنية"},title:{en:"From business logic to",ar:"من منطق الأعمال إلى"},accent:{en:"working systems.",ar:"أنظمة تعمل فعليًا."}},
-  contact:{index:{en:"06 / Contact",ar:"06 / تواصل معي"},title:{en:"Let’s build the system",ar:"لنبنِ النظام"},accent:{en:"behind your next move.",ar:"خلف خطوتك القادمة."},intro:{en:"Have a transformation challenge, a platform idea, or an operation that needs to work smarter? Let’s talk.",ar:"لديك تحدٍ في التحول الرقمي، أو فكرة منصة، أو عملية تحتاج إلى أن تعمل بذكاء أكبر؟ لنتحدث."}},
+  nav:{journey:{en:"Journey",ar:"الرحلة"},caseStudy:{en:"Case Study",ar:"دراسة الحالة"},systems:{en:"Systems",ar:"الأنظمة"},expertise:{en:"Expertise",ar:"الخبرات"},contact:{en:"Contact",ar:"تواصل"},menu:{en:"Menu",ar:"القائمة"}},
 };
-
-function SystemIcon({ name }: { name: string }) {
-  const paths: Record<string, React.ReactNode> = {
-    spark:<><path d="M12 2l1.7 5.1L19 9l-5.3 1.9L12 16l-1.7-5.1L5 9l5.3-1.9L12 2Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/></>,
-    layers:<><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></>,
-    brain:<><path d="M9.5 4.5A3.5 3.5 0 0 0 6 8v1a3 3 0 0 0-1 5.8A3.5 3.5 0 0 0 9.5 20H12V4.5H9.5ZM14.5 4.5A3.5 3.5 0 0 1 18 8v1a3 3 0 0 1 1 5.8 3.5 3.5 0 0 1-4.5 5.2H12V4.5h2.5Z"/><path d="M8 9h4M12 15h4"/></>,
-    message:<><path d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.6-4.8A7.5 7.5 0 0 1 3 12a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v3Z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></>,
-    flow:<><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h4a3 3 0 0 1 3 3v6M12 18H9a3 3 0 0 1-3-3V9"/></>,
-    database:<><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></>,
-  };
-  return <span className="system-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg></span>;
-}
-
-function SocialIcon({ name }: { name: string }) {
-  const icon = name === "Facebook"
-    ? <path d="M14 8h3V4h-3c-3.2 0-5 1.9-5 5v3H6v4h3v6h4v-6h3.4l.6-4h-4V9c0-.7.3-1 1-1Z"/>
-    : name === "Instagram"
-      ? <><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></>
-      : <><rect x="4" y="9" width="4" height="11"/><path d="M6 4.5v.01M11 20v-7c0-2 1.2-4 4-4 2.6 0 4 1.8 4 4v7M11 9v11"/></>;
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{icon}</svg>;
-}
-
-const social = [
-  {label:"Facebook",url:"https://www.facebook.com/ahmed.abdelkhalek2/"},
-  {label:"Instagram",url:"https://www.instagram.com/ahmed.khalek.pr/"},
-  {label:"LinkedIn",url:"https://www.linkedin.com/in/ahmed-abdelkhalek-3baab5414/"},
-];
 
 export default function PortfolioHome() {
   const pathname = usePathname();
@@ -119,13 +93,6 @@ export default function PortfolioHome() {
     setTimeout(()=>window.location.assign(destination),340);
     setTimeout(()=>setTransition(null),850);
   };
-  const sendMessage=(event:React.FormEvent<HTMLFormElement>)=>{event.preventDefault();const data=new FormData(event.currentTarget);const subject=encodeURIComponent(`${data.get("project")} — ${data.get("name")}`);const body=encodeURIComponent(`${data.get("message")}\n\n${data.get("name")}\n${data.get("email")}`);window.location.href=`mailto:ahmed@m2agroupeg.com?subject=${subject}&body=${body}`;};
-
-  const premium = [
-    {cls:"card-lime",icon:"layers",code:{en:"PLATFORM / 01",ar:"منصة / 01"},visual:"WEB",title:{en:"Corporate Digital Platform",ar:"المنصة الرقمية المؤسسية"},text:{en:"A responsive public layer built to convert attention into qualified action.",ar:"واجهة عامة متجاوبة تحوّل الاهتمام إلى تفاعل وفرص حقيقية."},tags:["Next.js","Responsive UX","SEO"]},
-    {cls:"card-cyan",icon:"brain",code:{en:"INTELLIGENCE / 02",ar:"ذكاء / 02"},visual:"AI",title:{en:"Website Lead AI CRM",ar:"نظام CRM ذكي للعملاء"},text:{en:"A structured system turning enquiries into an intelligent, coordinated pipeline.",ar:"نظام منظم يحوّل الاستفسارات إلى مسار ذكي ومترابط للعملاء."},tags:["CRM","AI Assist","Supabase"]},
-    {cls:"card-violet",icon:"flow",code:{en:"AUTOMATION / 03",ar:"أتمتة / 03"},visual:"OS",title:{en:"Automation Command Layer",ar:"طبقة قيادة الأتمتة"},text:{en:"Event-driven workflows connect messages, teams, data, and decisions.",ar:"مسارات قائمة على الأحداث تربط الرسائل والفرق والبيانات والقرارات."},tags:["APIs","Workflows","Events"]},
-  ];
   const tickerItems = ar
     ? ["هندسة التحول الرقمي","تطوير منصات Full-Stack","أتمتة العمليات المؤسسية","حلول الذكاء الاصطناعي","هندسة CRM","تكامل الأنظمة وواجهات API","تصميم تجارب رقمية متجاوبة","تحليل وتطوير مسارات العمل","منصات بيانات مترابطة","حلول رقمية قابلة للتوسع"]
     : ["Digital Transformation Engineering","Full-Stack Platform Development","Enterprise Process Automation","AI-Powered Solutions","CRM Architecture","Systems & API Integration","Responsive Digital Experiences","Workflow Design & Optimization","Connected Data Platforms","Scalable Digital Operations"];
@@ -134,7 +101,7 @@ export default function PortfolioHome() {
     <nav className={`nav shell ${scrolled ? "nav-scrolled" : ""} nav-cinematic-visible`} aria-label={ar?"التنقل الرئيسي":"Primary navigation"}>
       <a className="brand" href="#top"><span>AA</span><b>{ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}</b></a>
       <button className="menu-button" aria-expanded={menuOpen} aria-controls="primary-nav-links" onClick={()=>setMenuOpen(!menuOpen)}>{t(copy.nav.menu,lang)}</button>
-      <div id="primary-nav-links" className={`nav-links ${menuOpen?"open":""}`}><a href="#journey">{t(copy.nav.journey,lang)}</a><a href="#case-study">{t(copy.nav.caseStudy,lang)}</a><a href="#expertise">{t(copy.nav.expertise,lang)}</a><a href="#contact">{t(copy.nav.contact,lang)}</a>
+      <div id="primary-nav-links" className={`nav-links ${menuOpen?"open":""}`}><a href="#journey">{t(copy.nav.journey,lang)}</a><a href="#case-study">{t(copy.nav.caseStudy,lang)}</a><a href="#systems">{t(copy.nav.systems,lang)}</a><a href="#expertise">{t(copy.nav.expertise,lang)}</a><a href="#contact">{t(copy.nav.contact,lang)}</a>
         <a
           className="edge-gateway"
           href={ar ? "/insights" : "/en/insights"}
@@ -184,21 +151,11 @@ export default function PortfolioHome() {
       language={ar ? "ar" : "en"}
     />
 
-    <section className="selected-systems section"><div className="shell"><div className="systems-heading"><div><p className="section-index">{t(copy.systems.index,lang)}</p><h2>{t(copy.systems.title,lang)}<br/><em>{t(copy.systems.accent,lang)}</em></h2></div><p>{t(copy.systems.intro,lang)}</p></div><div className="premium-cards">{premium.map(card=><article className={`premium-card ${card.cls}`} key={card.visual}><div className="card-scan"/><div className="premium-card-top"><SystemIcon name={card.icon}/><span>{t(card.code,lang)}</span></div><div className="premium-visual"><span className="visual-ring"/><strong>{card.visual}</strong></div><div className="premium-card-copy"><h3>{t(card.title,lang)}</h3><p>{t(card.text,lang)}</p><div>{card.tags.map(x=><span key={x}>{x}</span>)}</div></div></article>)}</div></div></section>
+    <SystemsExperience language={ar ? "ar" : "en"} />
 
-    <section id="expertise" className="expertise section"><div className="shell"><p className="section-index">{t(copy.expertise.index,lang)}</p><div className="expertise-layout"><h2>{t(copy.expertise.title,lang)}<br/><em>{t(copy.expertise.accent,lang)}</em></h2><div className="expertise-list">{[
-      {title:{en:"Platform Engineering",ar:"هندسة المنصات"},text:{en:"Responsive platforms built around business goals, performance, accessibility, and maintainable architecture.",ar:"منصات متجاوبة مبنية حول أهداف الأعمال والأداء وسهولة الوصول وهندسة قابلة للتطوير."}},
-      {title:{en:"Automation Systems",ar:"أنظمة الأتمتة"},text:{en:"Event-driven automations that reduce manual work and improve speed, visibility, and consistency.",ar:"أتمتة قائمة على الأحداث تقلل العمل اليدوي وتحسّن السرعة والوضوح والاتساق."}},
-      {title:{en:"CRM & AI Integration",ar:"تكامل CRM والذكاء الاصطناعي"},text:{en:"Connected pipelines, intelligent routing, APIs, and AI-assisted processes turning activity into action.",ar:"مسارات مترابطة وتوجيه ذكي وواجهات API وعمليات مدعومة بالذكاء الاصطناعي."}},
-    ].map((x,i)=><article key={x.title.en}><span>0{i+1}</span><div><h3>{t(x.title,lang)}</h3><p>{t(x.text,lang)}</p></div></article>)}</div></div><div className="stack">{["Next.js","React","TypeScript","Supabase","REST APIs","AI Workflows","CRM","Automation"].map(x=><span key={x}>{x}</span>)}</div></div></section>
+    <ExpertiseExperience language={ar ? "ar" : "en"} />
 
-    <section id="contact" className="contact shell section">
-      <div className="contact-head"><div><p className="section-index">{t(copy.contact.index,lang)}</p><h2>{t(copy.contact.title,lang)}<br/><em>{t(copy.contact.accent,lang)}</em></h2></div><div className="availability"><i/><span>{ar?"متاح لمشروعات تحول رقمي مختارة":"Available for select transformation projects"}</span></div></div>
-      <div className="contact-grid">
-        <div className="contact-story"><p>{t(copy.contact.intro,lang)}</p><div className="social-row">{social.map(x=><a href={x.url} target="_blank" rel="noreferrer" key={x.label}><span><SocialIcon name={x.label}/></span><b>{x.label}</b><i>↗</i></a>)}</div><div className="contact-links"><a href="mailto:ahmed@m2agroupeg.com"><span>{ar?"البريد المهني":"Professional email"}</span>ahmed@m2agroupeg.com ↗</a><a href="mailto:a7madsadlio@aun.edu.eg"><span>{ar?"البريد الأكاديمي":"Academic email"}</span>a7madsadlio@aun.edu.eg ↗</a><a href="https://wa.me/201066956222"><span>WhatsApp</span><bdi dir="ltr">+20 106 695 6222</bdi> ↗</a><a href="tel:+201096588887"><span>{ar?"الهاتف":"Phone"}</span><bdi dir="ltr">+20 109 658 8887</bdi> ↗</a></div></div>
-        <form className="contact-form" onSubmit={sendMessage}><div className="form-top"><span>PROJECT SIGNAL / 01</span><b>{ar?"أرسل تفاصيل المشروع":"Tell me about the project"}</b></div><label>{ar?"الاسم":"Your name"}<input name="name" required placeholder={ar?"الاسم الكامل":"Full name"}/></label><label>{ar?"البريد الإلكتروني":"Email address"}<input name="email" required type="email" placeholder="name@company.com"/></label><label>{ar?"نوع المشروع":"Project type"}<select name="project" defaultValue=""><option value="" disabled>{ar?"اختر المسار":"Select a track"}</option><option>{ar?"منصة رقمية":"Digital platform"}</option><option>{ar?"أتمتة وذكاء اصطناعي":"Automation & AI"}</option><option>{ar?"نظام CRM":"CRM system"}</option><option>{ar?"استشارة تحول رقمي":"Transformation advisory"}</option></select></label><label>{ar?"نبذة عن التحدي":"Project brief"}<textarea name="message" required rows={4} placeholder={ar?"ما المشكلة التي تريد حلها؟":"What should the new system solve?"}/></label><button type="submit"><span>{ar?"إرسال موجز المشروع":"Send project brief"}</span><i>↗</i></button></form>
-      </div>
-    </section>
+    <ContactExperience language={ar ? "ar" : "en"} />
 
     <FloatingIntelligenceAssistant
       language={ar ? "ar" : "en"}
@@ -231,14 +188,6 @@ export default function PortfolioHome() {
       </svg>
     </button>
 
-    <footer className="footer shell"><div className="footer-signature"><span className="footer-monogram">AA</span><h2>{ar?"أحمد عبد الخالق":"Ahmed Abdelkhalek"}</h2><strong>{ar?<>مهندس أنظمة ومنصات<br/>مؤسسية</>:<>Enterprise Systems &amp;<br/>Platform Architect</>}</strong><p>{ar?<>هندسة منصات Full-Stack <i/> الأتمتة وحلول الذكاء الاصطناعي</>:<>Full-Stack Platform Engineering <i/> Automation &amp; AI Solutions</>}</p><small>{ar?"أسيوط، مصر — أبني أنظمة رقمية تربط الرؤية بالتنفيذ":"Assiut, Egypt — Engineering the connection between vision and execution"}</small></div><a
-      className={`back-top ${showBackTop ? "is-visible" : ""}`}
-      href="#top"
-      aria-label={ar ? "العودة إلى أعلى الصفحة" : "Back to page top"}
-      onClick={(event)=>{
-        event.preventDefault();
-        window.scrollTo({top:0,behavior:"smooth"});
-      }}
-    ><span>{ar?"العودة للأعلى":"Back to top"}</span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M12 20V4M5 11l7-7 7 7"/></svg></i></a></footer>
+    <FooterExperience language={ar ? "ar" : "en"} />
   </main>;
 }

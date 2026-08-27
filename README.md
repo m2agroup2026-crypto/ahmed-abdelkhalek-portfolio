@@ -16,7 +16,9 @@ Production bilingual portfolio for Ahmed Abdelkhalek Sayed — Enterprise System
 - Responsive mobile-first design
 - Light and dark modes
 - Route-based language switching with clean public URLs
-- Premium enterprise system cards
+- Living enterprise operating-model architecture
+- Purposeful, reduced-motion-aware system activity
+- Localized metadata, social cards, sitemap, robots, and structured data
 - Social links and professional portrait
 
 ## Run locally

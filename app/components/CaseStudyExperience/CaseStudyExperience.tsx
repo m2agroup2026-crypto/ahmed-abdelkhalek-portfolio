@@ -109,16 +109,18 @@ export default function CaseStudyExperience({ language }: CaseStudyExperiencePro
               <p>{content.intro}</p>
             </div>
 
-            <a
-              className={styles.liveLink}
-              href="https://m2agroupeg.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span><i aria-hidden="true" />{content.live}</span>
-              <b>{content.visit}</b>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-            </a>
+            <div className={styles.headerAside}>
+              <a className={styles.liveLink} href="https://m2agroupeg.com" target="_blank" rel="noreferrer">
+                <span><i aria-hidden="true" />{content.live}</span>
+                <b>{content.visit}</b>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+              </a>
+              <div className={styles.transformationMini} aria-hidden="true">
+                <span><i /><b>{isArabic ? "إشارات" : "SIGNALS"}</b><small>05</small></span>
+                <em><i /><i /><i /></em>
+                <span><i /><b>{isArabic ? "نظام واحد" : "DIGITAL OS"}</b><small>01</small></span>
+              </div>
+            </div>
           </header>
 
           <div className={styles.commandShell}>

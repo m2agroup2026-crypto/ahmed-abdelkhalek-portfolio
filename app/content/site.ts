@@ -2,8 +2,8 @@ export const siteConfig = {
   url: "https://ahmed.m2agroupeg.com",
   name: "Ahmed Abdelkhalek",
   arabicName: "أحمد عبد الخالق",
-  title: "Ahmed Abdelkhalek | Enterprise Systems & Platform Architect",
-  arabicTitle: "أحمد عبد الخالق | مهندس أنظمة ومنصات مؤسسية",
+  title: "Ahmed Abdelkhalek | Digital Transformation & Enterprise Systems Architect",
+  arabicTitle: "أحمد عبد الخالق | مهندس التحول الرقمي والأنظمة المؤسسية",
   description:
     "Enterprise systems, digital operating platforms, CRM architecture, automation, and AI engineered into scalable, governable solutions for business transformation.",
   arabicDescription:

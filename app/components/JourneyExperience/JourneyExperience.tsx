@@ -98,6 +98,16 @@ export default function JourneyExperience({ language }: JourneyExperienceProps) 
                 <i aria-hidden="true" />
                 {content.eyebrow}
               </span>
+              <div className={styles.layerSequence} aria-hidden="true">
+                <span><i />01<b>{isArabic ? "اتصال" : "COMMS"}</b></span>
+                <span><i />02<b>{isArabic ? "قيادة" : "LEAD"}</b></span>
+                <span><i />03<b>{isArabic ? "تشغيل" : "OPS"}</b></span>
+                <span><i />04<b>{isArabic ? "أنظمة" : "SYSTEMS"}</b></span>
+              </div>
+              <p className={styles.sequenceResult}>
+                <span>{isArabic ? "النتيجة" : "CONVERGENCE"}</span>
+                <b>{isArabic ? "منظور مؤسسي متكامل" : "ONE ENTERPRISE PERSPECTIVE"}</b>
+              </p>
             </div>
 
             <div className={styles.headingGroup}>
