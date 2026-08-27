@@ -328,7 +328,15 @@ export default function JourneyExperience({ language }: JourneyExperienceProps) 
               data-journey-element="experience-architecture"
             >
               <div className={styles.architectureHeader}>
-                <span>{content.experienceArchitecture.label}</span>
+                <div className={styles.architectureTelemetry}>
+                  <span>{content.experienceArchitecture.telemetry.status}</span>
+                  <b>{content.experienceArchitecture.telemetry.online}</b>
+                  <small>{content.experienceArchitecture.telemetry.model}</small>
+                </div>
+
+                <span className={styles.architectureEyebrow}>
+                  {content.experienceArchitecture.label}
+                </span>
                 <h3>{content.experienceArchitecture.title}</h3>
               </div>
 
@@ -337,8 +345,17 @@ export default function JourneyExperience({ language }: JourneyExperienceProps) 
                   <article
                     key={layer.code}
                     className={styles.architectureCard}
+                    style={{ "--module-index": layer.code } as React.CSSProperties}
                   >
-                    <small>{layer.code}</small>
+                    <div className={styles.moduleStatus}>
+                      <i />
+                      <span>ONLINE</span>
+                    </div>
+
+                    <small className={styles.moduleNode}>
+                      NODE {layer.code}
+                    </small>
+
                     <h4>{layer.title}</h4>
                     <p>{layer.text}</p>
                   </article>

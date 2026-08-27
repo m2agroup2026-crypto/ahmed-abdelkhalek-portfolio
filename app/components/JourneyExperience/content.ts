@@ -74,6 +74,11 @@ export const journeyExperienceContent = {
     experienceArchitecture: {
       label: "معمارية الخبرة",
       title: "04 طبقات خبرة تم تفعيلها",
+      telemetry: {
+        status: "حالة النظام",
+        online: "04 / 04 طبقات مفعّلة",
+        model: "نموذج خبرة مترابط",
+      },
       layers: [
         {
           code: "01",
@@ -178,6 +183,11 @@ export const journeyExperienceContent = {
     experienceArchitecture: {
       label: "EXPERIENCE ARCHITECTURE",
       title: "04 EXPERIENCE LAYERS ACTIVATED",
+      telemetry: {
+        status: "SYSTEM STATUS",
+        online: "04 / 04 LAYERS ONLINE",
+        model: "CONNECTED EXPERIENCE MODEL",
+      },
       layers: [
         {
           code: "01",
