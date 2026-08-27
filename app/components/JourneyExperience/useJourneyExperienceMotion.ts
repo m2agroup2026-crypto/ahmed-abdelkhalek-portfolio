@@ -6,8 +6,24 @@ export type JourneyMotionState = "idle" | "active" | "reduced";
 
 const CHAPTER_COUNT = 4;
 
+const CAMERA_TARGETS = [
+  { x: -9, y: 7, scale: 1.016, rotate: -0.25 },
+  { x: 10, y: -8, scale: 1.032, rotate: 0.32 },
+  { x: -7, y: 10, scale: 1.024, rotate: -0.2 },
+  { x: 11, y: -6, scale: 1.04, rotate: 0.28 },
+] as const;
+
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value));
+}
+
+function lerp(start: number, end: number, progress: number) {
+  return start + (end - start) * progress;
+}
+
+function smoothstep(value: number) {
+  const progress = clamp(value);
+  return progress * progress * (3 - 2 * progress);
 }
 
 export function useJourneyExperienceMotion<T extends HTMLElement>() {
@@ -56,6 +72,8 @@ export function useJourneyExperienceMotion<T extends HTMLElement>() {
       return;
     }
 
+    const trajectoryPath = section.querySelector<SVGPathElement>("[data-journey-path]");
+    const trajectoryLength = trajectoryPath?.getTotalLength() ?? 0;
     let frame = 0;
     let lastChapter = -1;
 
@@ -65,16 +83,58 @@ export function useJourneyExperienceMotion<T extends HTMLElement>() {
       const bounds = section.getBoundingClientRect();
       const scrollable = Math.max(1, bounds.height - window.innerHeight);
       const progress = clamp(-bounds.top / scrollable);
+      const rawChapter = progress * CHAPTER_COUNT;
       const chapter = Math.min(
         CHAPTER_COUNT - 1,
-        Math.floor(progress * CHAPTER_COUNT)
+        Math.floor(rawChapter)
       );
+      const chapterProgress = clamp(rawChapter - chapter);
+      const cameraBlend = smoothstep(chapterProgress);
+      const currentCamera = CAMERA_TARGETS[chapter];
+      const nextCamera = CAMERA_TARGETS[Math.min(CHAPTER_COUNT - 1, chapter + 1)];
 
       section.style.setProperty("--journey-progress", progress.toFixed(4));
       section.style.setProperty(
         "--journey-progress-pct",
         `${(progress * 100).toFixed(2)}%`
       );
+      section.style.setProperty(
+        "--journey-chapter-progress",
+        chapterProgress.toFixed(4)
+      );
+      section.style.setProperty(
+        "--journey-camera-x",
+        `${lerp(currentCamera.x, nextCamera.x, cameraBlend).toFixed(2)}px`
+      );
+      section.style.setProperty(
+        "--journey-camera-y",
+        `${lerp(currentCamera.y, nextCamera.y, cameraBlend).toFixed(2)}px`
+      );
+      section.style.setProperty(
+        "--journey-camera-scale",
+        lerp(currentCamera.scale, nextCamera.scale, cameraBlend).toFixed(4)
+      );
+      section.style.setProperty(
+        "--journey-camera-rotate",
+        `${lerp(currentCamera.rotate, nextCamera.rotate, cameraBlend).toFixed(3)}deg`
+      );
+
+      if (trajectoryPath && trajectoryLength > 0) {
+        const distance = trajectoryLength * progress;
+        const point = trajectoryPath.getPointAtLength(distance);
+        const tangentPoint = trajectoryPath.getPointAtLength(
+          Math.min(trajectoryLength, distance + Math.max(1, trajectoryLength * 0.0025))
+        );
+        const tracerX = 4 + (point.x / 1000) * 92;
+        const tracerY = 8 + (point.y / 600) * 83;
+        const deltaX = (tangentPoint.x - point.x) * (92 / 1000);
+        const deltaY = (tangentPoint.y - point.y) * (83 / 600);
+        const tracerAngle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+        section.style.setProperty("--journey-tracer-x", `${tracerX.toFixed(3)}%`);
+        section.style.setProperty("--journey-tracer-y", `${tracerY.toFixed(3)}%`);
+        section.style.setProperty("--journey-tracer-angle", `${tracerAngle.toFixed(2)}deg`);
+      }
 
       if (chapter !== lastChapter) {
         lastChapter = chapter;
@@ -130,9 +190,8 @@ export function useJourneyExperienceMotion<T extends HTMLElement>() {
         return;
       }
 
-      const bounds = section.getBoundingClientRect();
-      pointerX = clamp((event.clientX - bounds.left) / bounds.width, 0, 1) - 0.5;
-      pointerY = clamp((event.clientY - bounds.top) / Math.max(bounds.height, 1), 0, 1) - 0.5;
+      pointerX = clamp(event.clientX / Math.max(window.innerWidth, 1), 0, 1) - 0.5;
+      pointerY = clamp(event.clientY / Math.max(window.innerHeight, 1), 0, 1) - 0.5;
       schedulePointer();
     };
 
