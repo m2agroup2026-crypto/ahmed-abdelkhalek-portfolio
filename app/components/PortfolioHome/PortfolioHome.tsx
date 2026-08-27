@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import EnterpriseHero from "@/app/components/EnterpriseHero/EnterpriseHero";
 import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod";
 import ProfessionalIdentity from "@/app/components/ProfessionalIdentity/ProfessionalIdentity";
+import JourneyExperience from "@/app/components/JourneyExperience/JourneyExperience";
 import FloatingIntelligenceAssistant from "@/app/components/FloatingIntelligenceAssistant/FloatingIntelligenceAssistant";
 import IntelligenceModal from "@/app/components/IntelligenceExperience/IntelligenceModal";
 import {
@@ -18,13 +19,6 @@ type Bi = { en: string; ar: string };
 
 const t = (value: Bi, lang: Lang) => value[lang];
 
-const journey: Array<{ role: Bi; org: Bi; text: Bi }> = [
-  { role:{en:"Public Relations & Media Officer",ar:"مسؤول العلاقات العامة والإعلام"}, org:{en:"Faculty of Medicine",ar:"كلية الطب"}, text:{en:"Institutional communication, event coordination, stakeholder relations, and public-facing operations.",ar:"إدارة الاتصال المؤسسي وتنظيم الفعاليات والعلاقات مع أصحاب المصلحة والعمليات الجماهيرية."} },
-  { role:{en:"Head of Public Relations",ar:"رئيس قسم العلاقات العامة"}, org:{en:"Masr Al Arabia Foundation for Human Rights",ar:"مؤسسة مصر العربية لحقوق الإنسان"}, text:{en:"Led communication workflows and translated organizational objectives into structured public engagement.",ar:"قيادة منظومة الاتصال وتحويل أهداف المؤسسة إلى تواصل جماهيري منظم وفعّال."} },
-  { role:{en:"Administrative Director & Contracts Officer",ar:"المدير الإداري ومسؤول العقود"}, org:{en:"ZAD Association — Assiut",ar:"جمعية زاد — أسيوط"}, text:{en:"Managed administration, contracts, documentation, and the systems behind operational delivery.",ar:"إدارة الشؤون الإدارية والعقود والتوثيق والأنظمة الداعمة للتشغيل اليومي."} },
-  { role:{en:"IT & Digital Transformation Manager",ar:"مدير تكنولوجيا المعلومات والتحول الرقمي"}, org:{en:"M2A Group",ar:"مجموعة M2A"}, text:{en:"Designing connected platforms that unite brand, data, CRM, automation, messaging, and AI.",ar:"تصميم منصات مترابطة تجمع الهوية والبيانات وإدارة العملاء والأتمتة والرسائل والذكاء الاصطناعي."} },
-];
-
 const architecture: Array<{ title: Bi; text: Bi; icon: string }> = [
   { icon:"spark",title:{en:"Digital Identity",ar:"الهوية الرقمية"},text:{en:"A unified, credible presence across every customer touchpoint.",ar:"حضور موحّد وموثوق عبر جميع نقاط التواصل مع العملاء."} },
   { icon:"layers",title:{en:"Corporate Platform",ar:"المنصة المؤسسية"},text:{en:"A responsive website engineered as the public layer of a larger business system.",ar:"موقع متجاوب تم تصميمه كواجهة عامة لمنظومة أعمال متكاملة."} },
@@ -36,8 +30,6 @@ const architecture: Array<{ title: Bi; text: Bi; icon: string }> = [
 
 const copy = {
   nav:{journey:{en:"Journey",ar:"الرحلة"},caseStudy:{en:"Case Study",ar:"دراسة الحالة"},expertise:{en:"Expertise",ar:"الخبرات"},contact:{en:"Contact",ar:"تواصل"},menu:{en:"Menu",ar:"القائمة"}},
-  identity:{index:{en:"01 / Professional Identity",ar:"01 / الهوية المهنية"},title:{en:"Technology shaped by",ar:"تكنولوجيا يصنعها"},accent:{en:"institutional insight.",ar:"الفهم المؤسسي."},p1:{en:"My work sits at the intersection of technology, administration, communication, and operations. I don’t begin with screens. I begin with how the institution actually works.",ar:"يقع عملي عند نقطة التقاء التكنولوجيا والإدارة والاتصال والتشغيل. لا أبدأ من الشاشات، بل أبدأ من فهم الطريقة الحقيقية التي تعمل بها المؤسسة."},p2:{en:"I map workflows, data, decisions, and customer touchpoints—then engineer the digital system that connects them into one measurable experience.",ar:"أحلل مسارات العمل والبيانات والقرارات ونقاط التواصل مع العملاء، ثم أبني النظام الرقمي الذي يربطها في تجربة واحدة واضحة وقابلة للقياس."},quote:{en:"The best digital solution doesn’t add software. It removes friction.",ar:"أفضل الحلول الرقمية لا تضيف برمجيات فقط، بل تزيل التعقيد."}},
-  journey:{index:{en:"02 / Digital Journey",ar:"02 / الرحلة الرقمية"},title:{en:"Experience became",ar:"تحوّلت الخبرة إلى"},accent:{en:"architecture.",ar:"هندسة رقمية."},intro:{en:"Each chapter added a new layer: communication, governance, operations, and finally the ability to connect them through technology.",ar:"أضافت كل مرحلة طبقة جديدة: الاتصال، والحوكمة، والتشغيل، ثم القدرة على ربطها جميعًا بالتكنولوجيا."}},
   caseStudy:{index:{en:"03 / Flagship Transformation",ar:"03 / مشروع التحول الرئيسي"},live:{en:"Live system",ar:"نظام فعّال"},name:{en:"M2A Digital OS",ar:"نظام M2A الرقمي"},intro:{en:"A connected operating system for the company—not simply a corporate website.",ar:"نظام تشغيل رقمي مترابط للشركة، وليس مجرد موقع مؤسسي."},visit:{en:"Visit M2A Group",ar:"زيارة موقع M2A Group"},challenge:{en:"THE CHALLENGE",ar:"التحدي"},challengeText:{en:"Brand, leads, conversations, follow-up, and operational data lived in separate places. The goal was one digital architecture connecting the full customer journey.",ar:"كانت الهوية والعملاء المحتملون والمحادثات والمتابعة والبيانات التشغيلية موزعة في أماكن منفصلة. كان الهدف بناء معمارية رقمية واحدة تربط رحلة العميل بالكامل."},outcome:{en:"THE OUTCOME",ar:"النتيجة"},outcomeTitle:{en:"One ecosystem. Every interaction connected.",ar:"منظومة واحدة. كل تفاعل مترابط."}},
   systems:{index:{en:"04 / Selected Systems",ar:"04 / أنظمة مختارة"},title:{en:"Premium interfaces.",ar:"واجهات فائقة الجودة."},accent:{en:"Serious infrastructure.",ar:"وبنية تحتية حقيقية."},intro:{en:"Selected layers from the M2A transformation ecosystem—designed to work as one connected operating model.",ar:"طبقات مختارة من منظومة التحول في M2A، صُممت لتعمل كنموذج تشغيلي واحد مترابط."}},
   expertise:{index:{en:"05 / Technical Expertise",ar:"05 / الخبرات التقنية"},title:{en:"From business logic to",ar:"من منطق الأعمال إلى"},accent:{en:"working systems.",ar:"أنظمة تعمل فعليًا."}},
@@ -193,7 +185,9 @@ export default function PortfolioHome() {
       language={ar ? "ar" : "en"}
     />
 
-    <section id="journey" className="journey section"><div className="shell"><div className="section-heading"><div><p className="section-index">{t(copy.journey.index,lang)}</p><h2>{t(copy.journey.title,lang)}<br/><em>{t(copy.journey.accent,lang)}</em></h2></div><p>{t(copy.journey.intro,lang)}</p></div><div className="timeline">{journey.map((item,i)=><article key={item.role.en}><span className="timeline-number">0{i+1}</span><div><p className="timeline-org">{t(item.org,lang)}</p><h3>{t(item.role,lang)}</h3><p>{t(item.text,lang)}</p></div></article>)}</div></div></section>
+    <JourneyExperience
+      language={ar ? "ar" : "en"}
+    />
 
     <section id="case-study" className="case-study shell section"><div className="case-intro"><p className="section-index">{t(copy.caseStudy.index,lang)}</p><span className="live-pill">{t(copy.caseStudy.live,lang)}</span><h2>{t(copy.caseStudy.name,lang)}</h2><p>{t(copy.caseStudy.intro,lang)}</p><a className="text-link" href="https://m2agroupeg.com" target="_blank" rel="noreferrer">{t(copy.caseStudy.visit,lang)} ↗</a></div><div className="case-statement"><span>{t(copy.caseStudy.challenge,lang)}</span><p>{t(copy.caseStudy.challengeText,lang)}</p></div><div className="architecture-grid">{architecture.map((item,i)=><article key={item.title.en}><div className="card-top"><SystemIcon name={item.icon}/><span>0{i+1}</span></div><h3>{t(item.title,lang)}</h3><p>{t(item.text,lang)}</p></article>)}</div><div className="outcome"><p className="section-index">{t(copy.caseStudy.outcome,lang)}</p><h3>{t(copy.caseStudy.outcomeTitle,lang)}</h3><div>{(ar?["الموقع","CRM","المحادثات","الأتمتة","الذكاء"]:["Website","Lead CRM","Messaging","Automation","Intelligence"]).map((x,i)=><span key={x}>{i>0&&<i>←</i>}{x}</span>)}</div></div></section>
 
