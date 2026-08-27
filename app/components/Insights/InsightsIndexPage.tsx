@@ -3,6 +3,7 @@ import InsightsThemeToggle from "./InsightsThemeToggle";
 import {
   getFeaturedInsights,
   getInsightsIndexPath,
+  getPortfolioHomePath,
   getPublishedInsights,
 } from "../../content/insights/registry";
 import {
@@ -69,6 +70,9 @@ export default function InsightsIndexPage({
   const alternateHref =
     getInsightsIndexPath(alternateLanguage);
 
+  const homeHref =
+    getPortfolioHomePath(language);
+
   return (
     <main
       className={styles.page}
@@ -87,7 +91,7 @@ export default function InsightsIndexPage({
       <header className={styles.siteHeader}>
         <Link
           className={styles.brand}
-          href="/"
+          href={homeHref}
           aria-label={ui.article.home}
         >
           <span>{ui.author.initials}</span>
@@ -106,7 +110,7 @@ export default function InsightsIndexPage({
               : "Knowledge center navigation"
           }
         >
-          <Link href="/">
+          <Link href={homeHref}>
             {ui.article.home}
           </Link>
 
@@ -279,7 +283,7 @@ export default function InsightsIndexPage({
           </p>
         </div>
 
-        <Link href="/">
+        <Link href={homeHref}>
           {ui.article.home}
           <i aria-hidden="true">
             {isArabic ? "↖" : "↗"}
