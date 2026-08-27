@@ -92,7 +92,7 @@ export default function EnterpriseHero({
           <div className={styles.visualFrame}>
             <div className={styles.portrait}>
               <Image
-                src="/ahmed-abdelkhalek.jpg"
+                src="/ahmed-abdelkhalek-v2.jpg"
                 alt={content.portraitAlt}
                 fill
                 priority

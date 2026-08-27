@@ -68,7 +68,7 @@ export function createRootMetadata(
     siteName: authorName,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title,
     description,
   },

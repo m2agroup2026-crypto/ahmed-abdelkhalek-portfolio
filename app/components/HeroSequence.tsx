@@ -122,7 +122,7 @@ export default function HeroSequence({
         </div>
 
           <div className="ahmed-reveal-photo">
-            <img src="/ahmed-abdelkhalek.jpg" alt="Ahmed Abdelkhalek" />
+            <img src="/ahmed-abdelkhalek-v2.jpg" alt="Ahmed Abdelkhalek" />
           </div>
 
           <div className="ahmed-reveal-content">
