@@ -1,5 +1,5 @@
-import Home from "@/app/(ar)/page";
+import PortfolioHome from "@/app/components/PortfolioHome/PortfolioHome";
 
 export default function EnglishHome() {
-  return <Home />;
+  return <PortfolioHome />;
 }
