@@ -254,7 +254,9 @@ export default function JourneyExperience({ language }: JourneyExperienceProps) 
                       </div>
 
                       <h3>{chapter.role}</h3>
-                      <p className={styles.chapterText}>{chapter.text}</p>
+                      <p className={`${styles.chapterText} ${controlStyles.chapterCopy}`}>
+                        {chapter.text}
+                      </p>
 
                       <div className={styles.layerPanel}>
                         <span>{chapter.layerLabel}</span>
