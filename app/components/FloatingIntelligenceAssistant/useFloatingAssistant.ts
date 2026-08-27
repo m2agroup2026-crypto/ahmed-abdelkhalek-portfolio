@@ -28,10 +28,6 @@ export function useFloatingAssistant({
     const hero = document.getElementById(heroId);
     const contact = document.getElementById(contactId);
 
-    if (!hero) {
-      setVisible(true);
-    }
-
     const updatePosition = () => {
       frameRef.current = 0;
 
@@ -40,6 +36,8 @@ export function useFloatingAssistant({
           hero.getBoundingClientRect();
 
         setVisible(heroBounds.bottom <= 120);
+      } else {
+        setVisible(true);
       }
 
       if (contact) {
@@ -54,6 +52,8 @@ export function useFloatingAssistant({
           contactBounds.bottom >= viewportHeight * 0.18;
 
         setNearContact(contactIsNear);
+      } else {
+        setNearContact(false);
       }
     };
 
@@ -66,7 +66,7 @@ export function useFloatingAssistant({
         window.requestAnimationFrame(updatePosition);
     };
 
-    updatePosition();
+    requestUpdate();
 
     window.addEventListener(
       "scroll",
