@@ -13,6 +13,8 @@ export const siteConfig = {
   authorPath: "/",
 } as const;
 
+export const siteHostname = new URL(siteConfig.url).hostname;
+
 export function absoluteUrl(path = "/") {
   return new URL(path, siteConfig.url).toString();
 }
