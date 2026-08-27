@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element -- next/og ImageResponse renders an embedded data URL directly; next/image is not supported in this renderer. */
+
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
