@@ -1066,6 +1066,89 @@
   transform: rotate(45deg);
 }
 
+
+.experienceArchitecture {
+  position: relative;
+  margin-top: clamp(44px, 6vw, 90px);
+  padding: clamp(28px, 4vw, 52px);
+  border: 1px solid var(--journey-line);
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--journey-surface-strong) 72%, transparent);
+  box-shadow: 0 30px 90px var(--journey-shadow);
+  overflow: hidden;
+}
+
+.experienceArchitecture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--journey-cyan-bright) 18%, transparent), transparent);
+  opacity: .35;
+  pointer-events: none;
+}
+
+.architectureHeader {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.architectureHeader span {
+  color: var(--journey-cyan-bright);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.architectureHeader h3 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.15;
+}
+
+.architectureGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.architectureCard {
+  min-height: 170px;
+  padding: 22px;
+  border: 1px solid var(--journey-line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--journey-surface) 78%, transparent);
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  transition: transform .35s ease, border-color .35s ease;
+}
+
+.architectureCard:hover {
+  transform: translateY(-6px);
+  border-color: var(--journey-cyan-bright);
+}
+
+.architectureCard small {
+  color: var(--journey-lime-bright);
+  font-size: 12px;
+  letter-spacing: .15em;
+}
+
+.architectureCard h4 {
+  margin: 0;
+  line-height: 1.3;
+}
+
+.architectureCard p {
+  margin: 0;
+  color: var(--journey-muted);
+  line-height: 1.7;
+}
+
 .section[dir="rtl"] .convergence > i {
   transform: rotate(-135deg);
 }
@@ -1486,6 +1569,44 @@
 
   .signalList {
     margin-top: 12px;
+  }
+}
+
+
+@media (max-width: 1180px) {
+  .architectureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 960px) {
+  .experienceArchitecture {
+    padding: 28px;
+  }
+
+  .architectureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .experienceArchitecture {
+    margin-top: 36px;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .architectureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .architectureCard {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .architectureHeader h3 {
+    font-size: 26px;
   }
 }
 

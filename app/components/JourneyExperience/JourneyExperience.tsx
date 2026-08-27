@@ -322,6 +322,29 @@ export default function JourneyExperience({ language }: JourneyExperienceProps) 
               <p>{content.convergence.text}</p>
               <i aria-hidden="true" />
             </aside>
+
+            <section
+              className={styles.experienceArchitecture}
+              data-journey-element="experience-architecture"
+            >
+              <div className={styles.architectureHeader}>
+                <span>{content.experienceArchitecture.label}</span>
+                <h3>{content.experienceArchitecture.title}</h3>
+              </div>
+
+              <div className={styles.architectureGrid}>
+                {content.experienceArchitecture.layers.map((layer) => (
+                  <article
+                    key={layer.code}
+                    className={styles.architectureCard}
+                  >
+                    <small>{layer.code}</small>
+                    <h4>{layer.title}</h4>
+                    <p>{layer.text}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
           </div>
         </div>
       </div>

@@ -71,6 +71,32 @@ export const journeyExperienceContent = {
       text:
         "القيمة ليست في الانتقال بين مجالات مختلفة، بل في جمعها داخل منظور واحد: اتصال يفهم الناس، تشغيل يفهم الواقع، وحلول تقنية تربط الاثنين.",
     },
+    experienceArchitecture: {
+      label: "معمارية الخبرة",
+      title: "04 طبقات خبرة تم تفعيلها",
+      layers: [
+        {
+          code: "01",
+          title: "ذكاء الاتصال المؤسسي",
+          text: "الجمهور • الرسائل • أصحاب المصلحة",
+        },
+        {
+          code: "02",
+          title: "تشغيل القيادة",
+          text: "التوجيه • المواءمة • التنفيذ",
+        },
+        {
+          code: "03",
+          title: "الحوكمة التشغيلية",
+          text: "الإجراءات • العقود • الضبط",
+        },
+        {
+          code: "04",
+          title: "الأنظمة الرقمية",
+          text: "المنصات • البيانات • الأتمتة • الذكاء الاصطناعي",
+        },
+      ],
+    },
     controls: {
       previous: "المرحلة السابقة",
       next: "المرحلة التالية",
@@ -148,6 +174,32 @@ export const journeyExperienceContent = {
       title: "From understanding the organization to engineering its digital system.",
       text:
         "The value is not in moving through different disciplines. It is in combining them into one perspective: communication that understands people, operations that understand reality, and technology that connects both.",
+    },
+    experienceArchitecture: {
+      label: "EXPERIENCE ARCHITECTURE",
+      title: "04 EXPERIENCE LAYERS ACTIVATED",
+      layers: [
+        {
+          code: "01",
+          title: "COMMUNICATION INTELLIGENCE",
+          text: "Audience • Messages • Stakeholders",
+        },
+        {
+          code: "02",
+          title: "LEADERSHIP OPERATIONS",
+          text: "Direction • Alignment • Execution",
+        },
+        {
+          code: "03",
+          title: "OPERATIONAL GOVERNANCE",
+          text: "Processes • Contracts • Controls",
+        },
+        {
+          code: "04",
+          title: "DIGITAL SYSTEMS",
+          text: "Platforms • Data • Automation • AI",
+        },
+      ],
     },
     controls: {
       previous: "Previous chapter",
