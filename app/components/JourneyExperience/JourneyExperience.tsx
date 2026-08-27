@@ -2,6 +2,7 @@
 
 import styles from "./JourneyExperience.module.css";
 import directorStyles from "./JourneyExperienceDirector.module.css";
+import controlStyles from "./JourneyExperienceControls.module.css";
 import {
   journeyExperienceContent,
   type JourneyExperienceLanguage,
@@ -218,7 +219,10 @@ export default function JourneyExperience({ language }: JourneyExperienceProps) 
                 </span>
               </div>
 
-              <div className={styles.chapterViewport} data-journey-element="chapter-viewport">
+              <div
+                className={`${styles.chapterViewport} ${controlStyles.viewportDock}`}
+                data-journey-element="chapter-viewport"
+              >
                 <div
                   className={styles.chapterCounter}
                   data-journey-element="chapter-counter"
@@ -266,7 +270,7 @@ export default function JourneyExperience({ language }: JourneyExperienceProps) 
                   ))}
                 </div>
 
-                <div className={styles.controls}>
+                <div className={`${styles.controls} ${controlStyles.controlsDock}`}>
                   <button
                     type="button"
                     aria-label={content.controls.previous}
