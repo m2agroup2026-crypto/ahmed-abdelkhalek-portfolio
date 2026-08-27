@@ -14,6 +14,12 @@ export function createRootMetadata(
   const authorName = isArabic
     ? siteConfig.arabicName
     : siteConfig.name;
+  const canonicalPath = isArabic ? "/" : "/en";
+  const homeLanguages = {
+    ar: absoluteUrl("/"),
+    en: absoluteUrl("/en"),
+    "x-default": absoluteUrl("/"),
+  };
 
   return {
   metadataBase: new URL(siteConfig.url),
@@ -43,7 +49,8 @@ export function createRootMetadata(
     "Egypt",
   ],
   alternates: {
-    canonical: absoluteUrl("/"),
+    canonical: absoluteUrl(canonicalPath),
+    languages: homeLanguages,
   },
   robots: {
     index: true,
@@ -58,7 +65,7 @@ export function createRootMetadata(
   },
   openGraph: {
     type: "website",
-    url: absoluteUrl("/"),
+    url: absoluteUrl(canonicalPath),
     locale: isArabic ? siteConfig.alternateLocale : siteConfig.locale,
     alternateLocale: [
       isArabic ? siteConfig.locale : siteConfig.alternateLocale,
