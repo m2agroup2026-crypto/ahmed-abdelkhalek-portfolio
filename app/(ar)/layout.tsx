@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CleanUrlController from "@/app/components/Routing/CleanUrlController";
 import { createRootMetadata } from "@/app/content/root-metadata";
 import "@/app/globals.css";
 
@@ -11,7 +12,10 @@ export default function ArabicRootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body>{children}</body>
+      <body>
+        <CleanUrlController />
+        {children}
+      </body>
     </html>
   );
 }
