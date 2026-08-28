@@ -18,6 +18,7 @@ import {
 import InsightBodyRenderer from
   "./InsightBodyRenderer";
 import InsightCard from "./InsightCard";
+import InsightsAssistant from "./InsightsAssistant";
 import styles from
   "./InsightArticlePage.module.css";
 
@@ -323,6 +324,8 @@ export default function InsightArticlePage({
           <small>{articleHref}</small>
         </p>
       </footer>
+
+      <InsightsAssistant language={language} />
     </main>
   );
 }
