@@ -3,3 +3,22 @@
 @media(max-width:950px){.header{grid-template-columns:1fr 1.4fr}.intro{grid-column:1/-1;max-width:680px}.command{grid-template-columns:1fr}.channels{border-inline-end:0;border-bottom:1px solid rgba(255,255,255,.08)}.signal{grid-template-columns:auto 1fr;column-gap:28px;align-items:center;text-align:start}.signal>span,.signal>b{grid-column:2}.signal>div{grid-row:1/4;grid-column:1;margin:10px}.channelList{grid-template-columns:repeat(3,1fr)}.channelList a{grid-template-columns:43px 1fr}.channelList a>i{display:none}}
 @media(max-width:650px){.section{padding-block:68px}.shell{width:calc(100% - 20px)}.header{grid-template-columns:1fr;gap:24px;margin-bottom:30px}.header h2{font-size:clamp(38px,11vw,51px)}.intro{grid-column:auto}.command{border-radius:20px}.commandBar{grid-template-columns:1fr auto}.commandBar b{display:none}.channels{padding:25px 14px}.signal{display:grid;grid-template-columns:1fr;text-align:center;justify-items:center}.signal>span,.signal>b,.signal>div{grid-column:1;grid-row:auto}.signal>div{width:112px;height:112px;margin:22px}.channelList{grid-template-columns:1fr}.channelList a{grid-template-columns:48px 1fr auto}.channelList a>i{display:block}.form{grid-template-columns:1fr;padding:28px 15px}.formHead,.wide,.submitRow{grid-column:1}.form input,.form select,.form textarea{font-size:16px}.submitRow{grid-template-columns:1fr}.submitRow button{width:100%;min-width:0}.submitRow>small{order:2}}
 @media(prefers-reduced-motion:reduce){.command{transition:none}.status i,.signal>div:before,.signal>div:after{animation:none}}
+
+:global([data-theme="light"]) .section{background:linear-gradient(180deg,#f7f8f4,#edf4f0 52%,#f8f7f2);color:#08120f}
+:global([data-theme="light"]) .grid{background:radial-gradient(800px circle at 18% 50%,rgba(122,170,0,.11),transparent 60%),radial-gradient(700px circle at 82% 58%,rgba(111,68,180,.09),transparent 60%),linear-gradient(rgba(7,28,22,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(7,28,22,.055) 1px,transparent 1px);background-size:auto,auto,50px 50px,50px 50px}
+:global([data-theme="light"]) .header h2 em{background:linear-gradient(90deg,#547800,#007f82 58%,#15231e);background-clip:text}
+:global([data-theme="light"]) .intro,:global([data-theme="light"]) .status{color:#4a5f56}
+:global([data-theme="light"]) .status{border-color:rgba(84,120,0,.26);background:rgba(255,255,255,.45)}
+:global([data-theme="light"]) .command{background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(240,246,242,.96) 66%,rgba(246,240,250,.94));border-color:rgba(7,28,22,.16);box-shadow:0 38px 105px rgba(26,52,43,.14)}
+:global([data-theme="light"]) .commandBar,:global([data-theme="light"]) .channels,:global([data-theme="light"]) .signal,:global([data-theme="light"]) .formHead{border-color:rgba(7,28,22,.12)}
+:global([data-theme="light"]) .commandBar,:global([data-theme="light"]) .signal>span,:global([data-theme="light"]) .channels>p{color:#52675e}
+:global([data-theme="light"]) .commandBar b,:global([data-theme="light"]) .signal>b{color:#263d34}
+:global([data-theme="light"]) .signal>div{background:radial-gradient(circle,rgba(122,170,0,.13),transparent 67%)}
+:global([data-theme="light"]) .channelList a{color:#0b1813;background:rgba(255,255,255,.58);border-color:rgba(7,28,22,.12)}
+:global([data-theme="light"]) .channelList a>span{background:#eef4ef}
+:global([data-theme="light"]) .channelList small,:global([data-theme="light"]) .form label,:global([data-theme="light"]) .submitRow>small{color:#4d6259}
+:global([data-theme="light"]) .formHead p{color:#465c53}
+:global([data-theme="light"]) .form input,:global([data-theme="light"]) .form select,:global([data-theme="light"]) .form textarea{background:rgba(255,255,255,.72);border-color:rgba(7,28,22,.16);color:#08120f}
+:global([data-theme="light"]) .form select option{background:#fff;color:#08120f}
+
+@media(max-width:950px){:global([data-theme="light"]) .channels{border-color:rgba(7,28,22,.12)}}
