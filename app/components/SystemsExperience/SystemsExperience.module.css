@@ -198,3 +198,11 @@
 @media(max-width:900px){.shell{width:min(100% - 30px,1180px)}.section:after{display:none}.domain:hover,.domain.active{transform:none}}
 @media(max-width:560px){.shell{width:calc(100% - 20px)}}
 @media(prefers-reduced-motion:reduce){.section:after{animation:none}}
+
+/* Typography and anchor integrity. */
+.section{scroll-margin-top:126px}
+.section[dir="rtl"],.section[dir="rtl"] button{font-family:"Cairo",Arial,sans-serif}
+.section[dir="rtl"] .header h2,.section[dir="rtl"] .header h2 em,.section[dir="rtl"] .intro p{font-family:"Cairo",Arial,sans-serif}
+.section[dir="rtl"] .header h2{line-height:1.34;letter-spacing:0}
+.section[dir="rtl"] .header h2 em{font-weight:600}
+@media(max-width:560px){.section{scroll-margin-top:92px}.section[dir="rtl"] .header h2{line-height:1.42}}
