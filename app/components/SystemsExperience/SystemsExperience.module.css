@@ -206,3 +206,21 @@
 .section[dir="rtl"] .header h2{line-height:1.34;letter-spacing:0}
 .section[dir="rtl"] .header h2 em{font-weight:600}
 @media(max-width:560px){.section{scroll-margin-top:92px}.section[dir="rtl"] .header h2{line-height:1.42}}
+
+/* Structured operating model: one command core and a readable domain matrix. */
+@media(min-width:901px){
+  .architecture{height:auto;min-height:0;display:grid;grid-template-columns:minmax(260px,.72fr) repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(150px,auto));gap:14px;padding:28px}
+  .connections{display:none}
+  .core{position:relative;inset:auto;grid-column:1;grid-row:1/-1;width:auto;min-height:100%;transform:none!important;align-content:center;padding:34px 24px;border:1px solid rgba(40,240,208,.16);border-radius:24px;background:radial-gradient(circle at 50% 42%,rgba(40,240,208,.08),transparent 58%),rgba(255,255,255,.018)}
+  .domain,.intelligence,.communication,.operations,.governance,.technology{position:relative;inset:auto;width:auto;min-width:0;transform:translateY(18px)!important}
+  .section[data-visible="true"] .domain,.section[data-visible="true"] .intelligence{transform:none!important}
+  .domain{min-height:150px;align-content:space-between}
+  .intelligence{grid-column:2;grid-row:1}
+  .communication{grid-column:3;grid-row:1}
+  .operations{grid-column:2;grid-row:2}
+  .governance{grid-column:3;grid-row:2}
+  .technology{grid-column:2/-1;grid-row:3}
+  .domain:hover,.domain.active{transform:translateY(-4px)!important}
+  .domainBody small{min-height:auto}
+  :global(:root[data-theme="light"]) .core{background:radial-gradient(circle at 50% 42%,rgba(0,127,130,.09),transparent 58%),rgba(255,255,255,.58);border-color:rgba(0,127,130,.18)}
+}
