@@ -123,8 +123,13 @@ export function useCaseStudyExperienceMotion<T extends HTMLElement>() {
     };
   }, [motionState]);
 
-  const jumpToLayer = useCallback((_index: number) => {
-    return;
+  const jumpToLayer = useCallback((index: number) => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const sectionTop = window.scrollY + section.getBoundingClientRect().top;
+    const scrollable = Math.max(0, section.offsetHeight - window.innerHeight);
+    const progress = clamp((index + 0.5) / LAYER_COUNT);
+    window.scrollTo({ top: sectionTop + scrollable * progress, behavior: "smooth" });
   }, []);
 
   return {
