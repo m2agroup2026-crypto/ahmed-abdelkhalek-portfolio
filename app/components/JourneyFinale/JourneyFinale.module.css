@@ -15,3 +15,4 @@
 @media(max-width:460px){.commandDeck>header h3{font-size:33px}.moduleHero h4{font-size:35px}.moduleTop{padding-inline:14px}.moduleTop small{display:none}.dataFlow{font-size:5px}}
 @media(prefers-reduced-motion:reduce){.ambient>i,.ambient>span,.map:before,.map:after,.core>i,.outcome>div i{animation:none}.stage{opacity:1;transform:none;transition:none}.detail{animation:none}.map circle{display:none}}
 @media(prefers-reduced-motion:reduce){.voiceCore>i,.voiceCore>div i,.moduleOrb>i,.dataFlow i:after{animation:none}.moduleView{animation:none}}
+.section{scroll-margin-top:110px}
