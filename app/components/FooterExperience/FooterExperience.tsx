@@ -17,10 +17,12 @@ export default function FooterExperience({ language }: { language: FooterLanguag
           <div className={styles.core} aria-hidden="true"><span /><span /><i /><strong>AA</strong></div>
           <div className={styles.statementCopy}>
             <p>{footerText(footerContent.prelude, language)}</p>
-            <h2 id="footer-statement">{footerText(footerContent.title, language)}<em>{footerText(footerContent.accent, language)}</em></h2>
+            <h2 id="footer-statement">
+              <span>{footerText(footerContent.title, language)}</span>
+              <em>{ar ? <><span>والرؤية، أصبحت نظامًا</span><span>يعمل.</span></> : footerText(footerContent.accent, language)}</em>
+            </h2>
             <blockquote>{footerText(footerContent.statement, language)}</blockquote>
           </div>
-          <a className={styles.topControl} href="#top" onClick={scrollTop} aria-label={footerText(footerContent.top, language)}><span>{footerText(footerContent.top, language)}</span><i><svg viewBox="0 0 24 24"><path d="M12 20V4M5 11l7-7 7 7"/></svg></i></a>
         </section>
 
         <div className={styles.identityDeck}>
@@ -33,6 +35,7 @@ export default function FooterExperience({ language }: { language: FooterLanguag
         </div>
 
         <div className={styles.systemBar}><span><i />{footerText(footerContent.status, language)}</span><b>© {new Date().getFullYear()} AHMED ABDELKHALEK</b><small>{footerText(footerContent.copyright, language)}</small></div>
+        <a className={styles.topControl} href="#top" onClick={scrollTop} aria-label={footerText(footerContent.top, language)}><span>{footerText(footerContent.top, language)}</span><i><svg viewBox="0 0 24 24"><path d="M12 20V4M5 11l7-7 7 7"/></svg></i></a>
       </div>
     </footer>
   );
