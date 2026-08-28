@@ -19,3 +19,14 @@
 :global([data-theme="light"]) .navigation a:hover,:global([data-theme="light"]) .channels a:hover{color:#07140f;border-color:rgba(0,127,130,.3)}
 :global([data-theme="light"]) .systemBar{color:#50665d}
 :global([data-theme="light"]) .systemBar b{color:#263d34}
+
+/* Final signature rebuild: denser, stronger, and continuous with the experience. */
+.footer{padding-top:clamp(82px,9vw,138px)}
+.shell{width:min(1500px,calc(100% - 64px))}
+.finalStatement{grid-template-columns:200px minmax(0,1fr) 110px;padding-bottom:clamp(58px,6vw,90px)}
+.statementCopy h2{font-size:clamp(54px,6.3vw,96px)}
+.identityDeck{padding:clamp(42px,4vw,62px);border:1px solid rgba(255,255,255,.09);border-radius:30px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.008));box-shadow:0 36px 110px rgba(0,0,0,.22)}
+:global([data-theme="light"]) .identityDeck{background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(234,241,236,.62));box-shadow:0 30px 90px rgba(26,52,43,.12)}
+.systemBar{padding-inline:20px}
+@media(max-width:900px){.shell{width:min(100% - 30px,1240px)}.finalStatement{grid-template-columns:130px 1fr}.identityDeck{padding:38px}}
+@media(max-width:600px){.shell{width:calc(100% - 20px)}.finalStatement{grid-template-columns:1fr}.identityDeck{padding:32px 18px;border-radius:22px}.statementCopy h2{font-size:clamp(40px,11vw,55px)}}
