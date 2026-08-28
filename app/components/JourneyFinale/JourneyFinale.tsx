@@ -29,10 +29,10 @@ export default function JourneyFinale({language}:{language:"ar"|"en"}){
           <div className={styles.commandGrid}>
             <nav aria-label={ar?"وحدات نظام M2A":"M2A system modules"}>{c.deck.modules.map((item,index)=><button type="button" key={item.code} data-active={activeModule===index} onClick={()=>setActiveModule(index)} aria-pressed={activeModule===index}><span>{item.code}</span><div><b>{item.name}</b><small>{item.state}</small></div><i>↗</i></button>)}</nav>
             <article key={`${language}-${unit.code}`} className={styles.moduleView}>
-              <div className={styles.moduleTop}><span><i/>{unit.signal} / LIVE CONTEXT</span><small>MODULE {String(activeModule+1).padStart(2,"0")} / {String(c.deck.modules.length).padStart(2,"0")}</small></div>
+              <div className={styles.moduleTop}><span dir="ltr"><i/>{unit.signal} / LIVE CONTEXT</span><small dir="ltr">MODULE {String(activeModule+1).padStart(2,"0")} / {String(c.deck.modules.length).padStart(2,"0")}</small></div>
               <div className={styles.moduleHero}><div><small>{unit.state}</small><h4>{unit.name}</h4><p>{unit.description}</p></div><div className={styles.moduleOrb}><i/><i/><strong>{unit.code}</strong><span>{unit.signal}</span></div></div>
               <div className={styles.featureRail}>{unit.features.map((feature,index)=><div key={feature}><span>0{index+1}</span><b>{feature}</b><i>ONLINE</i></div>)}</div>
-              <div className={styles.dataFlow}><span>SUPABASE CORE</span><i/><span>M2A API LAYER</span><i/><span>COMMAND BUS</span><i/><span>{unit.code}</span></div>
+              <div className={styles.dataFlow} dir="ltr"><span>SUPABASE CORE</span><i/><span>M2A API LAYER</span><i/><span>COMMAND BUS</span><i/><span>{unit.code}</span></div>
             </article>
           </div>
           <footer className={styles.trustRail}><span><i/>{c.deck.security}</span><b>{c.deck.audit}</b><span>RLS · HTTPS · AUDIT LOG<i/></span></footer>
