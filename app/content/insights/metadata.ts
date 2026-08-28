@@ -67,6 +67,9 @@ export function createInsightsIndexMetadata(
           "التحول الرقمي",
           "الأتمتة",
           "المنصات المؤسسية",
+          "التحول الرقمي في الخليج",
+          "الذكاء الاصطناعي في الشرق الأوسط",
+          "تقنيات المؤسسات في السعودية والإمارات",
           "أحمد عبد الخالق",
         ]
       : [
@@ -76,6 +79,9 @@ export function createInsightsIndexMetadata(
           "digital transformation",
           "automation",
           "enterprise platforms",
+          "Gulf digital transformation",
+          "Middle East enterprise AI",
+          "Saudi Arabia and UAE enterprise technology",
           "Ahmed Abdelkhalek",
         ];
 

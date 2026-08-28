@@ -144,6 +144,12 @@ export function getInsightContent(
   return article.content[language];
 }
 
+export function getPortfolioHomePath(
+  language: InsightLanguage
+) {
+  return language === "ar" ? "/" : "/en";
+}
+
 export function getInsightPath(
   slug: string,
   language: InsightLanguage

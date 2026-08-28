@@ -1,0 +1,80 @@
+.viewportDock {
+  min-width: 0;
+  padding-bottom: 78px;
+}
+
+.viewportDock article {
+  min-width: 0;
+  max-inline-size: 100%;
+}
+
+.viewportDock article p {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.chapterCopy {
+  inline-size: min(100%, 46ch) !important;
+  max-inline-size: 46ch !important;
+  margin-inline-end: auto !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  text-wrap: pretty;
+}
+
+.controlsDock {
+  inset-inline: clamp(22px, 2.4vw, 34px);
+  bottom: 16px;
+  align-items: center;
+  min-height: 42px;
+  padding-top: 12px;
+  border-top: 1px solid var(--journey-line);
+}
+
+.controlsDock button {
+  min-width: 88px;
+}
+
+.controlsDock button:first-child {
+  justify-content: flex-start;
+}
+
+.controlsDock button:last-child {
+  justify-content: flex-end;
+}
+
+@media (max-height: 820px) and (min-width: 961px) {
+  .viewportDock {
+    padding-bottom: 64px;
+  }
+
+  .chapterCopy {
+    max-inline-size: 42ch !important;
+  }
+
+  .controlsDock {
+    bottom: 10px;
+    min-height: 36px;
+    padding-top: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .viewportDock {
+    padding-bottom: 68px;
+  }
+
+  .chapterCopy {
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+  }
+
+  .controlsDock {
+    inset-inline: 18px;
+    bottom: 12px;
+  }
+}

@@ -436,11 +436,21 @@
   background:
     radial-gradient(
       circle,
-      rgba(8, 127, 144, 0.13),
+      rgba(67, 219, 234, 0.24),
       transparent 63%
     ),
-    rgba(245, 249, 244, 0.96);
+    linear-gradient(145deg, #0a2924, #04100e);
+  border-color: rgba(186, 139, 31, 0.72);
+  box-shadow:
+    0 0 28px rgba(0, 176, 195, 0.3),
+    0 0 0 5px rgba(0, 143, 163, 0.08);
 }
+
+:global([data-theme="light"]) .coreOuter{stroke:rgba(0,205,225,.82)}
+:global([data-theme="light"]) .coreOrbit{stroke:rgba(242,190,67,.96)}
+:global([data-theme="light"]) .coreSignal{stroke:rgba(81,233,242,.95)}
+:global([data-theme="light"]) .coreCenter{fill:rgba(0,167,186,.2);stroke:#52e7f2}
+:global([data-theme="light"]) .corePulse{fill:#f2be43}
 
 :global([data-theme="light"]) .onlineIndicator {
   border-color: #f6f9f4;

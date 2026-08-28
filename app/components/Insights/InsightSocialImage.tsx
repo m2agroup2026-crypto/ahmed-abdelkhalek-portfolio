@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
+import { siteHostname } from "@/app/content/site";
 import type {
   InsightLanguage,
 } from "../../content/insights/types";
@@ -37,8 +38,6 @@ function reverseArabicWords(value: string) {
     .reverse()
     .join(" ");
 }
-
-
 
 export const insightSocialImageSize = {
   width: 1200,
@@ -189,7 +188,7 @@ export async function createInsightSocialImage({
               fontSize: 14,
             }}
           >
-            ahmed.m2agroupeg.com
+            {siteHostname}
           </span>
         </div>
 

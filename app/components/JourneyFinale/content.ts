@@ -1,0 +1,50 @@
+export const journeyFinaleContent = {
+  ar: {
+    eyebrow:"M2A OPERATING SYSTEM / JOURNEY FINALE", title:"حين تتحول الخبرة إلى", accent:"نظام تشغيل مؤسسي.",
+    intro:"هنا تتقارب طبقات دراسة الحالة في منظومة M2A واحدة: رؤية تقود، ومعمارية تربط، وذكاء يفسّر، وتشغيل ينفّذ، وأساس يتوسع بثقة.",
+    live:"منظومة M2A متصلة", core:"نواة قيادة M2A", coreState:"جميع المسارات متزامنة", detailLabel:"طبقة النظام النشطة", capabilities:"قدرات مفعّلة", outcome:"حالة المنظومة",
+    gates:[
+      {code:"01",label:"الرؤية",title:"اتجاه واضح قبل التنفيذ",text:"تحويل رؤية M2A إلى أولويات قابلة للقياس وخريطة قرار مشتركة بين القيادة وفرق التنفيذ.",metric:"ONE",metricLabel:"اتجاه موحّد",items:["أهداف مترابطة","أولويات قابلة للقياس","ملكية قرار واضحة"]},
+      {code:"02",label:"المعمارية",title:"نظام واحد بدل جزر منفصلة",text:"ربط المنصات والبيانات والواجهات داخل أساس مرن قابل للتوسع.",metric:"05",metricLabel:"طبقات متصلة",items:["تكامل API","نموذج بيانات موحد","خدمات قابلة للتركيب"]},
+      {code:"03",label:"الذكاء",title:"إشارات تتحول إلى قرار",text:"إدخال الذكاء الاصطناعي داخل تشغيل M2A مع تفسير ومراجعة بشرية وحوكمة واضحة.",metric:"AI",metricLabel:"ذكاء محكوم",items:["وكلاء ذكاء","توقع الإشارات","اعتماد بشري"]},
+      {code:"04",label:"التشغيل",title:"تنفيذ يتحرك بلا احتكاك",text:"تنسيق الفرق والخدمات والموافقات في مسارات تشغيلية مرئية ومؤتمتة داخل نظام واحد.",metric:"LIVE",metricLabel:"تشغيل مترابط",items:["أتمتة الأحداث","مراقبة الأداء","إدارة الاستثناءات"]},
+      {code:"05",label:"التوسع",title:"قدرة جاهزة للسوق القادم",text:"بنية مرنة تدعم النمو الآمن عبر القطاعات والأسواق الإقليمية والخليجية.",metric:"GCC",metricLabel:"جاهزية إقليمية",items:["توسع سحابي","حوكمة متعددة الأسواق","أداء قابل للقياس"]},
+    ],
+    deck:{eyebrow:"M2A MISSION CONTROL",title:"المجموعة كلها داخل مجال رؤية واحد.",intro:"لوحة قيادة تكيفية تقرأ نفس قاعدة البيانات المركزية، وتعرض لكل دور ما يحتاجه لاتخاذ القرار دون كسر سياق المؤسسة.",assistant:"نواة الأوامر الصوتية",assistantState:"عربي · English · لهجة مصرية",security:"Passkeys / Face ID / Touch ID",audit:"كل أمر يمر بالصلاحيات والموافقة وسجل التدقيق",open:"فتح الوحدة",modules:[
+      {code:"CRM",name:"العملاء والمتابعات",state:"تشغيل يومي",signal:"QUEUE",description:"عملاء اليوم، المتأخرون، المسؤول، الإجراء التالي، Lead Score وسبب الفقد.",features:["Follow-up Queue","توزيع المسؤوليات","تصنيف وأولوية العميل"]},
+      {code:"PRJ",name:"المشروعات والوحدات",state:"صورة تنفيذية",signal:"TWIN",description:"خريطة مترابطة للمشروعات والوحدات والمراحل والمهام والمخاطر والنتائج.",features:["Available / Reserved / Sold","المهام والمخاطر","الميديا والرسومات الهندسية"]},
+      {code:"CTR",name:"العقود والتحصيل",state:"رقابة مالية",signal:"DUE",description:"ملفات العملاء والعقود والملاحق والأقساط والاستحقاقات وتنبيهات التأخير.",features:["العقود والملاحق","جدول الأقساط","تنبيهات التحصيل"]},
+      {code:"OPS",name:"التشغيل والموافقات",state:"مسارات محكومة",signal:"FLOW",description:"إجراءات الفرق والمقاولين والموردين وأوامر الشراء والموافقات الإدارية.",features:["Workflow Engine","أوامر الشراء والتوريد","إدارة الاستثناءات"]},
+      {code:"COM",name:"القنوات والمحتوى",state:"قنوات موحّدة",signal:"OMNI",description:"الموقع وMessenger وWhatsApp والبريد والنشر تتدفق إلى سجل مركزي واحد.",features:["Website Leads","سجل المحادثات","إدارة المحتوى والنشر"]},
+      {code:"AI",name:"غرفة مجلس الذكاء",state:"قرار مدعوم",signal:"BOARD",description:"وكلاء مالي وقانوني وتشغيلي ومبيعات ومخاطر يعرضون الرأي والدليل والثقة.",features:["AI Boardroom","What-If Lab","Time Machine"]},
+      {code:"CMP",name:"الثقة والامتثال",state:"ISO-ready",signal:"TRUST",description:"جاهزية المعايير والأدلة والمخاطر والحوادث والموردين والمراجعات في Trust Passport واحد.",features:["Compliance Command Center","سجل المخاطر والضوابط","أدلة التدقيق"]},
+      {code:"SYS",name:"الأمان والصلاحيات",state:"Zero Trust",signal:"RLS",description:"صلاحيات دقيقة وعزل مؤسسات وإدارة جلسات وأجهزة وسجل غير قابل للتلاعب.",features:["Role & Row Level Security","Audit Log","Biometric Passkeys"]},
+      {code:"SCL",name:"منصة متعددة المؤسسات",state:"جاهزة للتوسع",signal:"CORE",description:"Core واحد وهوية ووحدات وباقات وتكاملات مستقلة لكل مؤسسة دون نسخ الكود.",features:["White-label & Multi-tenant","Tenant Modules","Commercial Control Plane"]},
+    ]},
+    finale:"M2A — من رؤية مؤسسية إلى نظام يعمل ويتعلم ويتوسع.", next:"استكشاف هندسة الأنظمة", footer:"M2A CASE STUDY / DESIGNED BY AHMED ABDELKHALEK",
+  },
+  en: {
+    eyebrow:"M2A OPERATING SYSTEM / JOURNEY FINALE", title:"Where experience becomes", accent:"an enterprise operating system.",
+    intro:"This is where the case-study layers converge into one M2A system: vision leads, architecture connects, intelligence interprets, operations execute, and the foundation scales.",
+    live:"M2A ecosystem connected", core:"M2A COMMAND CORE", coreState:"ALL PATHS SYNCHRONIZED", detailLabel:"ACTIVE SYSTEM LAYER", capabilities:"ACTIVATED CAPABILITIES", outcome:"SYSTEM STATE",
+    gates:[
+      {code:"01",label:"VISION",title:"Direction before delivery",text:"Translate M2A's vision into measurable priorities and a shared map for leadership and delivery teams.",metric:"ONE",metricLabel:"SHARED DIRECTION",items:["Connected objectives","Measurable priorities","Clear decision ownership"]},
+      {code:"02",label:"ARCHITECTURE",title:"One system, not isolated islands",text:"Connect platforms, data, and interfaces through a resilient composable foundation.",metric:"05",metricLabel:"CONNECTED LAYERS",items:["API integration","Unified data model","Composable services"]},
+      {code:"03",label:"INTELLIGENCE",title:"Signals become decisions",text:"Embed governed AI into M2A operations with explainability and human oversight.",metric:"AI",metricLabel:"GOVERNED INTELLIGENCE",items:["AI agents","Predictive signals","Human approval"]},
+      {code:"04",label:"OPERATIONS",title:"Execution without friction",text:"Orchestrate teams, services, and approvals through observable automated workflows in one system.",metric:"LIVE",metricLabel:"CONNECTED OPS",items:["Event automation","Performance telemetry","Exception control"]},
+      {code:"05",label:"SCALE",title:"Ready for the next market",text:"A resilient foundation engineered for safe growth across MENA and GCC markets.",metric:"GCC",metricLabel:"REGIONAL READINESS",items:["Cloud scalability","Multi-market governance","Measurable performance"]},
+    ],
+    deck:{eyebrow:"M2A MISSION CONTROL",title:"The entire group in one field of view.",intro:"An adaptive command surface reading one central data foundation and giving every role the context required to decide and act.",assistant:"VOICE COMMAND CORE",assistantState:"Arabic · English · Egyptian dialect",security:"Passkeys / Face ID / Touch ID",audit:"Every command passes authorization, approval, and the audit log",open:"OPEN MODULE",modules:[
+      {code:"CRM",name:"CRM & follow-up",state:"Daily operations",signal:"QUEUE",description:"Today's leads, overdue follow-ups, owner, next action, lead score, and loss reason.",features:["Follow-up Queue","Owner assignment","Lead scoring & priority"]},
+      {code:"PRJ",name:"Projects & inventory",state:"Executive picture",signal:"TWIN",description:"A connected map of projects, units, phases, tasks, risks, media, and outcomes.",features:["Available / Reserved / Sold","Tasks & risks","Media & engineering files"]},
+      {code:"CTR",name:"Contracts & collections",state:"Financial control",signal:"DUE",description:"Client files, contracts, addenda, installments, due dates, and collection alerts.",features:["Contracts & addenda","Installment schedule","Collection alerts"]},
+      {code:"OPS",name:"Operations & approvals",state:"Governed flows",signal:"FLOW",description:"Team procedures, contractors, suppliers, purchase orders, and management approvals.",features:["Workflow engine","Procurement orders","Exception control"]},
+      {code:"COM",name:"Channels & content",state:"Unified channels",signal:"OMNI",description:"Website, Messenger, WhatsApp, email, and publishing flow into one central record.",features:["Website leads","Conversation history","Content & publishing"]},
+      {code:"AI",name:"AI Boardroom",state:"Augmented decisions",signal:"BOARD",description:"Finance, legal, operations, sales, and risk agents present opinion, evidence, and confidence.",features:["AI Boardroom","What-If Lab","Time Machine"]},
+      {code:"CMP",name:"Trust & compliance",state:"ISO-ready",signal:"TRUST",description:"Standards readiness, evidence, risks, incidents, suppliers, and reviews in one Trust Passport.",features:["Compliance Command Center","Risk & control register","Audit evidence"]},
+      {code:"SYS",name:"Security & access",state:"Zero Trust",signal:"RLS",description:"Granular permissions, tenant isolation, device sessions, and a tamper-evident audit trail.",features:["Role & Row Level Security","Audit Log","Biometric passkeys"]},
+      {code:"SCL",name:"Multi-tenant platform",state:"Built to scale",signal:"CORE",description:"One core with independent identity, modules, plans, and integrations for every organization.",features:["White-label & multi-tenant","Tenant modules","Commercial control plane"]},
+    ]},
+    finale:"M2A — from enterprise vision to a system that operates, learns, and scales.", next:"Explore systems architecture", footer:"M2A CASE STUDY / DESIGNED BY AHMED ABDELKHALEK",
+  }
+} as const;

@@ -16,18 +16,29 @@ export function useSectionMotion<T extends HTMLElement>() {
       return;
     }
 
+    const scheduleMotionState = (
+      nextState: SectionMotionState
+    ) => {
+      const frame = requestAnimationFrame(() => {
+        setMotionState(nextState);
+      });
+
+      return () => cancelAnimationFrame(frame);
+    };
+
     const reducedMotionQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     );
 
     if (reducedMotionQuery.matches) {
-      setMotionState("reduced");
-      return;
+      return scheduleMotionState("reduced");
     }
 
-    if (!("IntersectionObserver" in window)) {
-      setMotionState("active");
-      return;
+    const supportsIntersectionObserver =
+      typeof window.IntersectionObserver === "function";
+
+    if (!supportsIntersectionObserver) {
+      return scheduleMotionState("active");
     }
 
     const observer = new IntersectionObserver(

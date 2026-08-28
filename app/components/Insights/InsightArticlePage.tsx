@@ -5,6 +5,7 @@ import {
   getInsightContent,
   getInsightPath,
   getInsightsIndexPath,
+  getPortfolioHomePath,
   getRelatedInsights,
 } from "../../content/insights/registry";
 import type {
@@ -17,6 +18,7 @@ import {
 import InsightBodyRenderer from
   "./InsightBodyRenderer";
 import InsightCard from "./InsightCard";
+import InsightsAssistant from "./InsightsAssistant";
 import styles from
   "./InsightArticlePage.module.css";
 
@@ -78,6 +80,9 @@ export default function InsightArticlePage({
   const insightsHref =
     getInsightsIndexPath(language);
 
+  const homeHref =
+    getPortfolioHomePath(language);
+
   const dateChanged =
     article.updatedAt !== article.publishedAt;
 
@@ -100,7 +105,7 @@ export default function InsightArticlePage({
       <header className={styles.siteHeader}>
         <Link
           className={styles.brand}
-          href="/"
+          href={homeHref}
           aria-label={ui.article.home}
         >
           <span>{ui.author.initials}</span>
@@ -309,7 +314,7 @@ export default function InsightArticlePage({
       </article>
 
       <footer className={styles.footer}>
-        <Link href="/">
+        <Link href={homeHref}>
           <span>{ui.author.initials}</span>
           <strong>{ui.author.name}</strong>
         </Link>
@@ -319,6 +324,8 @@ export default function InsightArticlePage({
           <small>{articleHref}</small>
         </p>
       </footer>
+
+      <InsightsAssistant language={language} />
     </main>
   );
 }

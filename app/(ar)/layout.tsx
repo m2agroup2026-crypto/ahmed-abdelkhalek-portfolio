@@ -1,8 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import CleanUrlController from "@/app/components/Routing/CleanUrlController";
+import PortfolioStructuredData from "@/app/components/SEO/PortfolioStructuredData";
 import { createRootMetadata } from "@/app/content/root-metadata";
 import "@/app/globals.css";
 
 export const metadata: Metadata = createRootMetadata("ar");
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f7f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#070a09" },
+  ],
+};
 
 export default function ArabicRootLayout({
   children,
@@ -11,19 +23,11 @@ export default function ArabicRootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>{children}</body>
+      <body>
+        <PortfolioStructuredData language="ar" />
+        <CleanUrlController />
+        {children}
+      </body>
     </html>
   );
 }

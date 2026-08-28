@@ -16,8 +16,10 @@ export function useFloatingAssistant({
   heroId = "top",
   contactId = "contact",
 }: UseFloatingAssistantOptions = {}) {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [nearContact, setNearContact] =
+    useState(false);
+  const [invitationUnlocked, setInvitationUnlocked] =
     useState(false);
   const [invitationDismissed, setInvitationDismissed] =
     useState(false);
@@ -25,22 +27,18 @@ export function useFloatingAssistant({
   const frameRef = useRef(0);
 
   useEffect(() => {
-    const hero = document.getElementById(heroId);
     const contact = document.getElementById(contactId);
-
-    if (!hero) {
-      setVisible(true);
-    }
 
     const updatePosition = () => {
       frameRef.current = 0;
 
-      if (hero) {
-        const heroBounds =
-          hero.getBoundingClientRect();
-
-        setVisible(heroBounds.bottom <= 120);
-      }
+      /*
+       * The assistant is a global product control, not a section reveal.
+       * Keeping it tied to the hero geometry made it disappear whenever
+       * a route restored scroll or a long animated hero reported stale
+       * bounds. It now remains available across the complete experience.
+       */
+      setVisible(true);
 
       if (contact) {
         const contactBounds =
@@ -54,6 +52,21 @@ export function useFloatingAssistant({
           contactBounds.bottom >= viewportHeight * 0.18;
 
         setNearContact(contactIsNear);
+        if (contactIsNear) {
+          setInvitationUnlocked(true);
+        }
+      } else {
+        setNearContact(false);
+      }
+
+      const pageHeight =
+        document.documentElement.scrollHeight;
+      const reachedClosingSequence =
+        window.scrollY + window.innerHeight >=
+        pageHeight * 0.78;
+
+      if (reachedClosingSequence) {
+        setInvitationUnlocked(true);
       }
     };
 
@@ -66,7 +79,7 @@ export function useFloatingAssistant({
         window.requestAnimationFrame(updatePosition);
     };
 
-    updatePosition();
+    requestUpdate();
 
     window.addEventListener(
       "scroll",
@@ -104,7 +117,7 @@ export function useFloatingAssistant({
     nearContact,
     invitationVisible:
       visible &&
-      nearContact &&
+      invitationUnlocked &&
       !invitationDismissed,
     dismissInvitation,
   };

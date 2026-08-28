@@ -52,6 +52,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ];
     });
 
+  const homeLanguages = {
+    ar: absoluteUrl("/"),
+    en: absoluteUrl("/en"),
+    "x-default": absoluteUrl("/"),
+  };
+
   const indexLanguages = {
     ar: absoluteUrl("/insights"),
     en: absoluteUrl("/en/insights"),
@@ -63,6 +69,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl("/"),
       changeFrequency: "monthly",
       priority: 1,
+      alternates: {
+        languages: homeLanguages,
+      },
+    },
+    {
+      url: absoluteUrl("/en"),
+      changeFrequency: "monthly",
+      priority: 1,
+      alternates: {
+        languages: homeLanguages,
+      },
     },
     {
       url: absoluteUrl("/insights"),

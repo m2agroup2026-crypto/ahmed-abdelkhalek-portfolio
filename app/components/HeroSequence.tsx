@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const cinematicVideo = "/hero/final-reveal-fixed.mp4";
@@ -39,9 +40,14 @@ export default function HeroSequence({
     if (!skipSequence) return;
 
     mainRef.current?.pause();
-    setFade(false);
-    setFinished(true);
-    onReveal?.();
+
+    const frame = window.requestAnimationFrame(() => {
+      setFade(false);
+      setFinished(true);
+      onReveal?.();
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [skipSequence, onReveal]);
 
   useEffect(() => {
@@ -81,48 +87,51 @@ export default function HeroSequence({
         />
       </div>
 
-
       {finished && (
-        
-<div className="ahmed-reveal">
-        <div className="reveal-nasa-layer" aria-hidden="true">
-          <span className="nasa-dot nasa-dot-a" />
-          <span className="nasa-dot nasa-dot-b" />
-          <span className="nasa-dot nasa-dot-c" />
-          <span className="nasa-dot nasa-dot-d" />
-          <span className="nasa-dot nasa-dot-e" />
+        <div className="ahmed-reveal">
+          <div className="reveal-nasa-layer" aria-hidden="true">
+            <span className="nasa-dot nasa-dot-a" />
+            <span className="nasa-dot nasa-dot-b" />
+            <span className="nasa-dot nasa-dot-c" />
+            <span className="nasa-dot nasa-dot-d" />
+            <span className="nasa-dot nasa-dot-e" />
 
-          <span className="nasa-line nasa-line-a" />
-          <span className="nasa-line nasa-line-b" />
-          <span className="nasa-line nasa-line-c" />
-          <span className="nasa-line nasa-line-d" />
+            <span className="nasa-line nasa-line-a" />
+            <span className="nasa-line nasa-line-b" />
+            <span className="nasa-line nasa-line-c" />
+            <span className="nasa-line nasa-line-d" />
 
-          <div className="nasa-panel nasa-panel-a">
-            <small>DATA GRID</small>
-            <strong>SYNCED</strong>
-            <span />
+            <div className="nasa-panel nasa-panel-a">
+              <small>DATA GRID</small>
+              <strong>SYNCED</strong>
+              <span />
+            </div>
+
+            <div className="nasa-panel nasa-panel-b">
+              <small>NEURAL MAP</small>
+              <strong>LIVE</strong>
+              <span />
+            </div>
+
+            <div className="nasa-panel nasa-panel-c">
+              <small>MISSION FLOW</small>
+              <strong>ACTIVE</strong>
+              <span />
+            </div>
+
+            <div className="nasa-orbit nasa-orbit-a" />
+            <div className="nasa-orbit nasa-orbit-b" />
+            <div className="nasa-scan" />
+            <div className="nasa-grid" />
           </div>
-
-          <div className="nasa-panel nasa-panel-b">
-            <small>NEURAL MAP</small>
-            <strong>LIVE</strong>
-            <span />
-          </div>
-
-          <div className="nasa-panel nasa-panel-c">
-            <small>MISSION FLOW</small>
-            <strong>ACTIVE</strong>
-            <span />
-          </div>
-
-          <div className="nasa-orbit nasa-orbit-a" />
-          <div className="nasa-orbit nasa-orbit-b" />
-          <div className="nasa-scan" />
-          <div className="nasa-grid" />
-        </div>
 
           <div className="ahmed-reveal-photo">
-            <img src="/ahmed-abdelkhalek-v2.jpg" alt="Ahmed Abdelkhalek" />
+            <Image
+              src="/ahmed-abdelkhalek-v2.jpg"
+              alt="Ahmed Abdelkhalek"
+              width={1080}
+              height={1080}
+            />
           </div>
 
           <div className="ahmed-reveal-content">
@@ -166,7 +175,6 @@ export default function HeroSequence({
                 <strong>READY</strong>
               </div>
             </div>
-
           </div>
 
           <div className="mobile-m2a-core-block">
@@ -179,7 +187,12 @@ export default function HeroSequence({
               <div className="mobile-m2a-neural-ring mobile-ring-two" />
 
               <div className="mobile-neural-core">
-                <img src="/m2a-logo.png" alt="M2A Group" />
+                <Image
+                  src="/m2a-logo.png"
+                  alt="M2A Group"
+                  width={512}
+                  height={512}
+                />
                 <span />
               </div>
 
@@ -215,14 +228,10 @@ export default function HeroSequence({
             </div>
 
             <div className="mobile-visual-caption">
-                <small>M2A DIGITAL OPERATING SYSTEM / ONLINE</small>
-                <strong>COGNITIVE CORE</strong>
-              </div>
-
-
-
+              <small>M2A DIGITAL OPERATING SYSTEM / ONLINE</small>
+              <strong>COGNITIVE CORE</strong>
+            </div>
           </div>
-
         </div>
       )}
     </section>
