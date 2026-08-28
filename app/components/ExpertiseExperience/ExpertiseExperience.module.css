@@ -25,3 +25,18 @@
 :global([data-theme="light"]) .footer strong{color:#263d34}
 
 @media(max-width:650px){:global([data-theme="light"]) .rail{border-color:rgba(7,28,22,.12)}:global([data-theme="light"]) .rail button{border-color:rgba(7,28,22,.1)}}
+
+/* Capability observatory — visually bridges the operating model to contact. */
+.section:after{content:"";position:absolute;inset-inline:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--violet),var(--cyan),var(--lime),transparent);box-shadow:0 0 30px rgba(40,240,208,.22)}
+.shell{width:min(1500px,calc(100% - 64px))}
+.header{grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr)}
+.matrix{border-radius:34px;box-shadow:0 50px 150px rgba(0,0,0,.46),inset 0 0 90px rgba(40,240,208,.018)}
+.workspace{grid-template-columns:320px minmax(0,1fr) 82px}
+.rail button{min-height:92px;border-radius:14px}
+.detail{min-height:650px;align-content:center}
+.detail:after{content:"";position:absolute;inset:8%;border:1px dashed color-mix(in srgb,var(--tone) 11%,transparent);border-radius:50%;pointer-events:none;animation:spin 42s linear infinite}
+.detail>*{position:relative;z-index:1}
+:global([data-theme="light"]) .matrix{box-shadow:0 45px 125px rgba(26,52,43,.16),inset 0 0 80px rgba(0,127,130,.025)}
+@media(max-width:900px){.shell{width:min(100% - 30px,1180px)}.workspace{grid-template-columns:220px 1fr}.detail{min-height:0}.detail:after{display:none}}
+@media(max-width:650px){.shell{width:calc(100% - 20px)}}
+@media(prefers-reduced-motion:reduce){.detail:after{animation:none}}
