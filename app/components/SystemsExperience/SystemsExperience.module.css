@@ -27,6 +27,27 @@
 @media(max-width:560px){.detailTop{grid-template-columns:1fr auto;padding-inline:14px}.detailTop>b{display:none}.detailBody{grid-template-columns:1fr}.detailIdentity,.detailCapabilities,.detailOutcome{padding:25px 18px;border-inline-end:0;border-bottom:1px solid rgba(255,255,255,.08)}.detailIdentity{grid-template-columns:48px 1fr;gap:15px}.detailIdentity>span{width:48px;height:48px;border-radius:14px}.detailIdentity h3{font-size:26px}.detailOutcome{border-bottom:0}}
 @media(prefers-reduced-motion:reduce){.domainDetail,.detailOutcome>div i{animation:none}}
 
+/* Complete light-theme surface — this experience must not remain dark. */
+:global(:root[data-theme="light"]) .section{background:radial-gradient(700px circle at var(--systems-x) var(--systems-y),rgba(8,132,169,.09),transparent 58%),radial-gradient(650px circle at 84% 70%,rgba(111,157,22,.08),transparent 60%),linear-gradient(145deg,#eef1eb,#fafbf7 52%,#e1e6df);color:#07110e;border-color:rgba(7,17,14,.13)}
+:global(:root[data-theme="light"]) .grid{background-image:linear-gradient(rgba(7,17,14,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(7,17,14,.055) 1px,transparent 1px)}
+:global(:root[data-theme="light"]) .header h2,:global(:root[data-theme="light"]) .core h3,:global(:root[data-theme="light"]) .domainBody>b,:global(:root[data-theme="light"]) .footer h3{color:#07110e}
+:global(:root[data-theme="light"]) .intro p,:global(:root[data-theme="light"]) .core p,:global(:root[data-theme="light"]) .domainBody small,:global(:root[data-theme="light"]) .footer p{color:#47554f}
+:global(:root[data-theme="light"]) .live{color:#34423c;border-color:rgba(111,157,22,.32);background:rgba(255,255,255,.62)}
+:global(:root[data-theme="light"]) .console{background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(237,241,235,.96) 62%,rgba(239,234,247,.94));border-color:rgba(7,17,14,.18);box-shadow:0 40px 110px rgba(20,31,26,.15),inset 0 0 70px rgba(8,132,169,.025)}
+:global(:root[data-theme="light"]) .consoleBar,:global(:root[data-theme="light"]) .telemetry{color:#4d5b55;background:rgba(255,255,255,.45);border-color:rgba(7,17,14,.12)}
+:global(:root[data-theme="light"]) .consoleBar b,:global(:root[data-theme="light"]) .telemetryHeading b{color:#14201c}
+:global(:root[data-theme="light"]) .domain{color:#07110e;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(235,240,234,.94));border-color:rgba(7,17,14,.15);box-shadow:0 18px 48px rgba(18,30,24,.11)}
+:global(:root[data-theme="light"]) .domainTop b,:global(:root[data-theme="light"]) .domainStatus,:global(:root[data-theme="light"]) .core>span,:global(:root[data-theme="light"]) .core small{color:#4b5a53}
+:global(:root[data-theme="light"]) .coreOrb{background:radial-gradient(circle,rgba(111,157,22,.13),rgba(255,255,255,.94) 64%)}
+:global(:root[data-theme="light"]) .coreOrb strong{color:#07110e}
+:global(:root[data-theme="light"]) .domainDetail{background:radial-gradient(circle at 8% 10%,color-mix(in srgb,var(--tone) 9%,transparent),transparent 32%),linear-gradient(145deg,#fff,#edf1eb)}
+:global(:root[data-theme="light"]) .detailTop{color:#4e5c56;border-color:rgba(7,17,14,.12)}
+:global(:root[data-theme="light"]) .detailTop>b,:global(:root[data-theme="light"]) .detailIdentity h3{color:#07110e}
+:global(:root[data-theme="light"]) .detailIdentity,:global(:root[data-theme="light"]) .detailCapabilities,:global(:root[data-theme="light"]) .detailOutcome,:global(:root[data-theme="light"]) .detailCapabilities li{border-color:rgba(7,17,14,.12)}
+:global(:root[data-theme="light"]) .detailIdentity p,:global(:root[data-theme="light"]) .detailOutcome>p{color:#45534d}
+:global(:root[data-theme="light"]) .detailCapabilities li{color:#16231e}
+:global(:root[data-theme="light"]) .detailOutcome>div{background:rgba(7,17,14,.035);border-color:rgba(7,17,14,.13)}
+
 
 /* AI CONTROL ROOM REVEAL */
 
