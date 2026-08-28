@@ -10,6 +10,7 @@ import ExperienceSystemTransition from "@/app/components/ExperienceSystemTransit
 import SystemActivationBridge from "@/app/components/SystemActivationBridge/SystemActivationBridge";
 import GlassCommandRoom from "@/app/components/GlassCommandRoom/GlassCommandRoom";
 import OperationsCenter from "@/app/components/OperationsCenter/OperationsCenter";
+import JourneyFinale from "@/app/components/JourneyFinale/JourneyFinale";
 import CaseStudyExperience from "@/app/components/CaseStudyExperience/CaseStudyExperience";
 import SystemsExperience from "@/app/components/SystemsExperience/SystemsExperience";
 import ExpertiseExperience from "@/app/components/ExpertiseExperience/ExpertiseExperience";
@@ -170,6 +171,8 @@ export default function PortfolioHome() {
     <CaseStudyExperience
       language={ar ? "ar" : "en"}
     />
+    <JourneyFinale language={ar ? "ar" : "en"} />
+
     <SystemsExperience language={ar ? "ar" : "en"} />
 
     <ExpertiseExperience language={ar ? "ar" : "en"} />
