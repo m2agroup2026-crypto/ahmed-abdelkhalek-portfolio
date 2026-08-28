@@ -9,7 +9,7 @@ export default function JourneyFinale({language}:{language:"ar"|"en"}){
   const root=useRef<HTMLElement>(null), detail=useRef<HTMLDivElement>(null), gate=c.gates[active], unit=c.deck.modules[activeModule];
   useEffect(()=>{const node=root.current;if(!node)return;const observer=new IntersectionObserver(([entry])=>{if(entry?.isIntersecting){setVisible(true);observer.disconnect()}},{threshold:.1});observer.observe(node);return()=>observer.disconnect()},[]);
   const activate=(index:number)=>{setActive(index);if(matchMedia("(max-width: 760px)").matches)requestAnimationFrame(()=>detail.current?.scrollIntoView({behavior:"smooth",block:"center"}))};
-  return <section ref={root} className={styles.section} data-visible={visible} data-language={language} dir={ar?"rtl":"ltr"} aria-labelledby="journey-finale-title">
+  return <section id="journey-finale" ref={root} className={styles.section} data-visible={visible} data-language={language} dir={ar?"rtl":"ltr"} aria-labelledby="journey-finale-title">
     <div className={styles.ambient} aria-hidden="true"><i/><i/><span/></div><div className={styles.shell}>
       <header className={styles.header}><div><span>{c.eyebrow}</span><small><i/>{c.live}</small></div><div><h2 id="journey-finale-title">{c.title}<em>{c.accent}</em></h2><p>{c.intro}</p></div></header>
       <div className={styles.stage}>
