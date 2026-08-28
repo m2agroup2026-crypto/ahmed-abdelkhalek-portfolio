@@ -48,7 +48,7 @@ main>section,main>footer,main>nav{max-width:100%;min-width:0}h1,h2,h3,p{max-widt
 .eyebrow { display:flex; align-items:center; gap:10px; color:#426056; }.eyebrow span { width:8px;height:8px;border-radius:50%;background:var(--acid);box-shadow:0 0 0 5px rgba(199,255,50,.17); }
 h1,h2,h3,p { margin-top:0; }
 h1 { font-size:clamp(58px, 7vw, 105px); line-height:.88; letter-spacing:-.07em; margin:42px 0 34px; font-weight:700; }
-h1 em,h2 em { color:var(--forest); font-family:Georgia, serif; font-weight:400; }
+h1 em,h2 em { color:var(--forest); font-family:inherit; font-weight:inherit; }
 .hero-summary { max-width:650px; color:var(--muted); font-size:18px; line-height:1.7; }
 .hero-actions { display:flex; gap:12px; margin-top:38px; }
 .button { min-height:52px; display:inline-flex; align-items:center; justify-content:center; gap:28px; padding:0 22px; border:1px solid var(--ink); font-size:13px; font-weight:700; }
