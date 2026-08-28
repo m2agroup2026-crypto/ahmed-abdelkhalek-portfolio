@@ -17,6 +17,7 @@ import type {
   InsightLanguage,
 } from "../../content/insights/types";
 import InsightCard from "./InsightCard";
+import InsightsAssistant from "./InsightsAssistant";
 import styles from
   "./InsightsIndexPage.module.css";
 
@@ -290,6 +291,8 @@ export default function InsightsIndexPage({
           </i>
         </Link>
       </footer>
+
+      <InsightsAssistant language={language} />
     </main>
   );
 }
