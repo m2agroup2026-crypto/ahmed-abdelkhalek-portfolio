@@ -18,6 +18,23 @@ export function useCaseStudyExperienceMotion<T extends HTMLElement>() {
   const [activePhase, setActivePhase] = useState(0);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const frame = window.requestAnimationFrame(() => setMotionState("reduced"));
+      return () => window.cancelAnimationFrame(frame);
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        setMotionState("active");
+        observer.disconnect();
+      }
+    }, { threshold: 0.06 });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     if (motionState === "reduced") return;
 
     let layer = 0;
