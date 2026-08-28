@@ -3,3 +3,25 @@
 @media(max-width:900px){.header{grid-template-columns:1fr;gap:28px}.workspace{grid-template-columns:220px 1fr}.telemetry{display:none}.detail{padding:32px;grid-template-columns:1fr}.orbit{width:170px;height:170px;margin:0 auto}.copy{text-align:center}.outcome,.stack{justify-content:center}.workspace{min-height:auto}.rail b{font-size:10px}}
 @media(max-width:650px){.section{padding-block:68px}.shell{width:calc(100% - 20px)}.header{margin-bottom:30px}.heading h2{font-size:clamp(37px,11vw,50px)}.matrix{border-radius:20px}.matrixBar{grid-template-columns:1fr auto}.matrixBar b{display:none}.workspace{display:block}.rail{display:grid;grid-template-columns:repeat(4,1fr);padding:10px;border-inline-end:0;border-bottom:1px solid rgba(255,255,255,.08)}.rail button{display:grid;place-items:center;padding:14px 5px;border:0;border-inline-end:1px solid rgba(255,255,255,.06);text-align:center}.rail button div b,.rail button>i{display:none}.rail button div small{font-size:5px}.rail button:hover,.rail button[data-active="true"],[dir="rtl"] .rail button:hover,[dir="rtl"] .rail button[data-active="true"]{transform:none;background:color-mix(in srgb,var(--tone) 8%,transparent)}.detail{padding:26px 17px;gap:22px}.detailTop strong{font-size:17px}.orbit{width:150px;height:150px}.orbit strong{font-size:38px}.copy h3{font-size:28px}.copy p,.outcome p{font-size:11px}.footer{grid-template-columns:auto 1fr auto}.footer i:nth-of-type(2),.footer span:last-child{display:none}.footer strong{font-size:7px;line-height:1.6}}
 @media(prefers-reduced-motion:reduce){.matrix{transition:none}.orbit:after,.telemetry>i{animation:none}.ambient{background:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:52px 52px}.detail{animation:none}}
+
+/* The experience keeps one visual hierarchy in both themes; only the surfaces change. */
+:global([data-theme="light"]) .section{background:linear-gradient(180deg,#f4f7f2,#edf3ef 58%,#f7f8f4);color:#08120f;border-color:rgba(7,28,22,.13)}
+:global([data-theme="light"]) .ambient{background:radial-gradient(600px circle at var(--pointer-x) var(--pointer-y),rgba(0,151,171,.1),transparent 65%),linear-gradient(rgba(7,28,22,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(7,28,22,.06) 1px,transparent 1px);background-size:auto,52px 52px,52px 52px}
+:global([data-theme="light"]) .heading>span,:global([data-theme="light"]) .intro{color:#4c6159}
+:global([data-theme="light"]) .heading h2 em{background:linear-gradient(90deg,#547800,#007f82 58%,#17241f);background-clip:text}
+:global([data-theme="light"]) .matrix{background:rgba(251,253,249,.92);border-color:rgba(7,28,22,.16);box-shadow:0 34px 95px rgba(26,52,43,.13)}
+:global([data-theme="light"]) .matrixBar,:global([data-theme="light"]) .rail,:global([data-theme="light"]) .telemetry{border-color:rgba(7,28,22,.12)}
+:global([data-theme="light"]) .matrixBar{color:#53675f}
+:global([data-theme="light"]) .matrixBar b{color:#273d35}
+:global([data-theme="light"]) .rail button{color:#40564e;border-color:rgba(7,28,22,.1)}
+:global([data-theme="light"]) .rail button:hover,:global([data-theme="light"]) .rail button[data-active="true"]{color:#07140f}
+:global([data-theme="light"]) .rail small,:global([data-theme="light"]) .detailTop,:global([data-theme="light"]) .telemetry>span{color:#52675f}
+:global([data-theme="light"]) .rail button>i{background:#9aaba4}
+:global([data-theme="light"]) .orbit i:nth-child(2){border-color:rgba(7,28,22,.12)}
+:global([data-theme="light"]) .orbit strong,:global([data-theme="light"]) .copy h3{color:#08120f}
+:global([data-theme="light"]) .copy p,:global([data-theme="light"]) .outcome p{color:#465c54}
+:global([data-theme="light"]) .stack span{color:#32483f;border-color:rgba(7,28,22,.14);background:rgba(255,255,255,.48)}
+:global([data-theme="light"]) .footer{color:#53685f}
+:global([data-theme="light"]) .footer strong{color:#263d34}
+
+@media(max-width:650px){:global([data-theme="light"]) .rail{border-color:rgba(7,28,22,.12)}:global([data-theme="light"]) .rail button{border-color:rgba(7,28,22,.1)}}
