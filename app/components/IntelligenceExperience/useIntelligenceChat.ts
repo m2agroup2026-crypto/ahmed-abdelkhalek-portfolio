@@ -21,6 +21,11 @@ export type IntelligenceChatStatus =
   | "thinking"
   | "error";
 
+export type IntelligenceConnectionStatus =
+  | "checking"
+  | "online"
+  | "offline";
+
 export type IntelligenceChatMessage =
   IntelligenceMessage & {
     id: string;
@@ -53,6 +58,9 @@ export function useIntelligenceChat(
   const [status, setStatus] =
     useState<IntelligenceChatStatus>("ready");
 
+  const [connectionStatus, setConnectionStatus] =
+    useState<IntelligenceConnectionStatus>("checking");
+
   const [notice, setNotice] =
     useState<string | null>(null);
 
@@ -67,8 +75,27 @@ export function useIntelligenceChat(
   const requestNumberRef = useRef(0);
 
   useEffect(() => {
+    const controller = new AbortController();
+
+    void fetch("/api/intelligence", {
+      cache: "no-store",
+      signal: controller.signal,
+    })
+      .then((response) => response.json())
+      .then((health: { configured?: boolean }) => {
+        if (mountedRef.current) {
+          setConnectionStatus(health.configured ? "online" : "offline");
+        }
+      })
+      .catch(() => {
+        if (mountedRef.current && !controller.signal.aborted) {
+          setConnectionStatus("offline");
+        }
+      });
+
     return () => {
       mountedRef.current = false;
+      controller.abort();
       controllerRef.current?.abort();
     };
   }, []);
@@ -89,8 +116,14 @@ export function useIntelligenceChat(
       requestNumberRef.current = requestNumber;
 
       setStatus("thinking");
+      setConnectionStatus("checking");
       setNotice(null);
       setFailedHistory(null);
+
+      const clientTimeout = window.setTimeout(
+        () => controller.abort(),
+        INTELLIGENCE_LIMITS.requestTimeoutMs + 3000
+      );
 
       try {
         const response = await fetch(
@@ -157,6 +190,7 @@ export function useIntelligenceChat(
         setStatus("ready");
         setNotice(null);
         setFailedHistory(null);
+        setConnectionStatus("online");
       } catch (error) {
         if (
           !mountedRef.current ||
@@ -181,6 +215,7 @@ export function useIntelligenceChat(
         }
 
         setStatus("error");
+        setConnectionStatus("offline");
 
         setNotice(
           error instanceof Error
@@ -190,6 +225,7 @@ export function useIntelligenceChat(
 
         setFailedHistory(history);
       } finally {
+        window.clearTimeout(clientTimeout);
         if (
           requestNumber === requestNumberRef.current
         ) {
@@ -301,6 +337,7 @@ export function useIntelligenceChat(
   return {
     messages,
     status,
+    connectionStatus,
     notice,
     isThinking: status === "thinking",
     canRetry:
