@@ -10,6 +10,19 @@
     linear-gradient(145deg, #f5f4ee 0%, #ffffff 45%, #ecebe4 100%);
 }
 
+/* Full dark-theme command layer. */
+:global(:root[data-theme="dark"]) .section{color:#f5f8f5;background:radial-gradient(circle at 15% 15%,rgba(47,201,223,.1),transparent 30%),radial-gradient(circle at 85% 75%,rgba(199,255,50,.07),transparent 35%),linear-gradient(145deg,#020605,#030908 48%,#07100d)}
+:global(:root[data-theme="dark"]) .section::before{background:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px)}
+:global(:root[data-theme="dark"]) .header span{color:#72ebfa}
+:global(:root[data-theme="dark"]) .header h2{color:#f7faf7}
+:global(:root[data-theme="dark"]) .header p{color:#c0cbc5}
+:global(:root[data-theme="dark"]) .layer{background:linear-gradient(145deg,rgba(15,29,25,.94),rgba(7,16,13,.96));border-color:rgba(114,235,250,.22);box-shadow:0 26px 75px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.05)}
+:global(:root[data-theme="dark"]) .layer::before{background:radial-gradient(circle at top right,rgba(114,235,250,.1),transparent 38%)}
+:global(:root[data-theme="dark"]) .layer small{color:#c7ff32}
+:global(:root[data-theme="dark"]) .layer h3{color:#f5f8f5}
+:global(:root[data-theme="dark"]) .layer strong{color:#72ebfa}
+:global(:root[data-theme="dark"]) .layer p{color:#c4cec9}
+
 .section::before {
   content: "";
   position: absolute;
