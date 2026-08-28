@@ -5,9 +5,9 @@ export const siteConfig = {
   title: "Ahmed Abdelkhalek | Digital Transformation & Enterprise Systems Architect",
   arabicTitle: "أحمد عبد الخالق | مهندس التحول الرقمي والأنظمة المؤسسية",
   description:
-    "Enterprise systems, digital operating platforms, CRM architecture, automation, and AI engineered into scalable, governable solutions for business transformation.",
+    "Enterprise systems, digital operating platforms, CRM architecture, automation, and AI engineered for scalable transformation across Egypt, the Gulf, and the Middle East.",
   arabicDescription:
-    "أصمم أنظمة ومنصات مؤسسية تربط التشغيل وCRM والأتمتة والذكاء الاصطناعي داخل معماريات قابلة للتوسع والحوكمة والتخصيص.",
+    "أصمم أنظمة ومنصات مؤسسية تربط التشغيل وCRM والأتمتة والذكاء الاصطناعي داخل معماريات قابلة للتوسع والحوكمة في مصر والخليج والشرق الأوسط.",
   locale: "en_US",
   alternateLocale: "ar_EG",
   authorPath: "/",
