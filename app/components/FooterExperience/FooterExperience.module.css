@@ -2,3 +2,20 @@
 @media(max-width:900px){.finalStatement{grid-template-columns:130px 1fr}.core{width:125px;height:125px}.topControl{grid-column:1/-1;display:flex;justify-content:flex-end}.topControl>span{max-width:none}.topControl>i{width:60px;height:60px}.identityDeck{grid-template-columns:1fr 1fr}.identity{grid-column:1/-1}.statementCopy h2{font-size:clamp(48px,9vw,78px)}}
 @media(max-width:600px){.footer{padding-top:88px}.shell{width:calc(100% - 20px)}.finalStatement{grid-template-columns:1fr;justify-items:center;text-align:center;gap:35px}.core{width:118px;height:118px}.statementCopy>p{font-size:7px;line-height:1.6}.statementCopy h2{font-size:clamp(42px,12vw,58px)}.statementCopy blockquote{margin-top:24px;padding:18px 0 0;border-inline-start:0;border-top:2px solid var(--lime);font-size:12px}.topControl{grid-column:auto;width:100%;justify-content:center}.identityDeck{grid-template-columns:1fr;padding-block:42px}.identity{grid-column:auto;display:grid;text-align:center;justify-items:center}.navigation,.channels{width:100%}.systemBar{grid-template-columns:1fr;justify-items:center;gap:12px;padding-block:25px;text-align:center}.systemBar small{text-align:center}.ambient i:nth-child(3){display:none}}
 @media(prefers-reduced-motion:reduce){.finalStatement{transition:none}.ambient i,.core:before,.core:after,.core span,.systemBar>span i{animation:none}}
+
+:global([data-theme="light"]) .footer{background:linear-gradient(180deg,#edf3ef,#f8f8f4 72%,#eef4f0);color:#08120f;border-color:rgba(84,120,0,.22)}
+:global([data-theme="light"]) .ambient{background:radial-gradient(800px circle at 20% 20%,rgba(122,170,0,.12),transparent 60%),radial-gradient(700px circle at 80% 65%,rgba(111,68,180,.09),transparent 62%),linear-gradient(rgba(7,28,22,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(7,28,22,.055) 1px,transparent 1px);background-size:auto,auto,56px 56px,56px 56px}
+:global([data-theme="light"]) .ambient i{border-color:rgba(0,127,130,.16)}
+:global([data-theme="light"]) .statementCopy h2 em{background:linear-gradient(90deg,#547800,#007f82 52%,#17241f);background-clip:text}
+:global([data-theme="light"]) .statementCopy blockquote{color:#40564d}
+:global([data-theme="light"]) .topControl{color:#42584f}
+:global([data-theme="light"]) .topControl>i{background:linear-gradient(145deg,#fff,#e5eee8);box-shadow:0 18px 45px rgba(26,52,43,.15),inset 0 0 25px rgba(122,170,0,.06)}
+:global([data-theme="light"]) .identityDeck{border-color:rgba(7,28,22,.13)}
+:global([data-theme="light"]) .monogram{background:#e9f1eb;color:#547800;border-color:rgba(84,120,0,.27)}
+:global([data-theme="light"]) .identity p{color:#3e554c}
+:global([data-theme="light"]) .identity small,:global([data-theme="light"]) .navigation>p,:global([data-theme="light"]) .channels>p{color:#50665d}
+:global([data-theme="light"]) .navigation a,:global([data-theme="light"]) .channels a{color:#354b42;border-color:rgba(7,28,22,.11)}
+:global([data-theme="light"]) .navigation a span,:global([data-theme="light"]) .channels a span{color:#53685f}
+:global([data-theme="light"]) .navigation a:hover,:global([data-theme="light"]) .channels a:hover{color:#07140f;border-color:rgba(0,127,130,.3)}
+:global([data-theme="light"]) .systemBar{color:#50665d}
+:global([data-theme="light"]) .systemBar b{color:#263d34}
