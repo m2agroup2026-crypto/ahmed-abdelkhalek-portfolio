@@ -49,9 +49,9 @@
   --case-surface: rgba(7, 17, 14, 0.74);
   --case-surface-strong: rgba(5, 13, 11, 0.95);
   --case-ink: #f4f5ef;
-  --case-muted: #9ca8a1;
-  --case-line: rgba(255, 255, 255, 0.09);
-  --case-line-strong: rgba(255, 255, 255, 0.18);
+  --case-muted: #c1ccc6;
+  --case-line: rgba(255, 255, 255, 0.14);
+  --case-line-strong: rgba(255, 255, 255, 0.26);
   --case-lime: #9fd22b;
   --case-lime-bright: #c1f13c;
   --case-cyan: #2fc9df;
@@ -168,7 +168,8 @@
   position: sticky;
   top: 0;
   display: flex;
-  min-height: 420vh;
+  height: 100vh;
+  min-height: 100vh;
   align-items: center;
   overflow: hidden;
 }
@@ -801,7 +802,7 @@
 }
 
 .layersPanel li button,
-.layersPanel li > div {
+.layersPanel li > button {
   position: relative;
   display: grid;
   grid-template-columns: 28px 42px minmax(0, 1fr) 8px;
@@ -820,7 +821,7 @@
 }
 
 .layersPanel li[data-active="true"] button,
-.layersPanel li[data-active="true"] > div {
+.layersPanel li[data-active="true"] > button {
   color: var(--case-ink);
   border-color: color-mix(in srgb, var(--case-active) 34%, var(--case-line));
   background: linear-gradient(90deg, var(--case-active-soft), transparent 88%);
@@ -828,11 +829,11 @@
 }
 
 .section[dir="rtl"] .layersPanel li[data-active="true"] button,
-.layersPanel li[data-active="true"] > div { transform: translateX(-4px); }
+.layersPanel li[data-active="true"] > button { transform: translateX(-4px); }
 .layersPanel li button:hover,
-.layersPanel li > div:hover { color: var(--case-ink); background: color-mix(in srgb, var(--case-surface-strong) 62%, transparent); }
+.layersPanel li > button:hover { color: var(--case-ink); background: color-mix(in srgb, var(--case-surface-strong) 62%, transparent); }
 .layersPanel li button:focus-visible,
-.layersPanel li > div:focus-visible { outline: 2px solid var(--case-cyan-bright); outline-offset: 2px; }
+.layersPanel li > button:focus-visible { outline: 2px solid var(--case-cyan-bright); outline-offset: 2px; }
 
 .layerCode {
   font-size: 8px;
@@ -976,7 +977,7 @@
   .mapLabel[data-position="6"] { right: 12%; bottom: 13%; }
   .layersPanel ol { grid-template-columns: 1fr; }
   .layersPanel li button,
-.layersPanel li > div { min-height: 56px; }
+.layersPanel li > button { min-height: 56px; }
   .progressDeck { gap: 9px; min-height: 42px; padding-inline: 14px; font-size: 7px; }
   .outcome { margin: 12px; padding: 17px; }
 }
@@ -1003,7 +1004,7 @@
   .fragments li { padding: 5px 7px; font-size: 7px; }
   .layersPanel ol { gap: 3px; }
   .layersPanel li button,
-.layersPanel li > div { min-height: 48px; grid-template-columns: 22px 34px minmax(0,1fr) 6px; gap: 7px; padding: 5px 7px; }
+.layersPanel li > button { min-height: 48px; grid-template-columns: 22px 34px minmax(0,1fr) 6px; gap: 7px; padding: 5px 7px; }
   .layerIcon { width: 32px; height: 32px; }
   .layerIcon svg { width: 18px; height: 18px; }
   .layerCopy b { font-size: 9px; }
