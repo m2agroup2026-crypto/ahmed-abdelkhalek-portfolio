@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./SystemsExperience.module.css";
 import {
   systemText,
@@ -15,7 +15,16 @@ type Props = { language: SystemsLanguage };
 export default function SystemsExperience({ language }: Props) {
   const rootRef = useSystemsExperienceMotion();
   const [active, setActive] = useState(systemsDomains[0].id);
+  const detailRef = useRef<HTMLDivElement>(null);
   const ar = language === "ar";
+  const activeDomain = systemsDomains.find((domain) => domain.id === active) ?? systemsDomains[0];
+
+  const activateDomain = (domainId: typeof active) => {
+    setActive(domainId);
+    if (window.matchMedia("(max-width: 900px)").matches) {
+      window.requestAnimationFrame(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }));
+    }
+  };
 
   return (
     <section
@@ -76,7 +85,7 @@ export default function SystemsExperience({ language }: Props) {
                 className={`${styles.domain} ${styles[domain.id]} ${styles[domain.tone]} ${active === domain.id ? styles.active : ""}`}
                 onPointerEnter={() => setActive(domain.id)}
                 onFocus={() => setActive(domain.id)}
-                onClick={() => setActive(domain.id)}
+                onClick={() => activateDomain(domain.id)}
                 aria-pressed={active === domain.id}
                 style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}
               >
@@ -98,6 +107,30 @@ export default function SystemsExperience({ language }: Props) {
             {[72, 88, 64, 96, 82, 91, 70, 86, 98, 78, 92, 84].map((value, index) => (
               <i key={index} style={{ "--value": `${value}%`, "--bar-delay": `${index * 70}ms` } as React.CSSProperties} />
             ))}
+          </div>
+
+          <div ref={detailRef} className={`${styles.domainDetail} ${styles[activeDomain.tone]}`} key={activeDomain.id}>
+            <div className={styles.detailTop}>
+              <span>{systemText(systemsCopy.detailLabel, language)}</span>
+              <b><i />{systemText(systemsCopy.detailState, language)}</b>
+              <small>{activeDomain.index} / 05</small>
+            </div>
+            <div className={styles.detailBody}>
+              <div className={styles.detailIdentity}>
+                <span>{activeDomain.index}</span>
+                <div><small>{systemText(activeDomain.label, language)}</small><h3>{systemText(activeDomain.title, language)}</h3><p>{systemText(activeDomain.description, language)}</p></div>
+              </div>
+              <div className={styles.detailCapabilities}>
+                <span>{systemText(systemsCopy.capabilitiesLabel, language)}</span>
+                <ul>{activeDomain.capabilities[language].map((capability, index) => <li key={capability}><i>0{index + 1}</i>{capability}<b>✓</b></li>)}</ul>
+              </div>
+              <div className={styles.detailOutcome}>
+                <span>{systemText(systemsCopy.outcomeLabel, language)}</span>
+                <strong>{activeDomain.metric}</strong>
+                <p>{systemText(activeDomain.outcome, language)}</p>
+                <div>{[48,72,58,88,66,94,76,84,62,91].map((height,index)=><i key={index} style={{height:`${height}%`,"--detail-delay":`${index*80}ms`} as React.CSSProperties}/>)}</div>
+              </div>
+            </div>
           </div>
         </div>
 
