@@ -19,6 +19,8 @@ export function useFloatingAssistant({
   const [visible, setVisible] = useState(true);
   const [nearContact, setNearContact] =
     useState(false);
+  const [invitationUnlocked, setInvitationUnlocked] =
+    useState(false);
   const [invitationDismissed, setInvitationDismissed] =
     useState(false);
 
@@ -50,8 +52,21 @@ export function useFloatingAssistant({
           contactBounds.bottom >= viewportHeight * 0.18;
 
         setNearContact(contactIsNear);
+        if (contactIsNear) {
+          setInvitationUnlocked(true);
+        }
       } else {
         setNearContact(false);
+      }
+
+      const pageHeight =
+        document.documentElement.scrollHeight;
+      const reachedClosingSequence =
+        window.scrollY + window.innerHeight >=
+        pageHeight * 0.78;
+
+      if (reachedClosingSequence) {
+        setInvitationUnlocked(true);
       }
     };
 
@@ -102,7 +117,7 @@ export function useFloatingAssistant({
     nearContact,
     invitationVisible:
       visible &&
-      nearContact &&
+      invitationUnlocked &&
       !invitationDismissed,
     dismissInvitation,
   };
