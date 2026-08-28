@@ -16,7 +16,7 @@ export function useFloatingAssistant({
   heroId = "top",
   contactId = "contact",
 }: UseFloatingAssistantOptions = {}) {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [nearContact, setNearContact] =
     useState(false);
   const [invitationDismissed, setInvitationDismissed] =
@@ -25,20 +25,18 @@ export function useFloatingAssistant({
   const frameRef = useRef(0);
 
   useEffect(() => {
-    const hero = document.getElementById(heroId);
     const contact = document.getElementById(contactId);
 
     const updatePosition = () => {
       frameRef.current = 0;
 
-      if (hero) {
-        const heroBounds =
-          hero.getBoundingClientRect();
-
-        setVisible(heroBounds.bottom <= 120);
-      } else {
-        setVisible(true);
-      }
+      /*
+       * The assistant is a global product control, not a section reveal.
+       * Keeping it tied to the hero geometry made it disappear whenever
+       * a route restored scroll or a long animated hero reported stale
+       * bounds. It now remains available across the complete experience.
+       */
+      setVisible(true);
 
       if (contact) {
         const contactBounds =
