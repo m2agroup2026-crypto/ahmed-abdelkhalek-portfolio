@@ -675,3 +675,13 @@
     transform: translateX(-110%);
   }
 }
+
+/* Invitation and copy remain readable over both closing themes. */
+.assistant{--fia-text:#f7fbf8;--fia-muted:#b4c3bc;--fia-cyan:#67edf4;--fia-gold:#f2ca62}
+.triggerCopy strong{color:var(--fia-text);text-shadow:0 1px 12px rgba(0,0,0,.55)}
+.triggerCopy em{color:var(--fia-muted)}
+.invitation{z-index:4}
+.invitationAction strong{color:var(--fia-text);font-weight:800;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+:global([data-theme="light"]) .assistant{--fia-text:#0a211a;--fia-muted:#405c52;--fia-cyan:#006f80;--fia-gold:#7d5500}
+:global([data-theme="light"]) .triggerCopy strong,:global([data-theme="light"]) .invitationAction strong{text-shadow:none}
+:global([data-theme="light"]) .invitation{border-color:rgba(0,111,128,.42);box-shadow:0 26px 80px rgba(24,45,38,.22),0 0 0 1px rgba(255,255,255,.9) inset}

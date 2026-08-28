@@ -29,6 +29,11 @@ export function useFloatingAssistant({
   useEffect(() => {
     const contact = document.getElementById(contactId);
 
+    /* Offer the guided invitation even on shorter visits or direct routes. */
+    const invitationTimer = window.setTimeout(() => {
+      setInvitationUnlocked(true);
+    }, 4200);
+
     const updatePosition = () => {
       frameRef.current = 0;
 
@@ -94,6 +99,7 @@ export function useFloatingAssistant({
     );
 
     return () => {
+      window.clearTimeout(invitationTimer);
       window.cancelAnimationFrame(frameRef.current);
 
       window.removeEventListener(
