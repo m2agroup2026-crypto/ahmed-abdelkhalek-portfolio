@@ -235,7 +235,7 @@ export default function CaseStudyExperience({ language }: CaseStudyExperiencePro
                 <ol>
                   {content.layers.map((layer, index) => (
                     <li data-active={index === activeLayer ? "true" : "false"} key={layer.code}>
-                      <div>
+                      <button type="button" onClick={() => jumpToLayer(index)} aria-pressed={index === activeLayer}>
                         <span className={styles.layerCode}>{layer.code}</span>
                         <span className={styles.layerIcon}><LayerIcon layer={layer.key} /></span>
                         <span className={styles.layerCopy}>
@@ -243,7 +243,7 @@ export default function CaseStudyExperience({ language }: CaseStudyExperiencePro
                           <small>{layer.description}</small>
                         </span>
                         <i className={styles.layerStatus} aria-hidden="true" />
-                      </div>
+                      </button>
                     </li>
                   ))}
                 </ol>
@@ -267,30 +267,8 @@ export default function CaseStudyExperience({ language }: CaseStudyExperiencePro
               </a>
             </aside>
 
-            <div
-              className={
-                activePhase === 3
-                  ? styles.handoffReveal
-                  : styles.handoffHidden
-              }
-            >
-              <div
-              className={
-                activePhase === 3
-                  ? styles.handoffReveal
-                  : styles.handoffHidden
-              }
-            >
-              <div
-  className={
-    activePhase === 3
-      ? styles.handoffReveal
-      : styles.handoffHidden
-  }
->
-  <CinematicHandoff />
-</div>
-            </div>
+            <div className={activePhase === 3 ? styles.handoffReveal : styles.handoffHidden}>
+              <CinematicHandoff />
             </div>
           </div>
         </div>
