@@ -36,3 +36,12 @@
 :global([data-theme="light"]) .command{box-shadow:0 46px 130px rgba(26,52,43,.17),inset 0 0 90px rgba(0,127,130,.025)}
 @media(max-width:950px){.shell{width:min(100% - 30px,1180px)}.header{grid-template-columns:1fr 1.4fr}.command{grid-template-columns:1fr}.channels{padding:34px}}
 @media(max-width:650px){.shell{width:calc(100% - 20px)}.channels{padding:25px 14px}.form{padding:28px 15px}}
+
+/* Keep the anchored contact scene clear of the fixed navigation. */
+.section{scroll-margin-top:126px}
+.section[dir="rtl"],.section[dir="rtl"] button,.section[dir="rtl"] input,.section[dir="rtl"] select,.section[dir="rtl"] textarea{font-family:"Cairo",Arial,sans-serif}
+.section[dir="rtl"] .header h2,.section[dir="rtl"] .header h2 em,.section[dir="rtl"] .intro{font-family:"Cairo",Arial,sans-serif}
+.section[dir="rtl"] .header h2{line-height:1.34;letter-spacing:0}
+.section[dir="rtl"] .header h2 em{font-weight:600}
+@media(max-width:950px){.header{align-items:start}}
+@media(max-width:650px){.section{scroll-margin-top:92px}.section[dir="rtl"] .header h2{line-height:1.42}}
