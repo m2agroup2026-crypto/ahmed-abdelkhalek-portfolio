@@ -99,6 +99,16 @@ function errorResponse(
   );
 }
 
+export async function GET() {
+  const configured = Boolean(process.env.GEMINI_API_KEY?.trim());
+  const model = process.env.GEMINI_MODEL?.trim() || "gemini-3.6-flash";
+
+  return Response.json(
+    { ok: true, configured, model },
+    { headers: { "Cache-Control": "no-store" } }
+  );
+}
+
 function isRecord(
   value: unknown
 ): value is Record<string, unknown> {
