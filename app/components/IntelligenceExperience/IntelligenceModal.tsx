@@ -70,6 +70,7 @@ export default function IntelligenceModal({
   const {
     messages,
     status,
+    connectionStatus,
     notice,
     isThinking,
     canRetry,
@@ -147,7 +148,9 @@ export default function IntelligenceModal({
   };
 
   const statusLabel =
-    status === "thinking"
+    connectionStatus === "offline"
+      ? content.status.error
+      : status === "thinking"
       ? content.status.thinking
       : status === "error"
         ? content.status.error
@@ -254,7 +257,7 @@ export default function IntelligenceModal({
 
               <p>
                 <small>COGNITIVE CORE</small>
-                <strong>ONLINE</strong>
+                <strong>{connectionStatus === "online" ? "ONLINE" : connectionStatus === "offline" ? "OFFLINE" : "CHECKING"}</strong>
               </p>
             </div>
 
