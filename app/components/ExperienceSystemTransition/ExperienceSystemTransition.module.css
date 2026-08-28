@@ -5,6 +5,15 @@
   overflow: hidden;
 }
 
+/* Theme-aware cinematic bridge contrast. */
+:global(:root[data-theme="dark"]) .section{color:#f5f8f5;background:radial-gradient(circle at 18% 22%,rgba(47,201,223,.1),transparent 30%),radial-gradient(circle at 82% 72%,rgba(199,255,50,.07),transparent 34%),#020605}
+:global(:root[data-theme="dark"]) .signal,:global(:root[data-theme="dark"]) .core{background:linear-gradient(145deg,rgba(14,28,24,.94),rgba(6,15,12,.96));border-color:rgba(114,235,250,.25);box-shadow:0 24px 70px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.05)}
+:global(:root[data-theme="dark"]) .signal span,:global(:root[data-theme="dark"]) .core small{color:#c5d0ca}
+:global(:root[data-theme="dark"]) .signal strong,:global(:root[data-theme="dark"]) .core strong{color:#c7ff32;text-shadow:0 0 18px rgba(199,255,50,.2)}
+:global(:root[data-theme="dark"]) .content h2{color:#f7faf7}
+:global(:root[data-theme="dark"]) .content p{color:#c0cbc5}
+:global(:root[data-theme="dark"]) .content span{color:#72ebfa}
+
 .shell {
   width: min(900px,92%);
   margin:auto;
@@ -326,4 +335,3 @@
   }
 
 }
-
