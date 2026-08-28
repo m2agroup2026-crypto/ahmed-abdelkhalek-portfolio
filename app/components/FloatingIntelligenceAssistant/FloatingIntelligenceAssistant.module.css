@@ -413,16 +413,16 @@
 }
 
 :global([data-theme="light"]) .assistant {
-  --fia-surface: rgba(250, 251, 246, 0.96);
-  --fia-surface-strong: rgba(255, 255, 252, 0.99);
-  --fia-border: rgba(15, 113, 125, 0.25);
-  --fia-border-strong: rgba(151, 112, 19, 0.45);
-  --fia-text: #10201c;
-  --fia-muted: #64736d;
-  --fia-shadow: rgba(31, 48, 42, 0.2);
-  --fia-cyan: #087f90;
-  --fia-gold: #9b7017;
-  --fia-green: #5c9500;
+  --fia-surface: rgba(4, 14, 12, 0.96);
+  --fia-surface-strong: rgba(7, 21, 18, 0.99);
+  --fia-border: rgba(104, 225, 235, 0.26);
+  --fia-border-strong: rgba(225, 185, 79, 0.52);
+  --fia-text: #f3f5ef;
+  --fia-muted: #a3b0aa;
+  --fia-shadow: rgba(18, 34, 29, 0.3);
+  --fia-cyan: #43dbea;
+  --fia-gold: #e1b94f;
+  --fia-green: #a5e329;
 }
 
 :global([data-theme="light"]) .trigger,
@@ -439,11 +439,11 @@
       rgba(8, 127, 144, 0.13),
       transparent 63%
     ),
-    rgba(245, 249, 244, 0.96);
+    rgba(1, 9, 8, 0.94);
 }
 
 :global([data-theme="light"]) .onlineIndicator {
-  border-color: #f6f9f4;
+  border-color: #06110e;
 }
 
 @media (hover: hover) and (pointer: fine) {
