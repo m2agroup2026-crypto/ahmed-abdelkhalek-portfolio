@@ -22,3 +22,17 @@
 :global([data-theme="light"]) .form select option{background:#fff;color:#08120f}
 
 @media(max-width:950px){:global([data-theme="light"]) .channels{border-color:rgba(7,28,22,.12)}}
+
+/* Mission intake rebuild: one decisive command surface, not a generic form. */
+.section:after{content:"";position:absolute;inset-inline:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--lime),var(--cyan),var(--violet),transparent);box-shadow:0 0 30px rgba(40,240,208,.2)}
+.shell{width:min(1500px,calc(100% - 64px))}
+.header{grid-template-columns:minmax(190px,.45fr) minmax(0,1.35fr) minmax(260px,.55fr)}
+.command{grid-template-columns:minmax(320px,.72fr) minmax(0,1.28fr);border-radius:34px;box-shadow:0 55px 160px rgba(0,0,0,.5),inset 0 0 100px rgba(40,240,208,.02)}
+.channels{display:grid;align-content:center;padding:clamp(34px,4vw,58px)}
+.form{padding:clamp(38px,5vw,72px)}
+.form input,.form select,.form textarea{min-height:54px}
+.form textarea{min-height:160px}
+.submitRow button{height:62px;border-radius:16px}
+:global([data-theme="light"]) .command{box-shadow:0 46px 130px rgba(26,52,43,.17),inset 0 0 90px rgba(0,127,130,.025)}
+@media(max-width:950px){.shell{width:min(100% - 30px,1180px)}.header{grid-template-columns:1fr 1.4fr}.command{grid-template-columns:1fr}.channels{padding:34px}}
+@media(max-width:650px){.shell{width:calc(100% - 20px)}.channels{padding:25px 14px}.form{padding:28px 15px}}
