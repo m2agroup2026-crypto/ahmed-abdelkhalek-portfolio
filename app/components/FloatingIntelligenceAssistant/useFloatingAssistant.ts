@@ -27,8 +27,6 @@ export function useFloatingAssistant({
   const frameRef = useRef(0);
 
   useEffect(() => {
-    const footer = document.querySelector("footer");
-
     const updatePosition = () => {
       frameRef.current = 0;
 
@@ -37,8 +35,7 @@ export function useFloatingAssistant({
 
       const contact = document.getElementById(contactId);
       if (contact) {
-        const contactBounds =
-          contact.getBoundingClientRect();
+        const contactBounds = contact.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         setNearContact(
           contactBounds.top <= viewportHeight * 0.78 &&
@@ -48,16 +45,14 @@ export function useFloatingAssistant({
         setNearContact(false);
       }
 
-      /*
-       * The invitation is owned by the footer viewport state.
-       * It appears while the footer is actually on screen and
-       * disappears again as soon as the user scrolls back above it.
-       */
+      /* Track only the real portfolio footer, never section-level footer tags. */
+      const footer = document.getElementById("portfolio-footer");
       if (footer) {
         const footerBounds = footer.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
         const isFooterVisible =
-          footerBounds.top <= window.innerHeight * 0.94 &&
-          footerBounds.bottom >= 0;
+          footerBounds.top <= viewportHeight * 0.88 &&
+          footerBounds.bottom >= viewportHeight * 0.12;
 
         setFooterVisible(isFooterVisible);
       } else {
@@ -66,40 +61,18 @@ export function useFloatingAssistant({
     };
 
     const requestUpdate = () => {
-      if (frameRef.current !== 0) {
-        return;
-      }
-
-      frameRef.current =
-        window.requestAnimationFrame(updatePosition);
+      if (frameRef.current !== 0) return;
+      frameRef.current = window.requestAnimationFrame(updatePosition);
     };
 
     requestUpdate();
-
-    window.addEventListener(
-      "scroll",
-      requestUpdate,
-      { passive: true }
-    );
-
-    window.addEventListener(
-      "resize",
-      requestUpdate,
-      { passive: true }
-    );
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate, { passive: true });
 
     return () => {
       window.cancelAnimationFrame(frameRef.current);
-
-      window.removeEventListener(
-        "scroll",
-        requestUpdate
-      );
-
-      window.removeEventListener(
-        "resize",
-        requestUpdate
-      );
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
     };
   }, [contactId, heroId]);
 
