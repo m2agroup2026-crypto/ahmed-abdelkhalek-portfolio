@@ -10,6 +10,7 @@ import "@/app/mobile-footer-readable.css";
 import "@/app/mobile-last-mile.css";
 import "@/app/mobile-professional-identity-correction.css";
 import "@/app/mobile-performance-final.css";
+import "@/app/mobile-cairo-restore.css";
 
 export const metadata: Metadata = createRootMetadata("ar");
 export const viewport: Viewport = {
