@@ -33,6 +33,7 @@ export const systemsCopy = {
   sync: { en: "SYSTEM SYNC", ar: "مزامنة النظام" },
   status: { en: "All domains operational", ar: "جميع النطاقات تعمل" },
   telemetry: { en: "LIVE SYSTEM TELEMETRY", ar: "قياسات النظام المباشرة" },
+  domainNavigation: { en: "System domains", ar: "نطاقات النظام" },
   detailLabel: { en: "ACTIVE DOMAIN INTELLIGENCE", ar: "تفاصيل النطاق النشط" },
   detailState: { en: "CONNECTED TO DIGITAL OS", ar: "متصل بنظام التشغيل الرقمي" },
   capabilitiesLabel: { en: "OPERATIONAL CAPABILITIES", ar: "القدرات التشغيلية" },
