@@ -8,7 +8,7 @@ import {
 } from "@/app/content/insights/registry";
 import { insightsUiContent } from "@/app/content/insights/ui";
 import type { InsightLanguage } from "@/app/content/insights/types";
-import { absoluteUrl } from "@/app/content/site";
+import { absoluteUrl, siteConfig } from "@/app/content/site";
 
 type Props = {
   language: InsightLanguage;
@@ -31,7 +31,7 @@ export default function InsightsIndexStructuredData({
   const latestModified = articles.reduce(
     (latest, article) =>
       article.updatedAt > latest ? article.updatedAt : latest,
-    "2026-08-29"
+    siteConfig.lastUpdated
   );
 
   const title = isArabic

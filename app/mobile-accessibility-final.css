@@ -1,0 +1,98 @@
+/*
+ * Final mobile accessibility and readability ownership layer.
+ * Intentionally narrow: no section geometry resets and no desktop changes.
+ */
+@media (max-width: 900px) {
+  /* Comfortable phone tap targets without changing navigation semantics. */
+  .nav .brand {
+    min-height: 44px !important;
+  }
+
+  .nav .menu-button {
+    min-height: 44px !important;
+    padding-inline: 12px !important;
+    font-size: 11px !important;
+  }
+
+  .nav .theme-toggle {
+    width: 44px !important;
+    height: 44px !important;
+    flex-basis: 44px !important;
+  }
+
+  .nav .language-rail {
+    width: 82px !important;
+    height: 44px !important;
+    flex: 0 0 82px !important;
+  }
+
+  .nav .language-thumb {
+    top: 4px !important;
+    width: 36px !important;
+    height: 34px !important;
+  }
+
+  .nav .language-rail.is-ar .language-thumb {
+    transform: translateX(38px) !important;
+  }
+
+  .nav .language-option {
+    font-size: 10px !important;
+  }
+
+  /* Body copy in the first and final conversion surfaces stays readable. */
+  #top [class*="EnterpriseHero_intro"],
+  #contact [class*="ContactExperience_intro"] {
+    font-size: 14px !important;
+  }
+
+  /* Deterministic keyboard focus for hybrid/tablet users. */
+  main :where(a, button):focus-visible,
+  #portfolio-footer :where(a, button):focus-visible {
+    outline: 2px solid #00afd5 !important;
+    outline-offset: 3px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Preserve the cinematic microcopy hierarchy without making text illegible. */
+  #portfolio-footer [class*="FooterExperience_statementCopy"] > p {
+    font-size: 9px !important;
+    line-height: 1.55 !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_statementCopy"] blockquote {
+    font-size: 12px !important;
+    line-height: 1.8 !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_navigation"] a span,
+  #portfolio-footer [class*="FooterExperience_channels"] a span,
+  #portfolio-footer [class*="FooterExperience_systemBar"] small {
+    font-size: 9px !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_voiceCore"] > small {
+    font-size: 7px !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_voiceCore"] > strong {
+    font-size: 8px !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_core"] small {
+    font-size: 9.5px !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_dimension"] p {
+    font-size: 10.5px !important;
+  }
+
+  /* The assistant close action remains a real touch target on phones. */
+  aside[data-visible][data-language] [class*="FloatingIntelligenceAssistant_dismiss"] {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+}
