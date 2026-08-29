@@ -4,19 +4,6 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import EnterpriseHero from "@/app/components/EnterpriseHero/EnterpriseHero";
-import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod";
-import ProfessionalIdentity from "@/app/components/ProfessionalIdentity/ProfessionalIdentity";
-import JourneyExperience from "@/app/components/JourneyExperience/JourneyExperience";
-import ExperienceSystemTransition from "@/app/components/ExperienceSystemTransition/ExperienceSystemTransition";
-import SystemActivationBridge from "@/app/components/SystemActivationBridge/SystemActivationBridge";
-import GlassCommandRoom from "@/app/components/GlassCommandRoom/GlassCommandRoom";
-import OperationsCenter from "@/app/components/OperationsCenter/OperationsCenter";
-import JourneyFinale from "@/app/components/JourneyFinale/JourneyFinale";
-import CaseStudyExperience from "@/app/components/CaseStudyExperience/CaseStudyExperience";
-import SystemsExperience from "@/app/components/SystemsExperience/SystemsExperience";
-import ExpertiseExperience from "@/app/components/ExpertiseExperience/ExpertiseExperience";
-import ContactExperience from "@/app/components/ContactExperience/ContactExperience";
-import FooterExperience from "@/app/components/FooterExperience/FooterExperience";
 import FloatingIntelligenceAssistant from "@/app/components/FloatingIntelligenceAssistant/FloatingIntelligenceAssistant";
 import {
   getPortfolioHomePath,
@@ -27,6 +14,45 @@ import {
 type Lang = "en" | "ar";
 type Bi = { en: string; ar: string };
 
+const EnterpriseSystemsMethod = dynamic(
+  () => import("@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod"),
+);
+const ProfessionalIdentity = dynamic(
+  () => import("@/app/components/ProfessionalIdentity/ProfessionalIdentity"),
+);
+const JourneyExperience = dynamic(
+  () => import("@/app/components/JourneyExperience/JourneyExperience"),
+);
+const ExperienceSystemTransition = dynamic(
+  () => import("@/app/components/ExperienceSystemTransition/ExperienceSystemTransition"),
+);
+const SystemActivationBridge = dynamic(
+  () => import("@/app/components/SystemActivationBridge/SystemActivationBridge"),
+);
+const GlassCommandRoom = dynamic(
+  () => import("@/app/components/GlassCommandRoom/GlassCommandRoom"),
+);
+const OperationsCenter = dynamic(
+  () => import("@/app/components/OperationsCenter/OperationsCenter"),
+);
+const CaseStudyExperience = dynamic(
+  () => import("@/app/components/CaseStudyExperience/CaseStudyExperience"),
+);
+const JourneyFinale = dynamic(
+  () => import("@/app/components/JourneyFinale/JourneyFinale"),
+);
+const SystemsExperience = dynamic(
+  () => import("@/app/components/SystemsExperience/SystemsExperience"),
+);
+const ExpertiseExperience = dynamic(
+  () => import("@/app/components/ExpertiseExperience/ExpertiseExperience"),
+);
+const ContactExperience = dynamic(
+  () => import("@/app/components/ContactExperience/ContactExperience"),
+);
+const FooterExperience = dynamic(
+  () => import("@/app/components/FooterExperience/FooterExperience"),
+);
 const IntelligenceModal = dynamic(
   () => import("@/app/components/IntelligenceExperience/IntelligenceModal"),
   { ssr: false },
@@ -165,43 +191,17 @@ export default function PortfolioHome() {
 
     <div className={`language-ticker desktop-language-ticker ${ar?"ticker-ar":"ticker-en"}`} aria-label={ar?"مجالات الخبرة":"Expertise areas"}><div>{[0,1].map(loop=><div className="ticker-set" aria-hidden={loop===1} key={loop}>{tickerItems.map((item,i)=><span className={`ticker-card ticker-tone-${i%3}`} key={`${loop}-${item}`}><i>0{(i%9)+1}</i>{item}<b>↗</b></span>)}</div>)}</div></div>
 
-    <EnterpriseSystemsMethod
-      language={ar ? "ar" : "en"}
-    />
-
-    <ProfessionalIdentity
-      language={ar ? "ar" : "en"}
-    />
-
-    <JourneyExperience
-      language={ar ? "ar" : "en"}
-    />
-
-    <ExperienceSystemTransition
-      language={ar ? "ar" : "en"}
-    />
-
-    <SystemActivationBridge
-      language={ar ? "ar" : "en"}
-    />
-
-    <GlassCommandRoom
-      language={ar ? "ar" : "en"}
-    />
-
-    <OperationsCenter
-      language={ar ? "ar" : "en"}
-    />
-
-    <CaseStudyExperience
-      language={ar ? "ar" : "en"}
-    />
+    <EnterpriseSystemsMethod language={ar ? "ar" : "en"} />
+    <ProfessionalIdentity language={ar ? "ar" : "en"} />
+    <JourneyExperience language={ar ? "ar" : "en"} />
+    <ExperienceSystemTransition language={ar ? "ar" : "en"} />
+    <SystemActivationBridge language={ar ? "ar" : "en"} />
+    <GlassCommandRoom language={ar ? "ar" : "en"} />
+    <OperationsCenter language={ar ? "ar" : "en"} />
+    <CaseStudyExperience language={ar ? "ar" : "en"} />
     <JourneyFinale language={ar ? "ar" : "en"} />
-
     <SystemsExperience language={ar ? "ar" : "en"} />
-
     <ExpertiseExperience language={ar ? "ar" : "en"} />
-
     <ContactExperience language={ar ? "ar" : "en"} />
 
     <FloatingIntelligenceAssistant

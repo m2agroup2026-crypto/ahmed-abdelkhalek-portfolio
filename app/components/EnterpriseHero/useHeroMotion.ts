@@ -17,6 +17,11 @@ export function useHeroMotion<T extends HTMLElement>() {
       "(prefers-reduced-motion: reduce)"
     );
 
+    if (window.matchMedia("(max-width: 900px)").matches) {
+      setMotionState("active");
+      return;
+    }
+
     let firstFrame = 0;
     let secondFrame = 0;
 

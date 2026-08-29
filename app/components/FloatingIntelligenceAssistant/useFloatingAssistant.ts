@@ -7,7 +7,7 @@ import {
 } from "react";
 
 export function useFloatingAssistant() {
-  const [visible] = useState(true);
+  const visible = true;
   const [footerVisible, setFooterVisible] =
     useState(false);
   const [invitationDismissed, setInvitationDismissed] =
@@ -20,30 +20,32 @@ export function useFloatingAssistant() {
       return undefined;
     }
 
-    const footerObserver = new IntersectionObserver(
-      ([entry]) => {
-        const isVisible = Boolean(entry?.isIntersecting);
-        setFooterVisible(isVisible);
+    let footerObserver: IntersectionObserver | null = null;
 
-        /*
-         * Dismissal only applies to the current footer visit.
-         * Once the user scrolls back above the footer, reset it so
-         * the invitation can appear again on the next visit.
-         */
-        if (!isVisible) {
-          setInvitationDismissed(false);
-        }
-      },
-      {
-        threshold: 0.01,
-        rootMargin: "0px 0px -8% 0px",
-      },
-    );
+    const connectObserver = () => {
+      footerObserver = new IntersectionObserver(
+        ([entry]) => {
+          const isVisible = Boolean(entry?.isIntersecting);
+          setFooterVisible(isVisible);
 
-    footerObserver.observe(footer);
+          if (!isVisible) {
+            setInvitationDismissed(false);
+          }
+        },
+        {
+          threshold: 0.01,
+          rootMargin: "0px 0px -8% 0px",
+        },
+      );
+
+      footerObserver.observe(footer);
+    };
+
+    const timeout = window.setTimeout(connectObserver, 400);
 
     return () => {
-      footerObserver.disconnect();
+      window.clearTimeout(timeout);
+      footerObserver?.disconnect();
     };
   }, []);
 
