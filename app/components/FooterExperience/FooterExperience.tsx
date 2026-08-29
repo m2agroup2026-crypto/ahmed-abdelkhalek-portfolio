@@ -10,7 +10,7 @@ export default function FooterExperience({ language }: { language: FooterLanguag
   const scrollTop = (event: React.MouseEvent<HTMLAnchorElement>) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
   return (
-    <footer ref={footerRef} className={styles.footer} dir={ar ? "rtl" : "ltr"}>
+    <footer id="portfolio-footer" ref={footerRef} className={styles.footer} dir={ar ? "rtl" : "ltr"}>
       <div className={styles.ambient} aria-hidden="true"><i /><i /><i /></div>
       <div className={styles.shell}>
         <section className={styles.finalStatement} aria-labelledby="footer-statement">
