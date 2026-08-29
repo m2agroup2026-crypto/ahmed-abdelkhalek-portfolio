@@ -47,6 +47,10 @@ export default function InsightArticleRoute({
   const articleUrl =
     absoluteUrl(articlePath);
 
+  const homeUrl = absoluteUrl(
+    language === "ar" ? "/" : "/en"
+  );
+
   const indexUrl = absoluteUrl(
     language === "ar"
       ? "/insights"
@@ -58,54 +62,86 @@ export default function InsightArticleRoute({
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": `${articleUrl}#article`,
-    url: articleUrl,
-    headline: content.title,
-    description: content.seo.description,
-    inLanguage:
-      language === "ar" ? "ar-EG" : "en-US",
-    datePublished: article.publishedAt,
-    dateModified: article.updatedAt,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": articleUrl,
-    },
-    isPartOf: {
-      "@type": "CollectionPage",
-      "@id": indexUrl,
-      name:
-        language === "ar"
-          ? "السَّبْق"
-          : "THE EDGE",
-    },
-    articleSection:
-      category?.label[language] ??
-      content.categoryLabel,
-    keywords: [
-      ...content.seo.keywords,
-      ...article.tags,
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${articleUrl}#article`,
+        url: articleUrl,
+        headline: content.title,
+        description: content.seo.description,
+        inLanguage:
+          language === "ar" ? "ar-EG" : "en-US",
+        datePublished: article.publishedAt,
+        dateModified: article.updatedAt,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": articleUrl,
+        },
+        isPartOf: {
+          "@type": "CollectionPage",
+          "@id": indexUrl,
+          name:
+            language === "ar"
+              ? "السَّبْق"
+              : "THE EDGE",
+        },
+        articleSection:
+          category?.label[language] ??
+          content.categoryLabel,
+        keywords: [
+          ...content.seo.keywords,
+          ...article.tags,
+        ],
+        about: article.tags.map((tag) => ({
+          "@type": "Thing",
+          name: tag,
+        })),
+        author: {
+          "@type": "Person",
+          "@id": personId,
+          name: ui.author.name,
+          url: absoluteUrl("/"),
+          jobTitle: ui.author.role,
+        },
+        publisher: {
+          "@type": "Person",
+          "@id": personId,
+          name: ui.author.name,
+          url: absoluteUrl("/"),
+        },
+        copyrightHolder: {
+          "@id": personId,
+        },
+        copyrightYear:
+          new Date(article.publishedAt)
+            .getUTCFullYear(),
+        isAccessibleForFree: true,
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${articleUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: language === "ar" ? "الرئيسية" : "Home",
+            item: homeUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: language === "ar" ? "السَّبْق" : "THE EDGE",
+            item: indexUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: content.title,
+            item: articleUrl,
+          },
+        ],
+      },
     ],
-    author: {
-      "@type": "Person",
-      "@id": personId,
-      name: ui.author.name,
-      url: absoluteUrl("/"),
-      jobTitle: ui.author.role,
-    },
-    publisher: {
-      "@type": "Person",
-      "@id": personId,
-      name: ui.author.name,
-      url: absoluteUrl("/"),
-    },
-    copyrightHolder: {
-      "@id": personId,
-    },
-    copyrightYear:
-      new Date(article.publishedAt)
-        .getUTCFullYear(),
-    isAccessibleForFree: true,
   };
 
   return (
