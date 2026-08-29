@@ -5,6 +5,66 @@
  * removing continuously repainting decoration and expensive glass effects.
  */
 @media (max-width: 900px) {
+  /*
+   * Mobile Arabic uses the platform UI font stack. This avoids downloading and
+   * swapping several Cairo weights during the critical first viewport, which
+   * reduces layout movement and keeps text metrics stable during first paint.
+   */
+  main.arabic-ui,
+  main.arabic-ui * {
+    font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif !important;
+  }
+
+  /*
+   * The hero is above the fold and must be paint-ready immediately. Desktop
+   * keeps the full cinematic reveal; mobile renders the LCP candidates without
+   * opacity/blur/clip-path delays while decorative motion can remain lightweight.
+   */
+  #top[data-motion="idle"] h1 > span,
+  #top[data-motion="idle"] h1 > em,
+  #top[data-motion="idle"] figure > div,
+  #top[data-motion="idle"] figure img,
+  #top[data-motion="active"] h1 > span,
+  #top[data-motion="active"] h1 > em,
+  #top[data-motion="active"] figure > div,
+  #top[data-motion="active"] figure img {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
+
+  /* The first-viewport copy should not wait on staged reveal delays either. */
+  #top[data-motion="idle"] [class*="EnterpriseHero_identity"],
+  #top[data-motion="idle"] [class*="EnterpriseHero_status"],
+  #top[data-motion="idle"] [class*="EnterpriseHero_intro"],
+  #top[data-motion="idle"] [class*="EnterpriseHero_actions"] a,
+  #top[data-motion="active"] [class*="EnterpriseHero_identity"],
+  #top[data-motion="active"] [class*="EnterpriseHero_status"],
+  #top[data-motion="active"] [class*="EnterpriseHero_intro"],
+  #top[data-motion="active"] [class*="EnterpriseHero_actions"] a {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+
+  /* Hero decorative loops are not worth continuous work on a touch viewport. */
+  #top [class*="EnterpriseHero_orbit"],
+  #top [class*="EnterpriseHero_signal"],
+  #top [class*="EnterpriseHero_systemGrid"],
+  #top [class*="EnterpriseHero_systemArc"],
+  #top [class*="EnterpriseHero_systemScan"],
+  #top [class*="EnterpriseHero_node"] {
+    animation: none !important;
+  }
+
+  #top [class*="EnterpriseHero_visualCaption"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
   /* A fixed full-viewport grid forces extra compositing while the page scrolls. */
   main::before {
     display: none !important;
