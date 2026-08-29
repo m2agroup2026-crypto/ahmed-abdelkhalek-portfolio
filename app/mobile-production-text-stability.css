@@ -1,9 +1,10 @@
 /*
  * Production mobile text stability layer.
- * Prevents deployed CSS chunk/cascade ordering from collapsing the Enterprise
- * Systems Method copy into a narrow column on phone layouts.
+ * Keeps the deployed CSS cascade from collapsing Arabic copy into narrow
+ * columns while preserving each component's existing typography and visuals.
  */
 @media (max-width: 900px) {
+  /* Enterprise Systems Method */
   #enterprise-systems-method {
     width: 100% !important;
     max-width: 100% !important;
@@ -27,7 +28,9 @@
 
   #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"],
   #enterprise-systems-method [class*="EnterpriseSystemsMethod_intro"],
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_index"] {
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_index"],
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] span,
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] em {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -40,6 +43,35 @@
   #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] span,
   #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] em {
     display: block !important;
+  }
+
+  /* Expertise Experience */
+  #expertise {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #expertise > [class*="ExpertiseExperience_shell"] {
+    width: min(calc(100% - 30px), 1180px) !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-inline: auto !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_header"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_heading"],
+  #expertise [class*="ExpertiseExperience_intro"],
+  #expertise [class*="ExpertiseExperience_heading"] h2,
+  #expertise [class*="ExpertiseExperience_heading"] h2 span,
+  #expertise [class*="ExpertiseExperience_heading"] h2 em {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -48,29 +80,20 @@
     overflow-wrap: normal !important;
     white-space: normal !important;
   }
+
+  #expertise [class*="ExpertiseExperience_heading"] h2,
+  #expertise [class*="ExpertiseExperience_heading"] h2 span,
+  #expertise [class*="ExpertiseExperience_heading"] h2 em {
+    display: block !important;
+  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   #enterprise-systems-method > [class*="EnterpriseSystemsMethod_inner"] {
     width: min(calc(100% - 24px), 520px) !important;
   }
 
-  #enterprise-systems-method[data-language="ar"] [class*="EnterpriseSystemsMethod_title"] {
-    font-size: clamp(30px, 8.8vw, 40px) !important;
-    line-height: 1.55 !important;
-    letter-spacing: 0 !important;
-    text-align: start !important;
-  }
-
-  #enterprise-systems-method[data-language="ar"] [class*="EnterpriseSystemsMethod_title"] em {
-    margin-top: 2px !important;
-    font-size: 0.86em !important;
-    line-height: 1.65 !important;
-  }
-
-  #enterprise-systems-method[data-language="ar"] [class*="EnterpriseSystemsMethod_intro"] {
-    font-size: 14px !important;
-    line-height: 2 !important;
-    text-align: start !important;
+  #expertise > [class*="ExpertiseExperience_shell"] {
+    width: calc(100% - 20px) !important;
   }
 }
