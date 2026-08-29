@@ -35,6 +35,126 @@
     white-space: normal !important;
   }
 
+  /* Compact translucent navigation: mobile should feel lighter than desktop. */
+  .nav.shell {
+    width: min(calc(100% - 24px), 560px) !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    margin: 10px auto 0 !important;
+    padding-inline: 8px !important;
+    gap: 8px !important;
+    border: 1px solid rgba(7, 17, 14, 0.13) !important;
+    border-radius: 18px !important;
+    background: rgba(248, 250, 246, 0.72) !important;
+    box-shadow: 0 10px 28px rgba(13, 31, 26, 0.08) !important;
+    backdrop-filter: blur(18px) saturate(1.16) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.16) !important;
+  }
+
+  [data-theme="dark"] .nav.shell {
+    border-color: rgba(255, 255, 255, 0.11) !important;
+    background: rgba(5, 10, 8, 0.68) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22) !important;
+  }
+
+  .nav .brand {
+    gap: 7px !important;
+    font-size: 11px !important;
+  }
+
+  .nav .brand span {
+    width: 30px !important;
+    height: 30px !important;
+    flex: 0 0 30px !important;
+    font-size: 9px !important;
+  }
+
+  .nav .brand b {
+    display: none !important;
+  }
+
+  .nav .theme-toggle {
+    width: 34px !important;
+    height: 34px !important;
+    flex-basis: 34px !important;
+  }
+
+  .nav .language-rail {
+    width: 72px !important;
+    height: 34px !important;
+  }
+
+  .nav .language-thumb {
+    width: 32px !important;
+    height: 26px !important;
+  }
+
+  .nav .language-rail.is-ar .language-thumb {
+    transform: translateX(33px) !important;
+  }
+
+  .nav .menu-button {
+    min-height: 34px !important;
+    padding-inline: 9px !important;
+    font-size: 9px !important;
+  }
+
+  /* One consistent vertical rhythm for the phone experience. */
+  main > section:not(#top) {
+    margin-block: 0 !important;
+    padding-block: clamp(48px, 12vw, 64px) !important;
+    scroll-margin-top: 76px !important;
+  }
+
+  /* Hero: remove the old oversized nav clearance and protect copy width. */
+  #top [class*="mobileInner"],
+  #top [class*="EnterpriseHero_inner"] {
+    width: min(calc(100% - 24px), 540px) !important;
+    gap: 26px !important;
+    padding-top: 78px !important;
+    padding-bottom: 26px !important;
+  }
+
+  #top [class*="EnterpriseHero_copy"] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #top h1 {
+    width: 100% !important;
+    font-size: clamp(34px, 10.2vw, 46px) !important;
+    line-height: 1.28 !important;
+  }
+
+  #top h1 em {
+    margin-top: 2px !important;
+    line-height: 1.42 !important;
+  }
+
+  #top [class*="EnterpriseHero_intro"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 18px !important;
+    font-size: 13px !important;
+    line-height: 1.9 !important;
+  }
+
+  #top [class*="EnterpriseHero_identity"] {
+    margin-bottom: 16px !important;
+  }
+
+  #top [class*="EnterpriseHero_status"] {
+    margin-bottom: 16px !important;
+  }
+
+  #top [class*="EnterpriseHero_actions"] {
+    margin-top: 20px !important;
+  }
+
+  #top [class*="EnterpriseHero_visual"] {
+    width: min(90%, 390px) !important;
+  }
+
   /* The operating-method heading is the most constrained mobile title. */
   #enterprise-systems-method h2,
   #enterprise-systems-method h3 {
@@ -50,12 +170,249 @@
     max-width: 100% !important;
   }
 
-  /*
-   * Light-mode parity with desktop.
-   * Earlier mobile rules remapped the desktop green/teal system to a
-   * saturated blue palette. Restore the desktop semantic colors only
-   * while the light theme is active.
-   */
+  /* Journey: keep the desktop composition language but stack it deliberately. */
+  #journey [class*="JourneyExperienceRebuilt_header"] {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_deck"] {
+    margin-top: 34px !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_body"] {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_map"] {
+    min-height: 300px !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_card"] {
+    min-height: 0 !important;
+    padding: 24px 18px !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_convergence"] {
+    margin-top: 42px !important;
+    padding-top: 38px !important;
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+  }
+
+  /* Capability observatory: desktop rebuild rules sit after old media rules,
+     so restack it again here, after every module stylesheet. */
+  #expertise [class*="ExpertiseExperience_shell"] {
+    width: calc(100% - 24px) !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_header"] {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    margin-bottom: 28px !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_heading"] h2 {
+    font-size: clamp(32px, 9.7vw, 44px) !important;
+    line-height: 1.32 !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_workspace"] {
+    display: block !important;
+    min-height: 0 !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_rail"] {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    padding: 8px !important;
+    border-inline-end: 0 !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_rail"] button {
+    min-height: 62px !important;
+    padding: 10px 4px !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_detail"] {
+    min-height: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding: 24px 16px !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_copy"] h3 {
+    font-size: 26px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Contact / “Bring the complexity”: restore a full-width mobile story. */
+  #contact [class*="ContactExperience_shell"] {
+    width: calc(100% - 24px) !important;
+  }
+
+  #contact [class*="ContactExperience_header"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    margin-bottom: 28px !important;
+    align-items: start !important;
+  }
+
+  #contact [class*="ContactExperience_header"] > * {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    grid-column: auto !important;
+  }
+
+  #contact h2 {
+    font-size: clamp(34px, 10vw, 45px) !important;
+    line-height: 1.32 !important;
+    text-align: start !important;
+  }
+
+  #contact h2 em {
+    display: block !important;
+    margin-top: 2px !important;
+    line-height: 1.42 !important;
+  }
+
+  #contact [class*="ContactExperience_intro"] {
+    font-size: 13px !important;
+    line-height: 1.9 !important;
+  }
+
+  #contact [class*="ContactExperience_command"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    border-radius: 22px !important;
+  }
+
+  #contact [class*="ContactExperience_channels"] {
+    padding: 24px 14px !important;
+    border-inline-end: 0 !important;
+  }
+
+  #contact [class*="ContactExperience_form"] {
+    grid-template-columns: 1fr !important;
+    padding: 26px 14px !important;
+  }
+
+  #contact [class*="ContactExperience_formHead"],
+  #contact [class*="ContactExperience_wide"],
+  #contact [class*="ContactExperience_submitRow"] {
+    grid-column: 1 !important;
+  }
+
+  /* Footer: a purpose-built mobile closing scene instead of a squeezed desktop deck. */
+  #portfolio-footer {
+    padding: 54px 0 18px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_shell"] {
+    width: calc(100% - 24px) !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_finalStatement"] {
+    display: grid !important;
+    grid-template-columns: 66px minmax(0, 1fr) !important;
+    gap: 18px !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+    padding: 22px !important;
+    border-radius: 24px !important;
+    text-align: start !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_core"] {
+    width: 62px !important;
+    height: 62px !important;
+    min-width: 62px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_core"] strong {
+    font-size: 18px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_statementCopy"] > p {
+    margin-bottom: 10px !important;
+    font-size: 7px !important;
+    line-height: 1.5 !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_statementCopy"] h2 {
+    font-size: clamp(26px, 8vw, 36px) !important;
+    line-height: 1.38 !important;
+    text-align: start !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_statementCopy"] h2 em {
+    margin-top: 2px !important;
+    line-height: 1.48 !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_statementCopy"] blockquote {
+    margin-top: 16px !important;
+    padding: 13px 0 0 !important;
+    border-inline-start: 0 !important;
+    border-top: 1px solid currentColor !important;
+    font-size: 11px !important;
+    line-height: 1.8 !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_identityDeck"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 26px !important;
+    margin-top: 14px !important;
+    padding: 24px 18px !important;
+    border-radius: 24px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_identity"] {
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    gap: 14px !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+    text-align: start !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_monogram"] {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_navigation"],
+  #portfolio-footer [class*="FooterExperience_channels"] {
+    width: 100% !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_systemBar"] {
+    grid-template-columns: 1fr !important;
+    justify-items: start !important;
+    gap: 8px !important;
+    min-height: 0 !important;
+    padding: 20px 4px 8px !important;
+    text-align: start !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_systemBar"] small {
+    text-align: start !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_topControl"] {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 14px !important;
+    justify-content: space-between !important;
+  }
+
+  /* Light-mode parity with desktop. */
   [data-theme="light"] main {
     --ink: #0a1512 !important;
     --muted: #485650 !important;
@@ -67,13 +424,10 @@
     --mobile-electric-dark: #06384a !important;
   }
 
-  [data-theme="light"] .nav {
+  [data-theme="light"] .nav.shell {
     color: #07110e !important;
-    background: rgba(250, 251, 247, 0.97) !important;
-    border-color: rgba(7, 17, 14, 0.18) !important;
-    box-shadow:
-      0 14px 42px rgba(11, 28, 24, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+    background: rgba(248, 250, 246, 0.72) !important;
+    border-color: rgba(7, 17, 14, 0.13) !important;
   }
 
   [data-theme="light"] .nav .brand,
@@ -85,7 +439,6 @@
     opacity: 1 !important;
   }
 
-  /* Legacy light sections use the same ink and green accent as desktop. */
   [data-theme="light"] main .opening-lead h2,
   [data-theme="light"] main .identity h2,
   [data-theme="light"] main .section-heading h2,
@@ -117,7 +470,6 @@
     opacity: 1 !important;
   }
 
-  /* Enterprise Hero: stronger light ink without touching dark variables. */
   [data-theme="light"] #top {
     --eh-ink: #07110e !important;
     --eh-muted: #3f4f48 !important;
@@ -130,7 +482,6 @@
     --eh-green: #6f9918 !important;
   }
 
-  /* Enterprise Systems Method: match the same high-contrast desktop palette. */
   [data-theme="light"] #enterprise-systems-method {
     --esm-ink: #07110e !important;
     --esm-muted: #3f4f48 !important;
@@ -142,7 +493,6 @@
     --esm-cyan-bright: #00afd5 !important;
   }
 
-  /* Professional Identity is also a light surface in the light theme. */
   [data-theme="light"] section:has(#professional-identity-title) {
     --pi-ink: #07110e !important;
     --pi-muted: #3f4f48 !important;
@@ -154,5 +504,49 @@
     --pi-cyan-bright: #00afd5 !important;
     --pi-gold: #936918 !important;
     --pi-gold-bright: #c99a31 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer {
+    background: linear-gradient(180deg, #edf3ef, #f8f8f4 72%, #eef4f0) !important;
+    color: #08120f !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_finalStatement"],
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_identityDeck"] {
+    border-color: rgba(7, 28, 22, 0.13) !important;
+    background: linear-gradient(145deg, rgba(255,255,255,.86), rgba(234,241,236,.72)) !important;
+    box-shadow: 0 22px 60px rgba(26, 52, 43, 0.1) !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_topControl"] {
+    color: #243c33 !important;
+    border-color: rgba(0, 127, 130, 0.22) !important;
+    background: rgba(255, 255, 255, 0.72) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  main > section:not(#top) {
+    padding-block: 50px !important;
+  }
+
+  #top [class*="mobileInner"],
+  #top [class*="EnterpriseHero_inner"] {
+    padding-top: 72px !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_map"] {
+    min-height: 280px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_finalStatement"] {
+    grid-template-columns: 56px minmax(0, 1fr) !important;
+    padding: 18px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_core"] {
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
   }
 }
