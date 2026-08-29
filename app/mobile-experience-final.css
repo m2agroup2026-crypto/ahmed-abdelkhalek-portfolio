@@ -1,0 +1,240 @@
+/*
+ * Final mobile UX ownership layer.
+ * Imported after the legacy globals and mobile polish so the phone layout
+ * has one deterministic cascade without changing desktop or dark mode.
+ */
+@media (max-width: 900px) {
+  /* Consistent phone rhythm and safer interaction targets. */
+  main > section:not(#top) {
+    padding-block: clamp(44px, 10vw, 58px) !important;
+  }
+
+  main a,
+  main button {
+    touch-action: manipulation;
+  }
+
+  /*
+   * Light theme: remove the fluorescent lime from the mobile experience.
+   * Teal carries informational accents; warm gold carries decisive CTAs.
+   */
+  [data-theme="light"] main {
+    --acid: #d2a238 !important;
+    --forest: #12392e !important;
+    --mobile-electric: #087f92 !important;
+    --mobile-electric-bright: #0aa8bd !important;
+    --mobile-electric-dark: #063f4a !important;
+  }
+
+  [data-theme="light"] main > section,
+  [data-theme="light"] #portfolio-footer {
+    --lime: #087f92 !important;
+    --cyan: #087f92 !important;
+    --green: #087f92 !important;
+  }
+
+  [data-theme="light"] #top {
+    --eh-green: #087f92 !important;
+    --eh-cyan: #087f92 !important;
+    --eh-cyan-bright: #0aa8bd !important;
+    --eh-gold: #9b6d18 !important;
+    --eh-gold-bright: #d2a238 !important;
+  }
+
+  [data-theme="light"] #enterprise-systems-method {
+    --esm-cyan: #087f92 !important;
+    --esm-cyan-bright: #0aa8bd !important;
+    --esm-gold: #9b6d18 !important;
+    --esm-gold-bright: #d2a238 !important;
+  }
+
+  [data-theme="light"] section:has(#professional-identity-title) {
+    --pi-lime: #087f92 !important;
+    --pi-lime-bright: #0aa8bd !important;
+    --pi-cyan: #087f92 !important;
+    --pi-cyan-bright: #0aa8bd !important;
+    --pi-gold: #9b6d18 !important;
+    --pi-gold-bright: #d2a238 !important;
+  }
+
+  /* Replace legacy fluorescent CTA surfaces with the desktop-family gold. */
+  [data-theme="light"] main .button.primary,
+  [data-theme="light"] main a[class*="primaryAction"],
+  [data-theme="light"] main a[class*="primaryCta"],
+  [data-theme="light"] main a[class*="ctaPrimary"],
+  [data-theme="light"] main button[class*="primaryAction"],
+  [data-theme="light"] main button[class*="primaryCta"],
+  [data-theme="light"] main button[class*="ctaPrimary"] {
+    color: #07110e !important;
+    border-color: rgba(155, 109, 24, 0.24) !important;
+    background: linear-gradient(135deg, #d2a238, #ebcd79) !important;
+    box-shadow: 0 12px 30px rgba(155, 109, 24, 0.16) !important;
+  }
+
+  /* Small section labels should be teal, never fluorescent green. */
+  [data-theme="light"] main [class*="eyebrow"],
+  [data-theme="light"] main [class*="kicker"],
+  [data-theme="light"] main [class*="sectionIndex"],
+  [data-theme="light"] main [class*="section-index"] {
+    color: #087f92 !important;
+    -webkit-text-fill-color: #087f92 !important;
+  }
+
+  /* Footer readability and hierarchy in light mode. */
+  [data-theme="light"] #portfolio-footer {
+    color: #07110e !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_statementCopy"] > p {
+    color: #087f92 !important;
+    -webkit-text-fill-color: #087f92 !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_statementCopy"] h2,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_statementCopy"] h2 span {
+    color: #07110e !important;
+    -webkit-text-fill-color: #07110e !important;
+    background: none !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_statementCopy"] h2 em,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_statementCopy"] h2 em span {
+    color: #087f92 !important;
+    -webkit-text-fill-color: #087f92 !important;
+    background: none !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_statementCopy"] blockquote {
+    color: #2e413a !important;
+    border-color: rgba(8, 127, 146, 0.34) !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_identity"] h3 {
+    color: #07110e !important;
+    font-size: clamp(20px, 5.6vw, 25px) !important;
+    font-weight: 800 !important;
+    line-height: 1.45 !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_identity"] p {
+    color: #1f332b !important;
+    font-size: 12px !important;
+    font-weight: 650 !important;
+    line-height: 1.75 !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_identity"] small,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_navigation"] > p,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_channels"] > p {
+    color: #42554e !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_navigation"] a,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_channels"] a {
+    min-height: 46px !important;
+    color: #07110e !important;
+    border-color: rgba(7, 17, 14, 0.14) !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_navigation"] a b,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_channels"] a b {
+    color: #07110e !important;
+    font-size: 11px !important;
+    font-weight: 750 !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_navigation"] a span,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_channels"] a span {
+    color: #53645d !important;
+    font-size: 8px !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_navigation"] a i,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_channels"] a i {
+    color: #087f92 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_systemBar"],
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_systemBar"] b,
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_systemBar"] small {
+    color: #263a32 !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+  }
+
+  [data-theme="light"] #portfolio-footer [class*="FooterExperience_topControl"] {
+    color: #07110e !important;
+    font-weight: 800 !important;
+    border-color: rgba(8, 127, 146, 0.24) !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Footer headline gets the full phone width: no icon/text collision. */
+  #portfolio-footer [class*="FooterExperience_finalStatement"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+    padding: 20px 18px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_core"] {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    justify-self: end !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_statementCopy"] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_statementCopy"] h2 {
+    width: 100% !important;
+    margin: 0 !important;
+    font-size: clamp(29px, 8.8vw, 38px) !important;
+    line-height: 1.48 !important;
+    overflow: visible !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_statementCopy"] h2 span,
+  #portfolio-footer [class*="FooterExperience_statementCopy"] h2 em,
+  #portfolio-footer [class*="FooterExperience_statementCopy"] h2 em span {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_identityDeck"] {
+    gap: 20px !important;
+    padding: 22px 16px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_identity"] {
+    grid-template-columns: 44px minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_monogram"] {
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
