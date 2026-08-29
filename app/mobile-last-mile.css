@@ -1,4 +1,11 @@
-/* Final phone-only corrections: deterministic back-to-top control and Journey Finale voice core fit. */
+/* Final cross-device corrections: deterministic footer controls and Journey Finale voice core fit. */
+
+/* Keep the footer's main return control on the right in both languages and at every viewport size. */
+#portfolio-footer [class*="FooterExperience_topControl"] {
+  left: auto !important;
+  right: 0 !important;
+}
+
 @media (max-width: 900px) {
   main .floating-back-top {
     position: fixed !important;
