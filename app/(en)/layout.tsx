@@ -8,6 +8,7 @@ import "@/app/mobile-experience-final.css";
 import "@/app/mobile-footer-readable.css";
 import "@/app/mobile-last-mile.css";
 import "@/app/mobile-professional-identity-correction.css";
+import "@/app/mobile-performance-final.css";
 
 export const metadata: Metadata = createRootMetadata("en");
 export const viewport: Viewport = {
