@@ -27,14 +27,31 @@ export function useSystemsExperienceMotion() {
 
     observer.observe(root);
 
-    const updatePointer = (event: PointerEvent) => {
-      const bounds = root.getBoundingClientRect();
-      root.style.setProperty("--systems-x", `${event.clientX - bounds.left}px`);
-      root.style.setProperty("--systems-y", `${event.clientY - bounds.top}px`);
+    const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    let frame = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+
+    const renderPointer = () => {
+      root.style.setProperty("--systems-x", `${pointerX}px`);
+      root.style.setProperty("--systems-y", `${pointerY}px`);
+      frame = 0;
     };
 
-    root.addEventListener("pointermove", updatePointer, { passive: true });
+    const updatePointer = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      const bounds = root.getBoundingClientRect();
+      pointerX = event.clientX - bounds.left;
+      pointerY = event.clientY - bounds.top;
+      if (!frame) frame = window.requestAnimationFrame(renderPointer);
+    };
+
+    if (precisePointer.matches) {
+      root.addEventListener("pointermove", updatePointer, { passive: true });
+    }
+
     return () => {
+      window.cancelAnimationFrame(frame);
       observer.disconnect();
       root.removeEventListener("pointermove", updatePointer);
     };

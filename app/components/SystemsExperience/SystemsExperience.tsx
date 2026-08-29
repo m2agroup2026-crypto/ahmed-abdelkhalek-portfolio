@@ -22,7 +22,7 @@ export default function SystemsExperience({ language }: Props) {
   const activateDomain = (domainId: typeof active) => {
     setActive(domainId);
     if (window.matchMedia("(max-width: 900px)").matches) {
-      window.requestAnimationFrame(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }));
+      window.requestAnimationFrame(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
     }
   };
 
@@ -41,7 +41,7 @@ export default function SystemsExperience({ language }: Props) {
           <div>
             <p className={styles.eyebrow}>{systemText(systemsCopy.eyebrow, language)}</p>
             <h2 id="systems-title">
-              {systemText(systemsCopy.title, language)}
+              <span className={styles.titleLine}>{systemText(systemsCopy.title, language)}</span>
               <em>{systemText(systemsCopy.accent, language)}</em>
             </h2>
           </div>
@@ -78,25 +78,27 @@ export default function SystemsExperience({ language }: Props) {
               <small><i />{systemText(systemsCopy.sync, language)} / 100%</small>
             </div>
 
-            {systemsDomains.map((domain, index) => (
-              <button
-                type="button"
-                key={domain.id}
-                className={`${styles.domain} ${styles[domain.id]} ${styles[domain.tone]} ${active === domain.id ? styles.active : ""}`}
-                onPointerEnter={() => setActive(domain.id)}
-                onFocus={() => setActive(domain.id)}
-                onClick={() => activateDomain(domain.id)}
-                aria-pressed={active === domain.id}
-                style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}
-              >
-                <span className={styles.domainTop}><i>{domain.index}</i><b>{systemText(domain.label, language)}</b><strong>{domain.metric}</strong></span>
-                <span className={styles.domainBody}>
-                  <b>{systemText(domain.title, language)}</b>
-                  <small>{systemText(domain.description, language)}</small>
-                </span>
-                <span className={styles.domainStatus}><i />{systemText(domain.signal, language)}</span>
-              </button>
-            ))}
+            <div className={styles.domainRail} role="group" aria-label={systemText(systemsCopy.domainNavigation, language)}>
+              {systemsDomains.map((domain, index) => (
+                <button
+                  type="button"
+                  key={domain.id}
+                  className={`${styles.domain} ${styles[domain.id]} ${styles[domain.tone]} ${active === domain.id ? styles.active : ""}`}
+                  onPointerEnter={() => setActive(domain.id)}
+                  onFocus={() => setActive(domain.id)}
+                  onClick={() => activateDomain(domain.id)}
+                  aria-pressed={active === domain.id}
+                  style={{ "--delay": `${index * 90}ms` } as React.CSSProperties}
+                >
+                  <span className={styles.domainTop}><i>{domain.index}</i><b>{systemText(domain.label, language)}</b><strong>{domain.metric}</strong></span>
+                  <span className={styles.domainBody}>
+                    <b>{systemText(domain.title, language)}</b>
+                    <small>{systemText(domain.description, language)}</small>
+                  </span>
+                  <span className={styles.domainStatus}><i />{systemText(domain.signal, language)}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className={styles.telemetry}>
