@@ -1,6 +1,7 @@
 /* Mobile boundary correction: remove the oversized visual dead-zone between Systems Experience and Expertise. */
 @media (max-width: 640px) {
-  #systems {
+  /* Beat the generic mobile rhythm rule: main > section:not(#top). */
+  body main > section#systems {
     min-height: 0 !important;
     margin-bottom: 0 !important;
     padding-bottom: 28px !important;
@@ -12,7 +13,7 @@
     padding-bottom: 0 !important;
   }
 
-  #expertise {
+  body main > section#expertise {
     min-height: 0 !important;
     margin-top: 0 !important;
     padding-top: 30px !important;
