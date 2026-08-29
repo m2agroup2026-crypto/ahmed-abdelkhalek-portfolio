@@ -18,8 +18,13 @@ export function useHeroMotion<T extends HTMLElement>() {
     );
 
     if (window.matchMedia("(max-width: 900px)").matches) {
-      setMotionState("active");
-      return;
+      const mobileFrame = window.requestAnimationFrame(() => {
+        setMotionState("active");
+      });
+
+      return () => {
+        window.cancelAnimationFrame(mobileFrame);
+      };
     }
 
     let firstFrame = 0;
