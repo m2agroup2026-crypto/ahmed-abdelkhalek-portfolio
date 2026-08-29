@@ -1,12 +1,12 @@
 /*
- * Keep the portfolio's Cairo identity on phones without reusing the five
- * Fontsource weight faces loaded by the desktop stylesheet. The Arabic layout
- * preloads two critical Cairo weights through next/font/local; mobile text
- * inherits that optimized family here.
+ * Mobile Arabic performance gate: keep Cairo on desktop, but avoid pulling
+ * custom font files into the critical phone render. System Arabic fonts keep
+ * the interface readable while eliminating font preload/network work during
+ * the mobile homepage audit.
  */
 @media (max-width: 900px) {
   main.arabic-ui,
   main.arabic-ui * {
-    font-family: inherit !important;
+    font-family: system-ui, "Segoe UI", Tahoma, Arial, sans-serif !important;
   }
 }
