@@ -8,7 +8,7 @@ import { absoluteUrl, siteConfig } from "./content/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   const articles = getPublishedInsights();
 
-  const latestUpdate = articles.reduce(
+  const latestUpdate = articles.reduce<string>(
     (latest, article) =>
       article.updatedAt > latest
         ? article.updatedAt
