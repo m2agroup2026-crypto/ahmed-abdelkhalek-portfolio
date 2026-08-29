@@ -1,0 +1,213 @@
+/*
+ * Final mobile performance budget.
+ * Loaded last, after all responsive/visual correction layers.
+ * Desktop keeps the full cinematic system; phones keep the composition while
+ * removing continuously repainting decoration and expensive glass effects.
+ */
+@media (max-width: 900px) {
+  /*
+   * Mobile Arabic uses the platform UI font stack. This avoids downloading and
+   * swapping several Cairo weights during the critical first viewport, which
+   * reduces layout movement and keeps text metrics stable during first paint.
+   */
+  main.arabic-ui,
+  main.arabic-ui * {
+    font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif !important;
+  }
+
+  /*
+   * The hero is above the fold and must be paint-ready immediately. Desktop
+   * keeps the full cinematic reveal; mobile renders the LCP candidates without
+   * opacity/blur/clip-path delays while decorative motion can remain lightweight.
+   */
+  #top[data-motion="idle"] h1 > span,
+  #top[data-motion="idle"] h1 > em,
+  #top[data-motion="idle"] figure > div,
+  #top[data-motion="idle"] figure img,
+  #top[data-motion="active"] h1 > span,
+  #top[data-motion="active"] h1 > em,
+  #top[data-motion="active"] figure > div,
+  #top[data-motion="active"] figure img {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
+
+  /* The first-viewport copy should not wait on staged reveal delays either. */
+  #top[data-motion="idle"] [class*="EnterpriseHero_identity"],
+  #top[data-motion="idle"] [class*="EnterpriseHero_status"],
+  #top[data-motion="idle"] [class*="EnterpriseHero_intro"],
+  #top[data-motion="idle"] [class*="EnterpriseHero_actions"] a,
+  #top[data-motion="active"] [class*="EnterpriseHero_identity"],
+  #top[data-motion="active"] [class*="EnterpriseHero_status"],
+  #top[data-motion="active"] [class*="EnterpriseHero_intro"],
+  #top[data-motion="active"] [class*="EnterpriseHero_actions"] a {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+
+  /* Hero decorative loops are not worth continuous work on a touch viewport. */
+  #top [class*="EnterpriseHero_orbit"],
+  #top [class*="EnterpriseHero_signal"],
+  #top [class*="EnterpriseHero_systemGrid"],
+  #top [class*="EnterpriseHero_systemArc"],
+  #top [class*="EnterpriseHero_systemScan"],
+  #top [class*="EnterpriseHero_node"] {
+    animation: none !important;
+  }
+
+  #top [class*="EnterpriseHero_visualCaption"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* A fixed full-viewport grid forces extra compositing while the page scrolls. */
+  main::before {
+    display: none !important;
+  }
+
+  /* Keep the mobile nav translucent without a live backdrop blur surface. */
+  .nav.shell {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .language-glow {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  /*
+   * Skip layout/paint work for deep sections until they approach the viewport.
+   * Chrome ignores this safely where unsupported and reveals anchor targets.
+   */
+  section[aria-labelledby="professional-identity-title"],
+  #journey,
+  #experience-system-transition,
+  #system-activation-bridge,
+  section[aria-labelledby="command-room-title"],
+  section[aria-labelledby="operations-center-title"],
+  #case-study,
+  #journey-finale,
+  #systems,
+  #expertise,
+  #contact,
+  #portfolio-footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
+  /* Glass Command Room: preserve the dashboard, freeze decorative telemetry. */
+  section[aria-labelledby="command-room-title"] *,
+  section[aria-labelledby="command-room-title"] *::before,
+  section[aria-labelledby="command-room-title"] *::after {
+    animation: none !important;
+  }
+
+  section[aria-labelledby="command-room-title"] [class*="GlassCommandRoom_shell"],
+  section[aria-labelledby="command-room-title"] [class*="GlassCommandRoom_deck"],
+  section[aria-labelledby="command-room-title"] [class*="GlassCommandRoom_panel"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Operations Center: keep static system topology and remove live loops. */
+  section[aria-labelledby="operations-center-title"] *,
+  section[aria-labelledby="operations-center-title"] *::before,
+  section[aria-labelledby="operations-center-title"] *::after {
+    animation: none !important;
+  }
+
+  /* Transition bridge: particles/glass floating were expensive during touch scroll. */
+  #experience-system-transition *,
+  #experience-system-transition *::before,
+  #experience-system-transition *::after {
+    animation: none !important;
+  }
+
+  #experience-system-transition [class*="ExperienceSystemTransition_signal"],
+  #experience-system-transition [class*="ExperienceSystemTransition_core"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  #experience-system-transition [class*="ExperienceSystemTransition_core"]::after {
+    filter: none !important;
+    opacity: 0.18 !important;
+  }
+
+  /* Four stacked activation cards do not need live backdrop sampling on phones. */
+  #system-activation-bridge article {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 10px 28px rgba(7, 17, 14, 0.08) !important;
+  }
+
+  :root[data-theme="dark"] #system-activation-bridge article {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
+  }
+
+  /* Case study: static topology on mobile; interactions remain fully functional. */
+  #case-study *,
+  #case-study *::before,
+  #case-study *::after {
+    animation: none !important;
+  }
+
+  #case-study [class*="CaseStudyExperience_architecture"] {
+    box-shadow: 0 16px 40px rgba(3, 10, 8, 0.1) !important;
+  }
+
+  /*
+   * Journey Finale was one of the heaviest sections: CSS loops plus five SVG
+   * animateMotion nodes. Keep the static paths and interactive gates, hide only
+   * the moving signal dots on mobile.
+   */
+  #journey-finale *,
+  #journey-finale *::before,
+  #journey-finale *::after {
+    animation: none !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_map"] svg circle {
+    display: none !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_stage"] {
+    box-shadow: 0 18px 46px rgba(3, 12, 9, 0.12) !important;
+  }
+
+  /* Fixed assistant stays sharp but stops sampling the page behind it. */
+  aside[data-visible][data-language] > button,
+  aside[data-visible][data-language] > [role="status"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
+  }
+
+  :root[data-theme="light"] aside[data-visible][data-language] > button,
+  :root[data-theme="light"] aside[data-visible][data-language] > [role="status"] {
+    box-shadow: 0 10px 26px rgba(31, 48, 42, 0.14) !important;
+  }
+
+  aside[data-visible][data-language] svg * {
+    filter: none !important;
+    animation: none !important;
+  }
+
+  /* Fixed controls should not create oversized compositing surfaces. */
+  main .floating-back-top {
+    will-change: auto !important;
+  }
+}
+
+/* Low-power / accessibility preferences get the same deterministic experience. */
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .language-ticker > div {
+    animation: none !important;
+  }
+}

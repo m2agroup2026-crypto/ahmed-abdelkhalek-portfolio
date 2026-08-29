@@ -10,6 +10,7 @@ export default function SystemActivationBridge({ language = "en" }: Props) {
 
   return (
     <section
+      id="system-activation-bridge"
       className={styles.section}
       dir={language === "ar" ? "rtl" : "ltr"}
       aria-label={content.eyebrow}
