@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import CleanUrlController from "@/app/components/Routing/CleanUrlController";
 import PortfolioStructuredData from "@/app/components/SEO/PortfolioStructuredData";
 import { createRootMetadata } from "@/app/content/root-metadata";
@@ -22,14 +23,26 @@ export const viewport: Viewport = {
   ],
 };
 
+const themeBootstrap = `
+(function(){
+  try {
+    var saved = localStorage.getItem("ahmed-portfolio-theme");
+    var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+  } catch (_) {}
+})();`;
+
 export default function ArabicRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body>
+        <Script id="theme-bootstrap-ar" strategy="beforeInteractive">
+          {themeBootstrap}
+        </Script>
         <PortfolioStructuredData language="ar" />
         <CleanUrlController />
         {children}
