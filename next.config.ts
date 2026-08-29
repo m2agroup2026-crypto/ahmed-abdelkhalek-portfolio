@@ -29,6 +29,7 @@ const nextConfig: NextConfig = {
   compress: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    deviceSizes: [360, 390, 430, 640, 750, 828, 1080, 1200, 1440, 1920],
     minimumCacheTTL: 86400,
   },
   async headers() {
