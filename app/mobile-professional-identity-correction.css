@@ -1,0 +1,327 @@
+/*
+ * Professional Identity mobile correction.
+ * Loaded after mobile-last-mile.css so the selectors below target the actual
+ * DOM roles instead of broad CSS-module substrings (core/coreMark/coreRule,
+ * dimension/dimensions/etc.). Desktop behavior is intentionally untouched.
+ */
+
+@media (max-width: 600px) {
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"] {
+    padding: 16px 9px 13px !important;
+  }
+
+  /* Target only the stage's main core, never coreMark/coreRule/coreScan. */
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"] {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    box-sizing: border-box !important;
+    width: 208px !important;
+    min-width: 208px !important;
+    max-width: 208px !important;
+    height: 208px !important;
+    min-height: 208px !important;
+    max-height: 208px !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 24px auto 34px !important;
+    padding: 20px 18px !important;
+    overflow: visible !important;
+    border-radius: 50% !important;
+    background:
+      radial-gradient(circle at 50% 40%, rgba(10, 168, 189, 0.08), transparent 45%),
+      rgba(255, 255, 255, 0.86) !important;
+    box-shadow:
+      0 13px 32px rgba(20, 36, 30, 0.11),
+      inset 0 0 24px rgba(8, 127, 146, 0.04) !important;
+    transform: none !important;
+  }
+
+  [data-theme="dark"]
+    section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"] {
+    background:
+      radial-gradient(circle at 50% 40%, rgba(42, 205, 224, 0.09), transparent 45%),
+      rgba(7, 16, 14, 0.94) !important;
+  }
+
+  /* Reset the inner orbit spans that were accidentally inheriting core sizing. */
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > span[class*="ProfessionalIdentity_coreOrbit"] {
+    position: absolute !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    aspect-ratio: auto !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > span[class*="ProfessionalIdentity_coreOrbitSecondary"] {
+    inset: -15px !important;
+    opacity: 0.26 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > span[class*="ProfessionalIdentity_coreOrbit"]:not([class*="Secondary"]) {
+    inset: -8px !important;
+    opacity: 0.42 !important;
+  }
+
+  /* Restore the scan line from the accidental 232px circle. */
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > span[class*="ProfessionalIdentity_coreScan"] {
+    position: absolute !important;
+    inset-inline: 22% !important;
+    top: 31% !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 1px !important;
+    min-height: 1px !important;
+    max-height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    aspect-ratio: auto !important;
+    border-radius: 0 !important;
+    background: linear-gradient(90deg, transparent, #0aa8bd, transparent) !important;
+    box-shadow: 0 0 8px rgba(10, 168, 189, 0.18) !important;
+  }
+
+  /* Restore the AA mark instead of letting it inherit the whole core box. */
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > div[class*="ProfessionalIdentity_coreMark"] {
+    position: relative !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    max-width: 46px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+    margin: 0 0 9px !important;
+    padding: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, #9dcc1d, #00b9dc) !important;
+    box-shadow: 0 0 15px rgba(8, 127, 146, 0.13) !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > div[class*="ProfessionalIdentity_coreMark"]
+    span {
+    font-size: 16px !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > p {
+    margin: 0 !important;
+    font-size: 6.5px !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > h3 {
+    width: auto !important;
+    max-width: 170px !important;
+    margin: 6px 0 0 !important;
+    padding: 0 !important;
+    font-size: 14.5px !important;
+    line-height: 1.45 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"][data-language="ar"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > h3 {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Restore the separator rule from the accidental giant filled block. */
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > span[class*="ProfessionalIdentity_coreRule"] {
+    position: relative !important;
+    display: block !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 1px !important;
+    min-height: 1px !important;
+    max-height: 1px !important;
+    margin: 8px 0 !important;
+    padding: 0 !important;
+    aspect-ratio: auto !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: linear-gradient(90deg, #9dcc1d, #00b9dc) !important;
+    box-shadow: none !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > small {
+    width: auto !important;
+    max-width: 164px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 8px !important;
+    line-height: 1.5 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"][data-language="ar"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > div[class*="ProfessionalIdentity_core"]
+    > small {
+    line-height: 1.65 !important;
+  }
+
+  /* Two-by-two capability grid. Target only direct LI children. */
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > ol[class*="ProfessionalIdentity_dimensions"] {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_blueprintStage"]
+    > ol[class*="ProfessionalIdentity_dimensions"]
+    > li[class*="ProfessionalIdentity_dimension"] {
+    position: relative !important;
+    inset: auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_dimensions"]
+    > li[class*="ProfessionalIdentity_dimension"]
+    > article {
+    min-height: 162px !important;
+    padding: 12px 11px 13px !important;
+    border-radius: 15px !important;
+    box-shadow: 0 7px 18px rgba(20, 36, 30, 0.07) !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_dimensions"]
+    > li[class*="ProfessionalIdentity_dimension"]
+    > article
+    > div[class*="ProfessionalIdentity_dimensionTop"] {
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    gap: 7px !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_dimensions"]
+    [class*="ProfessionalIdentity_dimensionCode"] {
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    font-size: 7px !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_dimensions"]
+    [class*="ProfessionalIdentity_dimensionIcon"] {
+    width: 31px !important;
+    min-width: 31px !important;
+    max-width: 31px !important;
+    height: 31px !important;
+    min-height: 31px !important;
+    max-height: 31px !important;
+    padding: 0 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_dimensions"]
+    [class*="ProfessionalIdentity_dimensionIcon"] svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_dimensions"]
+    > li[class*="ProfessionalIdentity_dimension"]
+    h3 {
+    margin: 10px 0 4px !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"][data-language="ar"]
+    [class*="ProfessionalIdentity_dimensions"]
+    > li[class*="ProfessionalIdentity_dimension"]
+    h3 {
+    line-height: 1.5 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_dimensions"]
+    > li[class*="ProfessionalIdentity_dimension"]
+    p {
+    font-size: 8px !important;
+    line-height: 1.5 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"][data-language="ar"]
+    [class*="ProfessionalIdentity_dimensions"]
+    > li[class*="ProfessionalIdentity_dimension"]
+    p {
+    line-height: 1.65 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"]
+    [class*="ProfessionalIdentity_dimensions"]
+    [class*="ProfessionalIdentity_dimensionTelemetry"] {
+    display: none !important;
+  }
+}
