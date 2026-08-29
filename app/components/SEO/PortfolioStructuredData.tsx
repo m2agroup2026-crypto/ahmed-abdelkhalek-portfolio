@@ -7,13 +7,59 @@ export default function PortfolioStructuredData({ language }: Props) {
   const name = isArabic ? siteConfig.arabicName : siteConfig.name;
   const description = isArabic ? siteConfig.arabicDescription : siteConfig.description;
   const pageUrl = absoluteUrl(isArabic ? "/" : "/en");
+  const personId = absoluteUrl("/#person");
+  const websiteId = absoluteUrl("/#website");
+
+  const areaServed = siteConfig.markets.map((market) => ({
+    "@type": "Country",
+    name: market,
+  }));
+
+  const services = [
+    {
+      id: "enterprise-systems",
+      name: isArabic ? "هندسة الأنظمة والمنصات المؤسسية" : "Enterprise Systems & Platform Architecture",
+      alternateName: isArabic ? "Enterprise Systems Architecture" : "هندسة الأنظمة المؤسسية",
+      description: isArabic
+        ? "تصميم أنظمة ومنصات مؤسسية مترابطة قابلة للتوسع والحوكمة والتكامل عبر واجهات API."
+        : "Architecture for connected, scalable, governable enterprise systems and platforms with API-led integration.",
+      serviceType: "Enterprise Systems Architecture",
+    },
+    {
+      id: "digital-transformation",
+      name: isArabic ? "التحول الرقمي وأتمتة العمليات" : "Digital Transformation & Process Automation",
+      alternateName: isArabic ? "Digital Transformation & Automation" : "التحول الرقمي والأتمتة",
+      description: isArabic
+        ? "تحويل مسارات العمل والتشغيل المؤسسي إلى عمليات رقمية مترابطة وقابلة للقياس والأتمتة."
+        : "Transforming business workflows and enterprise operations into connected, measurable, automated digital processes.",
+      serviceType: "Digital Transformation",
+    },
+    {
+      id: "enterprise-ai",
+      name: isArabic ? "الذكاء الاصطناعي ووكلاء الأعمال للمؤسسات" : "Enterprise AI & AI Agents",
+      alternateName: isArabic ? "Enterprise AI" : "الذكاء الاصطناعي للمؤسسات",
+      description: isArabic
+        ? "تصميم حلول ذكاء اصطناعي ووكلاء أعمال متكاملين مع البيانات والعمليات والحوكمة المؤسسية."
+        : "Enterprise AI and agentic systems connected to operational data, workflows, controls, and human governance.",
+      serviceType: "Enterprise AI",
+    },
+    {
+      id: "crm-connected-platforms",
+      name: isArabic ? "هندسة CRM والمنصات الرقمية المترابطة" : "CRM Architecture & Connected Digital Platforms",
+      alternateName: isArabic ? "CRM Architecture" : "هندسة إدارة علاقات العملاء",
+      description: isArabic
+        ? "بناء معماريات CRM ومنصات رقمية توحد العملاء والبيانات والقنوات والمتابعات داخل نظام تشغيل واحد."
+        : "CRM and connected-platform architecture that unifies customer data, channels, follow-up, and operations in one system.",
+      serviceType: "CRM Architecture",
+    },
+  ];
 
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Person",
-        "@id": absoluteUrl("/#person"),
+        "@id": personId,
         name,
         alternateName: isArabic ? siteConfig.name : siteConfig.arabicName,
         url: pageUrl,
@@ -27,6 +73,15 @@ export default function PortfolioStructuredData({ language }: Props) {
           addressLocality: isArabic ? "أسيوط" : "Assiut",
           addressCountry: "EG",
         },
+        homeLocation: {
+          "@type": "Place",
+          name: isArabic ? "مصر" : "Egypt",
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: "EG",
+          },
+        },
+        knowsLanguage: ["Arabic", "English"],
         sameAs: [
           "https://www.facebook.com/ahmed.abdelkhalek2/",
           "https://www.instagram.com/ahmed.khalek.pr/",
@@ -39,17 +94,20 @@ export default function PortfolioStructuredData({ language }: Props) {
           "CRM Architecture",
           "Business Process Automation",
           "Enterprise AI",
+          "AI Agents",
           "API Integration",
+          "Systems Integration",
+          "Digital Operating Systems",
         ],
       },
       {
         "@type": "WebSite",
-        "@id": absoluteUrl("/#website"),
+        "@id": websiteId,
         url: absoluteUrl("/"),
         name,
         description,
-        inLanguage: isArabic ? "ar-EG" : "en",
-        author: { "@id": absoluteUrl("/#person") },
+        inLanguage: ["ar-EG", "en"],
+        author: { "@id": personId },
       },
       {
         "@type": "ProfilePage",
@@ -58,9 +116,20 @@ export default function PortfolioStructuredData({ language }: Props) {
         name: isArabic ? siteConfig.arabicTitle : siteConfig.title,
         description,
         inLanguage: isArabic ? "ar-EG" : "en",
-        mainEntity: { "@id": absoluteUrl("/#person") },
-        isPartOf: { "@id": absoluteUrl("/#website") },
+        mainEntity: { "@id": personId },
+        isPartOf: { "@id": websiteId },
       },
+      ...services.map((service) => ({
+        "@type": "Service",
+        "@id": absoluteUrl(`/#service-${service.id}`),
+        name: service.name,
+        alternateName: service.alternateName,
+        description: service.description,
+        serviceType: service.serviceType,
+        provider: { "@id": personId },
+        areaServed,
+        url: pageUrl,
+      })),
     ],
   };
 
