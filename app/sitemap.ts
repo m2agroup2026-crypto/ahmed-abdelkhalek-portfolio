@@ -3,7 +3,7 @@ import {
   getInsightPath,
   getPublishedInsights,
 } from "./content/insights/registry";
-import { absoluteUrl } from "./content/site";
+import { absoluteUrl, siteConfig } from "./content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const articles = getPublishedInsights();
@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       article.updatedAt > latest
         ? article.updatedAt
         : latest,
-    "2026-01-01"
+    siteConfig.lastUpdated
   );
 
   const insightEntries: MetadataRoute.Sitemap =
@@ -67,6 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: absoluteUrl("/"),
+      lastModified: siteConfig.lastUpdated,
       changeFrequency: "monthly",
       priority: 1,
       alternates: {
@@ -75,6 +76,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/en"),
+      lastModified: siteConfig.lastUpdated,
       changeFrequency: "monthly",
       priority: 1,
       alternates: {
