@@ -1,0 +1,88 @@
+/* Final phone-only corrections: deterministic back-to-top control and Journey Finale voice core fit. */
+@media (max-width: 900px) {
+  main .floating-back-top {
+    position: fixed !important;
+    z-index: 8875 !important;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
+    display: grid !important;
+    place-items: center !important;
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  main .floating-back-top.is-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  main.arabic-ui .floating-back-top {
+    left: 18px !important;
+    right: auto !important;
+  }
+
+  main.english-ui .floating-back-top {
+    right: 18px !important;
+    left: auto !important;
+  }
+}
+
+@media (max-width: 600px) {
+  #journey-finale [class*="JourneyFinale_voiceCore"] {
+    min-height: 132px !important;
+    padding: 12px !important;
+    gap: 5px !important;
+    place-items: center !important;
+    align-content: center !important;
+    text-align: center !important;
+    overflow: hidden !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_voiceCore"] > i {
+    width: 112px !important;
+    max-width: 112px !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_voiceCore"] > small,
+  #journey-finale [class*="JourneyFinale_voiceCore"] > strong {
+    position: relative !important;
+    z-index: 2 !important;
+    display: block !important;
+    width: 88px !important;
+    max-width: 88px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_voiceCore"] > small {
+    font-size: 5.5px !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_voiceCore"] > strong {
+    font-size: 6.4px !important;
+    line-height: 1.35 !important;
+    font-weight: 750 !important;
+    letter-spacing: 0 !important;
+  }
+
+  #journey-finale [class*="JourneyFinale_voiceCore"] > div {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 72px !important;
+    max-width: 72px !important;
+    height: 16px !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+  }
+}
