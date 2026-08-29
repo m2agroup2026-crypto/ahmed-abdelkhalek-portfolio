@@ -1,0 +1,7 @@
+/* Restore the portfolio's Arabic identity on mobile after the performance layer. */
+@media (max-width: 900px) {
+  main.arabic-ui,
+  main.arabic-ui * {
+    font-family: "Cairo", Arial, sans-serif !important;
+  }
+}
