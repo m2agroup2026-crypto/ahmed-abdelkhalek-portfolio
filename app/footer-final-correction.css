@@ -23,6 +23,13 @@
   right: 0 !important;
 }
 
+/* The blue floating back-to-top control is the phone control; never show it on desktop. */
+@media (min-width: 901px) {
+  main .floating-back-top {
+    display: none !important;
+  }
+}
+
 @media (max-width: 600px) {
   #portfolio-footer {
     padding-bottom: 72px !important;
