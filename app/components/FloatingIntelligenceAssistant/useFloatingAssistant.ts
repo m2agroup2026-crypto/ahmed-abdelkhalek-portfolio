@@ -3,105 +3,49 @@
 import {
   useCallback,
   useEffect,
-  useRef,
   useState,
 } from "react";
 
-type UseFloatingAssistantOptions = {
-  heroId?: string;
-  contactId?: string;
-};
-
-export function useFloatingAssistant({
-  heroId = "top",
-  contactId = "contact",
-}: UseFloatingAssistantOptions = {}) {
-  const [visible, setVisible] = useState(true);
-  const [nearContact, setNearContact] =
-    useState(false);
-  const [invitationUnlocked, setInvitationUnlocked] =
+export function useFloatingAssistant() {
+  const [visible] = useState(true);
+  const [footerVisible, setFooterVisible] =
     useState(false);
   const [invitationDismissed, setInvitationDismissed] =
     useState(false);
 
-  const frameRef = useRef(0);
-
   useEffect(() => {
-    const footer = document.querySelector("footer");
+    const footer = document.getElementById("portfolio-footer");
 
-    const updatePosition = () => {
-      frameRef.current = 0;
+    if (!footer) {
+      return undefined;
+    }
 
-      /* Keep the compact assistant control globally available. */
-      setVisible(true);
+    const footerObserver = new IntersectionObserver(
+      ([entry]) => {
+        const isVisible = Boolean(entry?.isIntersecting);
+        setFooterVisible(isVisible);
 
-      const contact = document.getElementById(contactId);
-      if (contact) {
-        const contactBounds =
-          contact.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        setNearContact(
-          contactBounds.top <= viewportHeight * 0.78 &&
-          contactBounds.bottom >= viewportHeight * 0.18
-        );
-      } else {
-        setNearContact(false);
-      }
-
-      /*
-       * The larger invitation belongs to the closing experience only.
-       * Unlock it once the footer actually enters the viewport instead
-       * of showing it after a timer near the top of the page.
-       */
-      if (footer) {
-        const footerBounds = footer.getBoundingClientRect();
-        const footerIsVisible =
-          footerBounds.top <= window.innerHeight * 0.94 &&
-          footerBounds.bottom >= 0;
-
-        if (footerIsVisible) {
-          setInvitationUnlocked(true);
+        /*
+         * Dismissal only applies to the current footer visit.
+         * Once the user scrolls back above the footer, reset it so
+         * the invitation can appear again on the next visit.
+         */
+        if (!isVisible) {
+          setInvitationDismissed(false);
         }
-      }
-    };
-
-    const requestUpdate = () => {
-      if (frameRef.current !== 0) {
-        return;
-      }
-
-      frameRef.current =
-        window.requestAnimationFrame(updatePosition);
-    };
-
-    requestUpdate();
-
-    window.addEventListener(
-      "scroll",
-      requestUpdate,
-      { passive: true }
+      },
+      {
+        threshold: 0.01,
+        rootMargin: "0px 0px -8% 0px",
+      },
     );
 
-    window.addEventListener(
-      "resize",
-      requestUpdate,
-      { passive: true }
-    );
+    footerObserver.observe(footer);
 
     return () => {
-      window.cancelAnimationFrame(frameRef.current);
-
-      window.removeEventListener(
-        "scroll",
-        requestUpdate
-      );
-
-      window.removeEventListener(
-        "resize",
-        requestUpdate
-      );
+      footerObserver.disconnect();
     };
-  }, [contactId, heroId]);
+  }, []);
 
   const dismissInvitation = useCallback(() => {
     setInvitationDismissed(true);
@@ -109,10 +53,9 @@ export function useFloatingAssistant({
 
   return {
     visible,
-    nearContact,
     invitationVisible:
       visible &&
-      invitationUnlocked &&
+      footerVisible &&
       !invitationDismissed,
     dismissInvitation,
   };

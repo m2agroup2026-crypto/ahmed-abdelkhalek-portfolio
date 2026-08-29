@@ -50,13 +50,13 @@ export function createInsightsIndexMetadata(
 
   const title =
     language === "ar"
-      ? "السَّبْق | الذكاء الاصطناعي والتحول الرقمي"
-      : "THE EDGE | AI & Digital Transformation";
+      ? "السَّبْق | الذكاء الاصطناعي والتحول الرقمي — الشرق الأوسط والخليج"
+      : "THE EDGE | Enterprise AI & Digital Transformation — MENA & GCC";
 
   const description =
     language === "ar"
-      ? "السَّبْق بوابة معرفية يقدم فيها أحمد عبد الخالق تحليلات عملية حول الذكاء الاصطناعي المؤسسي، والتحول الرقمي، والأتمتة، والمنصات التي تصنع قيمة حقيقية للأعمال."
-      : "THE EDGE is Ahmed Abdelkhalek’s knowledge gateway for practical thinking on enterprise AI, digital transformation, automation, and platforms that create measurable business value.";
+      ? "السَّبْق بوابة معرفية يقدم فيها أحمد عبد الخالق تحليلات عملية حول الذكاء الاصطناعي المؤسسي ووكلاء AI والتحول الرقمي والأتمتة والمنصات في مصر والسعودية والإمارات والخليج والشرق الأوسط."
+      : "THE EDGE is Ahmed Abdelkhalek’s knowledge gateway for enterprise AI, AI agents, digital transformation, automation, and scalable platforms across Egypt, Saudi Arabia, the UAE, MENA, and the GCC.";
 
   const keywords =
     language === "ar"
@@ -69,7 +69,8 @@ export function createInsightsIndexMetadata(
           "المنصات المؤسسية",
           "التحول الرقمي في الخليج",
           "الذكاء الاصطناعي في الشرق الأوسط",
-          "تقنيات المؤسسات في السعودية والإمارات",
+          "تقنيات المؤسسات في السعودية",
+          "الأنظمة المؤسسية في الإمارات",
           "أحمد عبد الخالق",
         ]
       : [
@@ -79,9 +80,10 @@ export function createInsightsIndexMetadata(
           "digital transformation",
           "automation",
           "enterprise platforms",
-          "Gulf digital transformation",
-          "Middle East enterprise AI",
-          "Saudi Arabia and UAE enterprise technology",
+          "GCC digital transformation",
+          "MENA enterprise AI",
+          "Saudi Arabia enterprise technology",
+          "UAE enterprise systems",
           "Ahmed Abdelkhalek",
         ];
 
