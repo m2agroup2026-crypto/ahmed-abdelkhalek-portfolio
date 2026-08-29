@@ -28,7 +28,7 @@ export default function InsightsIndexStructuredData({
   const itemListId = `${indexUrl}#item-list`;
   const breadcrumbId = `${indexUrl}#breadcrumb`;
 
-  const latestModified = articles.reduce(
+  const latestModified = articles.reduce<string>(
     (latest, article) =>
       article.updatedAt > latest ? article.updatedAt : latest,
     siteConfig.lastUpdated
