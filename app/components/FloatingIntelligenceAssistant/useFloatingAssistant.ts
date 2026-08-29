@@ -19,7 +19,7 @@ export function useFloatingAssistant({
   const [visible, setVisible] = useState(true);
   const [nearContact, setNearContact] =
     useState(false);
-  const [invitationUnlocked, setInvitationUnlocked] =
+  const [footerVisible, setFooterVisible] =
     useState(false);
   const [invitationDismissed, setInvitationDismissed] =
     useState(false);
@@ -49,19 +49,19 @@ export function useFloatingAssistant({
       }
 
       /*
-       * The larger invitation belongs to the closing experience only.
-       * Unlock it once the footer actually enters the viewport instead
-       * of showing it after a timer near the top of the page.
+       * The invitation is owned by the footer viewport state.
+       * It appears while the footer is actually on screen and
+       * disappears again as soon as the user scrolls back above it.
        */
       if (footer) {
         const footerBounds = footer.getBoundingClientRect();
-        const footerIsVisible =
+        const isFooterVisible =
           footerBounds.top <= window.innerHeight * 0.94 &&
           footerBounds.bottom >= 0;
 
-        if (footerIsVisible) {
-          setInvitationUnlocked(true);
-        }
+        setFooterVisible(isFooterVisible);
+      } else {
+        setFooterVisible(false);
       }
     };
 
@@ -112,7 +112,7 @@ export function useFloatingAssistant({
     nearContact,
     invitationVisible:
       visible &&
-      invitationUnlocked &&
+      footerVisible &&
       !invitationDismissed,
     dismissInvitation,
   };
