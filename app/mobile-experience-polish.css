@@ -1,0 +1,158 @@
+/*
+ * Mobile experience polish
+ * Loaded after globals.css so it can neutralize legacy mobile-only
+ * overrides without changing the desktop or dark-mode systems.
+ */
+@media (max-width: 900px) {
+  /* Never allow Arabic or English headings to collapse into letter stacks. */
+  main h1,
+  main h2,
+  main h3 {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    white-space: normal !important;
+  }
+
+  main.arabic-ui h1,
+  main.arabic-ui h2,
+  main.arabic-ui h3 {
+    text-wrap: balance !important;
+    letter-spacing: 0 !important;
+  }
+
+  main.arabic-ui h1 span,
+  main.arabic-ui h1 em,
+  main.arabic-ui h2 span,
+  main.arabic-ui h2 em,
+  main.arabic-ui h3 span,
+  main.arabic-ui h3 em {
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    white-space: normal !important;
+  }
+
+  /* The operating-method heading is the most constrained mobile title. */
+  #enterprise-systems-method h2,
+  #enterprise-systems-method h3 {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #enterprise-systems-method h2 span,
+  #enterprise-systems-method h2 em {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /*
+   * Light-mode parity with desktop.
+   * Earlier mobile rules remapped the desktop green/teal system to a
+   * saturated blue palette. Restore the desktop semantic colors only
+   * while the light theme is active.
+   */
+  [data-theme="light"] main {
+    --ink: #0a1512 !important;
+    --muted: #485650 !important;
+    --line: rgba(10, 21, 18, 0.16) !important;
+    --acid: #c7ff32 !important;
+    --forest: #12392e !important;
+    --mobile-electric: #087fa4 !important;
+    --mobile-electric-bright: #00afd5 !important;
+    --mobile-electric-dark: #06384a !important;
+  }
+
+  [data-theme="light"] .nav {
+    color: #07110e !important;
+    background: rgba(250, 251, 247, 0.97) !important;
+    border-color: rgba(7, 17, 14, 0.18) !important;
+    box-shadow:
+      0 14px 42px rgba(11, 28, 24, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+  }
+
+  [data-theme="light"] .nav .brand,
+  [data-theme="light"] .nav .brand b,
+  [data-theme="light"] .nav .menu-button,
+  [data-theme="light"] .nav .theme-toggle,
+  [data-theme="light"] .nav .language-option {
+    color: #07110e !important;
+    opacity: 1 !important;
+  }
+
+  /* Legacy light sections use the same ink and green accent as desktop. */
+  [data-theme="light"] main .opening-lead h2,
+  [data-theme="light"] main .identity h2,
+  [data-theme="light"] main .section-heading h2,
+  [data-theme="light"] main .systems-heading h2,
+  [data-theme="light"] main .expertise-layout h2,
+  [data-theme="light"] main .contact-head h2 {
+    color: #0a1512 !important;
+    -webkit-text-fill-color: #0a1512 !important;
+    text-shadow: none !important;
+  }
+
+  [data-theme="light"] main .opening-lead h2 em,
+  [data-theme="light"] main .identity h2 em,
+  [data-theme="light"] main .section-heading h2 em,
+  [data-theme="light"] main .systems-heading h2 em,
+  [data-theme="light"] main .expertise-layout h2 em,
+  [data-theme="light"] main .contact-head h2 em {
+    color: #12392e !important;
+    -webkit-text-fill-color: #12392e !important;
+    text-shadow: none !important;
+  }
+
+  [data-theme="light"] main .section-index,
+  [data-theme="light"] main .identity-copy,
+  [data-theme="light"] main .case-intro > p:not(.section-index),
+  [data-theme="light"] main .architecture-grid p,
+  [data-theme="light"] main .contact-story > p {
+    color: #3f4f48 !important;
+    opacity: 1 !important;
+  }
+
+  /* Enterprise Hero: stronger light ink without touching dark variables. */
+  [data-theme="light"] #top {
+    --eh-ink: #07110e !important;
+    --eh-muted: #3f4f48 !important;
+    --eh-line: rgba(7, 17, 14, 0.16) !important;
+    --eh-line-strong: rgba(7, 17, 14, 0.28) !important;
+    --eh-gold: #8f6418 !important;
+    --eh-gold-bright: #c99a31 !important;
+    --eh-cyan: #087fa4 !important;
+    --eh-cyan-bright: #00afd5 !important;
+    --eh-green: #6f9918 !important;
+  }
+
+  /* Enterprise Systems Method: match the same high-contrast desktop palette. */
+  [data-theme="light"] #enterprise-systems-method {
+    --esm-ink: #07110e !important;
+    --esm-muted: #3f4f48 !important;
+    --esm-line: rgba(7, 17, 14, 0.16) !important;
+    --esm-line-strong: rgba(7, 17, 14, 0.28) !important;
+    --esm-gold: #8f6418 !important;
+    --esm-gold-bright: #c99a31 !important;
+    --esm-cyan: #087fa4 !important;
+    --esm-cyan-bright: #00afd5 !important;
+  }
+
+  /* Professional Identity is also a light surface in the light theme. */
+  [data-theme="light"] section:has(#professional-identity-title) {
+    --pi-ink: #07110e !important;
+    --pi-muted: #3f4f48 !important;
+    --pi-line: rgba(7, 17, 14, 0.15) !important;
+    --pi-line-strong: rgba(7, 17, 14, 0.26) !important;
+    --pi-lime: #628f10 !important;
+    --pi-lime-bright: #8ebd18 !important;
+    --pi-cyan: #087fa4 !important;
+    --pi-cyan-bright: #00afd5 !important;
+    --pi-gold: #936918 !important;
+    --pi-gold-bright: #c99a31 !important;
+  }
+}
