@@ -1,4 +1,9 @@
 import { siteConfig, absoluteUrl } from "@/app/content/site";
+import {
+  getInsightContent,
+  getInsightPath,
+  getPublishedInsights,
+} from "@/app/content/insights/registry";
 
 type Props = { language: "ar" | "en" };
 
@@ -9,6 +14,7 @@ export default function PortfolioStructuredData({ language }: Props) {
   const pageUrl = absoluteUrl(isArabic ? "/" : "/en");
   const personId = absoluteUrl("/#person");
   const websiteId = absoluteUrl("/#website");
+  const publishedInsights = getPublishedInsights();
 
   const areaServed = siteConfig.markets.map((market) => ({
     "@type": "Country",
@@ -116,8 +122,20 @@ export default function PortfolioStructuredData({ language }: Props) {
         name: isArabic ? siteConfig.arabicTitle : siteConfig.title,
         description,
         inLanguage: isArabic ? "ar-EG" : "en",
+        dateModified: siteConfig.lastUpdated,
         mainEntity: { "@id": personId },
         isPartOf: { "@id": websiteId },
+        hasPart: publishedInsights.map((article) => {
+          const content = getInsightContent(article, language);
+          return {
+            "@type": "Article",
+            headline: content.title,
+            url: absoluteUrl(getInsightPath(article.slug, language)),
+            datePublished: article.publishedAt,
+            dateModified: article.updatedAt,
+            author: { "@id": personId },
+          };
+        }),
       },
       ...services.map((service) => ({
         "@type": "Service",
