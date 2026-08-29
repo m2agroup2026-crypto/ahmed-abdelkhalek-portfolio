@@ -3,6 +3,8 @@
   main .floating-back-top {
     position: fixed !important;
     z-index: 8875 !important;
+    right: 18px !important;
+    left: auto !important;
     bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
     display: grid !important;
     place-items: center !important;
@@ -19,16 +21,6 @@
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
-  }
-
-  main.arabic-ui .floating-back-top {
-    left: 18px !important;
-    right: auto !important;
-  }
-
-  main.english-ui .floating-back-top {
-    right: 18px !important;
-    left: auto !important;
   }
 }
 
