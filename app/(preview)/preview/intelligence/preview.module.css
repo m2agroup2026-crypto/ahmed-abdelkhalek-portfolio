@@ -156,7 +156,7 @@
   font: 600 9px/1.5 system-ui, sans-serif;
 }
 
-button:focus-visible {
+.preview button:focus-visible {
   outline: 3px solid #73ecff;
   outline-offset: 3px;
 }
