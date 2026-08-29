@@ -6,77 +6,46 @@ import {
   useState,
 } from "react";
 
-type UseFloatingAssistantOptions = {
-  heroId?: string;
-  contactId?: string;
-};
-
-export function useFloatingAssistant({
-  heroId = "top",
-  contactId = "contact",
-}: UseFloatingAssistantOptions = {}) {
+export function useFloatingAssistant() {
   const [visible] = useState(true);
-  const [nearContact, setNearContact] =
-    useState(false);
   const [footerVisible, setFooterVisible] =
     useState(false);
   const [invitationDismissed, setInvitationDismissed] =
     useState(false);
 
   useEffect(() => {
-    const contact = document.getElementById(contactId);
     const footer = document.getElementById("portfolio-footer");
 
-    let contactObserver: IntersectionObserver | null = null;
-    let footerObserver: IntersectionObserver | null = null;
-
-    if (contact) {
-      contactObserver = new IntersectionObserver(
-        ([entry]) => {
-          setNearContact(Boolean(entry?.isIntersecting));
-        },
-        {
-          threshold: 0.01,
-          rootMargin: "-18% 0px -18% 0px",
-        },
-      );
-
-      contactObserver.observe(contact);
-    } else {
-      setNearContact(false);
+    if (!footer) {
+      return undefined;
     }
 
-    if (footer) {
-      footerObserver = new IntersectionObserver(
-        ([entry]) => {
-          const isVisible = Boolean(entry?.isIntersecting);
-          setFooterVisible(isVisible);
+    const footerObserver = new IntersectionObserver(
+      ([entry]) => {
+        const isVisible = Boolean(entry?.isIntersecting);
+        setFooterVisible(isVisible);
 
-          /*
-           * Dismissal only applies to the current footer visit.
-           * Once the user scrolls back above the footer, reset it so
-           * the invitation can appear again on the next visit.
-           */
-          if (!isVisible) {
-            setInvitationDismissed(false);
-          }
-        },
-        {
-          threshold: 0.01,
-          rootMargin: "0px 0px -8% 0px",
-        },
-      );
+        /*
+         * Dismissal only applies to the current footer visit.
+         * Once the user scrolls back above the footer, reset it so
+         * the invitation can appear again on the next visit.
+         */
+        if (!isVisible) {
+          setInvitationDismissed(false);
+        }
+      },
+      {
+        threshold: 0.01,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
 
-      footerObserver.observe(footer);
-    } else {
-      setFooterVisible(false);
-    }
+    footerObserver.observe(footer);
 
     return () => {
-      contactObserver?.disconnect();
-      footerObserver?.disconnect();
+      footerObserver.disconnect();
     };
-  }, [contactId, heroId]);
+  }, []);
 
   const dismissInvitation = useCallback(() => {
     setInvitationDismissed(true);
@@ -84,7 +53,6 @@ export function useFloatingAssistant({
 
   return {
     visible,
-    nearContact,
     invitationVisible:
       visible &&
       footerVisible &&
