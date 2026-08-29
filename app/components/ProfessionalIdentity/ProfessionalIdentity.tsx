@@ -60,6 +60,7 @@ export default function ProfessionalIdentity({
   return (
     <section
       ref={sectionRef}
+      id="professional-identity"
       className={styles.section}
       aria-labelledby="professional-identity-title"
       data-language={language}
