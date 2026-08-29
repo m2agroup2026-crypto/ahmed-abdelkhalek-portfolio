@@ -6,6 +6,7 @@ import "@/app/globals.css";
 import "@/app/mobile-experience-polish.css";
 import "@/app/mobile-experience-final.css";
 import "@/app/mobile-footer-readable.css";
+import "@/app/mobile-last-mile.css";
 
 export const metadata: Metadata = createRootMetadata("ar");
 export const viewport: Viewport = {
