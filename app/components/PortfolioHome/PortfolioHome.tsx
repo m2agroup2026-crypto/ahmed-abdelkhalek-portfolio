@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import EnterpriseHero from "@/app/components/EnterpriseHero/EnterpriseHero";
 import EnterpriseSystemsMethod from "@/app/components/EnterpriseSystemsMethod/EnterpriseSystemsMethod";
@@ -17,7 +18,6 @@ import ExpertiseExperience from "@/app/components/ExpertiseExperience/ExpertiseE
 import ContactExperience from "@/app/components/ContactExperience/ContactExperience";
 import FooterExperience from "@/app/components/FooterExperience/FooterExperience";
 import FloatingIntelligenceAssistant from "@/app/components/FloatingIntelligenceAssistant/FloatingIntelligenceAssistant";
-import IntelligenceModal from "@/app/components/IntelligenceExperience/IntelligenceModal";
 import {
   getPortfolioHomePath,
   getPortfolioSectionFromPath,
@@ -26,6 +26,11 @@ import {
 
 type Lang = "en" | "ar";
 type Bi = { en: string; ar: string };
+
+const IntelligenceModal = dynamic(
+  () => import("@/app/components/IntelligenceExperience/IntelligenceModal"),
+  { ssr: false },
+);
 
 const t = (value: Bi, lang: Lang) => value[lang];
 
@@ -44,24 +49,44 @@ export default function PortfolioHome() {
   const [intelligenceOpen,setIntelligenceOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+    let frame = 0;
+    let lastScrolled = false;
+    let lastBackTop = false;
+
+    const commitScrollState = () => {
+      frame = 0;
+      const scrollY = window.scrollY;
+      const nextScrolled = scrollY > 40;
+      const nextBackTop = scrollY > window.innerHeight * 0.5;
+
+      if (nextScrolled !== lastScrolled) {
+        lastScrolled = nextScrolled;
+        setScrolled(nextScrolled);
+      }
+
+      if (nextBackTop !== lastBackTop) {
+        lastBackTop = nextBackTop;
+        setShowBackTop(nextBackTop);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const updateBackTop = () => {
-      setShowBackTop(window.scrollY > window.innerHeight * 0.5);
+    const scheduleScrollState = () => {
+      if (!frame) {
+        frame = window.requestAnimationFrame(commitScrollState);
+      }
     };
 
-    updateBackTop();
-    window.addEventListener("scroll", updateBackTop, { passive:true });
+    commitScrollState();
+    window.addEventListener("scroll", scheduleScrollState, { passive: true });
+    window.addEventListener("resize", scheduleScrollState, { passive: true });
 
-    return () => window.removeEventListener("scroll", updateBackTop);
+    return () => {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+      window.removeEventListener("scroll", scheduleScrollState);
+      window.removeEventListener("resize", scheduleScrollState);
+    };
   }, []);
 
   const ar = lang === "ar";
@@ -184,11 +209,13 @@ export default function PortfolioHome() {
       open={intelligenceOpen}
       onOpen={() => setIntelligenceOpen(true)}
     />
-    <IntelligenceModal
-      open={intelligenceOpen}
-      language={ar ? "ar" : "en"}
-      onClose={() => setIntelligenceOpen(false)}
-    />
+    {intelligenceOpen && (
+      <IntelligenceModal
+        open
+        language={ar ? "ar" : "en"}
+        onClose={() => setIntelligenceOpen(false)}
+      />
+    )}
 
     <button
       type="button"
