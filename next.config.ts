@@ -25,6 +25,12 @@ const securityHeaders = [
 ] as const;
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  compress: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 86400,
+  },
   async headers() {
     return [
       {
