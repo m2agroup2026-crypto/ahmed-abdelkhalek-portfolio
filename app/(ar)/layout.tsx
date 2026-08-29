@@ -29,7 +29,7 @@ const cairoCritical = localFont({
     },
   ],
   display: "swap",
-  preload: false,
+  preload: true,
   fallback: ["Arial"],
 });
 
