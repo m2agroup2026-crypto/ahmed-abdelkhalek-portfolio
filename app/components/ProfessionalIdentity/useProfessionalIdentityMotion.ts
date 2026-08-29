@@ -73,6 +73,14 @@ export function useProfessionalIdentityMotion<
       return;
     }
 
+    const precisePointer = window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    );
+
+    if (!precisePointer.matches) {
+      return;
+    }
+
     let frame = 0;
     let pointerX = 0;
     let pointerY = 0;
@@ -98,10 +106,6 @@ export function useProfessionalIdentityMotion<
     };
 
     const handlePointerMove = (event: PointerEvent) => {
-      if (event.pointerType === "touch") {
-        return;
-      }
-
       const bounds = section.getBoundingClientRect();
       const normalizedX =
         (event.clientX - bounds.left) / bounds.width - 0.5;
