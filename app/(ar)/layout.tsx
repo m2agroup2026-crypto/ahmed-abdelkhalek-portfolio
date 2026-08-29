@@ -3,6 +3,7 @@ import CleanUrlController from "@/app/components/Routing/CleanUrlController";
 import PortfolioStructuredData from "@/app/components/SEO/PortfolioStructuredData";
 import { createRootMetadata } from "@/app/content/root-metadata";
 import "@/app/globals.css";
+import "@/app/mobile-experience-polish.css";
 
 export const metadata: Metadata = createRootMetadata("ar");
 export const viewport: Viewport = {
