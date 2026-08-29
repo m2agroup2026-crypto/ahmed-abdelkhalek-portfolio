@@ -4,6 +4,7 @@ import PortfolioStructuredData from "@/app/components/SEO/PortfolioStructuredDat
 import { createRootMetadata } from "@/app/content/root-metadata";
 import "@/app/globals.css";
 import "@/app/mobile-experience-polish.css";
+import "@/app/mobile-experience-final.css";
 
 export const metadata: Metadata = createRootMetadata("ar");
 export const viewport: Viewport = {
