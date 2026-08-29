@@ -27,51 +27,41 @@ export function useFloatingAssistant({
   const frameRef = useRef(0);
 
   useEffect(() => {
-    const contact = document.getElementById(contactId);
-
-    /* Offer the guided invitation even on shorter visits or direct routes. */
-    const invitationTimer = window.setTimeout(() => {
-      setInvitationUnlocked(true);
-    }, 4200);
+    const footer = document.querySelector("footer");
 
     const updatePosition = () => {
       frameRef.current = 0;
 
-      /*
-       * The assistant is a global product control, not a section reveal.
-       * Keeping it tied to the hero geometry made it disappear whenever
-       * a route restored scroll or a long animated hero reported stale
-       * bounds. It now remains available across the complete experience.
-       */
+      /* Keep the compact assistant control globally available. */
       setVisible(true);
 
+      const contact = document.getElementById(contactId);
       if (contact) {
         const contactBounds =
           contact.getBoundingClientRect();
-
-        const viewportHeight =
-          window.innerHeight;
-
-        const contactIsNear =
+        const viewportHeight = window.innerHeight;
+        setNearContact(
           contactBounds.top <= viewportHeight * 0.78 &&
-          contactBounds.bottom >= viewportHeight * 0.18;
-
-        setNearContact(contactIsNear);
-        if (contactIsNear) {
-          setInvitationUnlocked(true);
-        }
+          contactBounds.bottom >= viewportHeight * 0.18
+        );
       } else {
         setNearContact(false);
       }
 
-      const pageHeight =
-        document.documentElement.scrollHeight;
-      const reachedClosingSequence =
-        window.scrollY + window.innerHeight >=
-        pageHeight * 0.78;
+      /*
+       * The larger invitation belongs to the closing experience only.
+       * Unlock it once the footer actually enters the viewport instead
+       * of showing it after a timer near the top of the page.
+       */
+      if (footer) {
+        const footerBounds = footer.getBoundingClientRect();
+        const footerIsVisible =
+          footerBounds.top <= window.innerHeight * 0.94 &&
+          footerBounds.bottom >= 0;
 
-      if (reachedClosingSequence) {
-        setInvitationUnlocked(true);
+        if (footerIsVisible) {
+          setInvitationUnlocked(true);
+        }
       }
     };
 
@@ -99,7 +89,6 @@ export function useFloatingAssistant({
     );
 
     return () => {
-      window.clearTimeout(invitationTimer);
       window.cancelAnimationFrame(frameRef.current);
 
       window.removeEventListener(

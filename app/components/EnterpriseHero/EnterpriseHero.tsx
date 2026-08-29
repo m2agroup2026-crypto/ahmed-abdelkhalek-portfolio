@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./EnterpriseHero.module.css";
+import mobileStyles from "./EnterpriseHero.mobile.module.css";
 import {
   enterpriseHeroContent,
   type EnterpriseHeroLanguage,
@@ -46,7 +47,7 @@ export default function EnterpriseHero({
         <span className={styles.pointerField} />
       </div>
 
-      <div className={styles.inner}>
+      <div className={`${styles.inner} ${mobileStyles.mobileInner}`}>
         <div className={styles.copy}>
           <div className={styles.identity}>
             <span className={styles.identityMark}>AA</span>
