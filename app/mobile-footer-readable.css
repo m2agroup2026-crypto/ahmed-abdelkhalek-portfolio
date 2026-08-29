@@ -1,0 +1,87 @@
+/* Final mobile footer text correction: keep every label horizontal and readable. */
+@media (max-width: 600px) {
+  #portfolio-footer [class*="FooterExperience_navigation"],
+  #portfolio-footer [class*="FooterExperience_channels"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: 0 !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_navigation"] > p,
+  #portfolio-footer [class*="FooterExperience_channels"] > p {
+    width: 100% !important;
+    margin: 0 0 10px !important;
+    white-space: normal !important;
+    writing-mode: horizontal-tb !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_navigation"] a,
+  #portfolio-footer [class*="FooterExperience_channels"] a {
+    display: grid !important;
+    grid-template-columns: 54px minmax(0, 1fr) 18px !important;
+    gap: 10px !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    padding: 8px 0 !important;
+    white-space: normal !important;
+    writing-mode: horizontal-tb !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_navigation"] a span,
+  #portfolio-footer [class*="FooterExperience_navigation"] a b,
+  #portfolio-footer [class*="FooterExperience_navigation"] a i,
+  #portfolio-footer [class*="FooterExperience_channels"] a span,
+  #portfolio-footer [class*="FooterExperience_channels"] a b,
+  #portfolio-footer [class*="FooterExperience_channels"] a i {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    writing-mode: horizontal-tb !important;
+    text-orientation: mixed !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_navigation"] a span,
+  #portfolio-footer [class*="FooterExperience_channels"] a span {
+    width: 54px !important;
+    white-space: nowrap !important;
+    font-size: 8px !important;
+    line-height: 1.35 !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_navigation"] a b,
+  #portfolio-footer [class*="FooterExperience_channels"] a b {
+    display: block !important;
+    width: 100% !important;
+    font-size: 11px !important;
+    line-height: 1.55 !important;
+  }
+
+  #portfolio-footer[dir="rtl"] [class*="FooterExperience_navigation"] a b {
+    direction: rtl !important;
+    text-align: right !important;
+  }
+
+  #portfolio-footer[dir="rtl"] [class*="FooterExperience_channels"] a b {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: plaintext !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_navigation"] a i,
+  #portfolio-footer [class*="FooterExperience_channels"] a i {
+    width: 18px !important;
+    justify-self: end !important;
+    white-space: nowrap !important;
+  }
+}
