@@ -4,21 +4,21 @@
  * columns while preserving each component's existing typography and visuals.
  */
 @media (max-width: 900px) {
-  /* Enterprise Systems Method */
-  #enterprise-systems-method {
+  /* Professional Identity */
+  #professional-identity {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
   }
 
-  #enterprise-systems-method > [class*="EnterpriseSystemsMethod_inner"] {
-    width: min(calc(100% - 32px), 760px) !important;
+  #professional-identity > [class*="ProfessionalIdentity_inner"] {
+    width: min(calc(100% - 32px), 720px) !important;
     max-width: 100% !important;
     min-width: 0 !important;
     margin-inline: auto !important;
   }
 
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_header"] {
+  #professional-identity [class*="ProfessionalIdentity_header"] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
     width: 100% !important;
@@ -26,11 +26,11 @@
     min-width: 0 !important;
   }
 
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"],
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_intro"],
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_index"],
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] span,
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] em {
+  #professional-identity [class*="ProfessionalIdentity_headingGroup"],
+  #professional-identity [class*="ProfessionalIdentity_title"],
+  #professional-identity [class*="ProfessionalIdentity_intro"],
+  #professional-identity [class*="ProfessionalIdentity_title"] span,
+  #professional-identity [class*="ProfessionalIdentity_title"] em {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -40,8 +40,8 @@
     white-space: normal !important;
   }
 
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] span,
-  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] em {
+  #professional-identity [class*="ProfessionalIdentity_title"] span,
+  #professional-identity [class*="ProfessionalIdentity_title"] em {
     display: block !important;
   }
 
@@ -89,11 +89,13 @@
 }
 
 @media (max-width: 650px) {
-  #enterprise-systems-method > [class*="EnterpriseSystemsMethod_inner"] {
-    width: min(calc(100% - 24px), 520px) !important;
-  }
-
   #expertise > [class*="ExpertiseExperience_shell"] {
     width: calc(100% - 20px) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #professional-identity > [class*="ProfessionalIdentity_inner"] {
+    width: min(calc(100% - 24px), 520px) !important;
   }
 }
