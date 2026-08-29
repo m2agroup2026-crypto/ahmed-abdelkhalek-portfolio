@@ -12,6 +12,7 @@ import "@/app/mobile-professional-identity-correction.css";
 import "@/app/mobile-performance-final.css";
 import "@/app/footer-final-correction.css";
 import "@/app/mobile-accessibility-final.css";
+import "@/app/mobile-production-text-stability.css";
 
 export const metadata: Metadata = createRootMetadata("en");
 export const viewport: Viewport = {
