@@ -82,24 +82,10 @@
   }
 
   /*
-   * Skip layout/paint work for deep sections until they approach the viewport.
-   * Chrome ignores this safely where unsupported and reveals anchor targets.
+   * Keep deep sections fully paintable on phones. Using content-visibility with
+   * a synthetic 900px intrinsic height caused visible blank gaps and late
+   * section paint during real scrolling on production.
    */
-  section[aria-labelledby="professional-identity-title"],
-  #journey,
-  #experience-system-transition,
-  #system-activation-bridge,
-  section[aria-labelledby="command-room-title"],
-  section[aria-labelledby="operations-center-title"],
-  #case-study,
-  #journey-finale,
-  #systems,
-  #expertise,
-  #contact,
-  #portfolio-footer {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 900px;
-  }
 
   /* Glass Command Room: preserve the dashboard, freeze decorative telemetry. */
   section[aria-labelledby="command-room-title"] *,

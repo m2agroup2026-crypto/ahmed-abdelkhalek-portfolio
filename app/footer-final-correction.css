@@ -1,0 +1,49 @@
+/*
+ * Final footer ownership layer.
+ * Keeps the footer return control opposite the intelligence assistant on every
+ * viewport and removes the oversized empty reserve below the system bar.
+ */
+#portfolio-footer {
+  padding-bottom: 76px !important;
+}
+
+#portfolio-footer [class*="FooterExperience_systemBar"] {
+  min-height: 56px !important;
+}
+
+#portfolio-footer [class*="FooterExperience_topControl"] {
+  left: 0 !important;
+  right: auto !important;
+  bottom: -62px !important;
+}
+
+/* English assistant sits on the left, so the footer return control owns right. */
+#portfolio-footer[dir="ltr"] [class*="FooterExperience_topControl"] {
+  left: auto !important;
+  right: 0 !important;
+}
+
+/* The blue floating back-to-top control is the phone control; never show it on desktop. */
+@media (min-width: 901px) {
+  main .floating-back-top {
+    display: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  #portfolio-footer {
+    padding-bottom: 72px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_systemBar"] {
+    min-height: 0 !important;
+    padding-block: 14px !important;
+  }
+
+  #portfolio-footer [class*="FooterExperience_topControl"] {
+    bottom: -58px !important;
+    width: auto !important;
+    min-width: 184px !important;
+    max-width: calc(100% - 20px) !important;
+  }
+}
