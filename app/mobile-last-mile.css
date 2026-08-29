@@ -29,6 +29,132 @@
     visibility: visible !important;
     pointer-events: auto !important;
   }
+
+  /*
+   * Mobile performance budget.
+   * Keep the cinematic composition and reveal transitions, but stop the
+   * continuously repainting decorative loops that make touch scrolling heavy.
+   */
+  .nav.shell {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_ambient"] i,
+  #journey [class*="JourneyExperienceRebuilt_ambient"] span,
+  #journey [class*="JourneyExperienceRebuilt_orbit"],
+  #journey [class*="JourneyExperienceRebuilt_orbit"] i {
+    animation: none !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_deck"] {
+    box-shadow: 0 18px 46px rgba(15, 28, 23, 0.1) !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_map"] {
+    background: radial-gradient(circle, rgba(8, 127, 146, 0.055), transparent 54%) !important;
+  }
+
+  #systems [class*="SystemsExperience_live"] i,
+  #systems [class*="SystemsExperience_domainStatus"] i,
+  #systems [class*="SystemsExperience_coreOrb"]::before,
+  #systems [class*="SystemsExperience_coreOrb"]::after,
+  #systems [class*="SystemsExperience_connections"] path,
+  #systems [class*="SystemsExperience_telemetry"] > i {
+    animation: none !important;
+  }
+
+  #systems [class*="SystemsExperience_console"] {
+    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.24) !important;
+  }
+
+  #systems [class*="SystemsExperience_domain"] {
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18) !important;
+  }
+
+  /* Expertise: force the heading to own the full phone width. */
+  #expertise [class*="ExpertiseExperience_header"] {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_heading"] {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_heading"] h2 {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    text-align: start !important;
+    font-size: clamp(30px, 9vw, 42px) !important;
+    line-height: 1.42 !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_heading"] h2 span,
+  #expertise [class*="ExpertiseExperience_heading"] h2 em {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    writing-mode: horizontal-tb !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_orbit"]::after,
+  #expertise [class*="ExpertiseExperience_detail"]::after,
+  #expertise [class*="ExpertiseExperience_telemetry"] > i {
+    animation: none !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_matrix"] {
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18) !important;
+  }
+
+  #expertise [class*="ExpertiseExperience_ambient"] {
+    background: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px) !important;
+    background-size: 52px 52px !important;
+  }
+
+  [data-theme="light"] #expertise [class*="ExpertiseExperience_ambient"] {
+    background: linear-gradient(rgba(7, 28, 22, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7, 28, 22, 0.045) 1px, transparent 1px) !important;
+    background-size: 52px 52px !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_grid"],
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_aurora"],
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_scanBeam"],
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_particleField"],
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_coreOrbit"],
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_coreScan"],
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_signalDot"],
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_eyebrow"] i {
+    animation: none !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_aurora"] {
+    filter: none !important;
+    opacity: 0.12 !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_blueprintShell"] {
+    box-shadow: 0 18px 48px rgba(20, 36, 30, 0.12) !important;
+    transform: none !important;
+  }
+
+  section[aria-labelledby="professional-identity-title"] [class*="ProfessionalIdentity_blueprintStage"]::before {
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 @media (max-width: 600px) {
