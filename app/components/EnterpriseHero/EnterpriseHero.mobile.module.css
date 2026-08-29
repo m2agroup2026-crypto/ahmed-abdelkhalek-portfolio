@@ -1,0 +1,11 @@
+@media (max-width: 600px) {
+  .mobileInner {
+    padding-top: 116px;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobileInner {
+    padding-top: 110px;
+  }
+}
