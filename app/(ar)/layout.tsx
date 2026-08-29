@@ -13,7 +13,6 @@ import "@/app/mobile-professional-identity-correction.css";
 import "@/app/mobile-performance-final.css";
 import "@/app/mobile-cairo-restore.css";
 import "@/app/footer-final-correction.css";
-import "@/app/mobile-systems-expertise-boundary.css";
 
 const cairoCritical = localFont({
   src: [
