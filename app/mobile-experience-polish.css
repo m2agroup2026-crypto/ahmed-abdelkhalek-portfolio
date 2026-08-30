@@ -107,26 +107,48 @@
   }
 
   /* Hero: remove the old oversized nav clearance and protect copy width. */
-  #top [class*="mobileInner"],
-  #top [class*="EnterpriseHero_inner"] {
+  #top [data-enterprise-hero-layout] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas:
+      "copy"
+      "visual"
+      "capabilities" !important;
     width: min(calc(100% - 24px), 540px) !important;
+    min-width: 0 !important;
     gap: 26px !important;
     padding-top: 78px !important;
     padding-bottom: 26px !important;
   }
 
-  #top [class*="EnterpriseHero_copy"] {
+  #top [data-enterprise-hero-copy] {
+    grid-area: copy !important;
+    grid-column: 1 / -1 !important;
     width: 100% !important;
     min-width: 0 !important;
+    max-width: none !important;
   }
 
-  #top h1 {
+  #top [data-enterprise-hero-title] {
     width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
     font-size: clamp(34px, 10.2vw, 46px) !important;
     line-height: 1.28 !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
   }
 
-  #top h1 em {
+  #top [data-enterprise-hero-title] > span,
+  #top [data-enterprise-hero-title] > em {
+    width: 100% !important;
+    max-width: 100% !important;
+    writing-mode: horizontal-tb !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  #top [data-enterprise-hero-title] em {
     margin-top: 2px !important;
     line-height: 1.42 !important;
   }
@@ -530,8 +552,7 @@
     padding-block: 50px !important;
   }
 
-  #top [class*="mobileInner"],
-  #top [class*="EnterpriseHero_inner"] {
+  #top [data-enterprise-hero-layout] {
     padding-top: 72px !important;
   }
 
