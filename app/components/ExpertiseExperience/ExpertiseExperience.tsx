@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./ExpertiseExperience.module.css";
 import { capabilities, expertiseContent, expertiseText, type ExpertiseLanguage } from "./content";
 import { useExpertiseMotion } from "./useExpertiseMotion";
+import MobileExpertiseExperience from "./MobileExpertiseExperience";
 
 export default function ExpertiseExperience({ language }: { language: ExpertiseLanguage }) {
   const sectionRef = useExpertiseMotion();
@@ -14,6 +15,7 @@ export default function ExpertiseExperience({ language }: { language: ExpertiseL
     <section ref={sectionRef} id="expertise" className={styles.section} dir={language === "ar" ? "rtl" : "ltr"} aria-labelledby="expertise-title">
       <div className={styles.ambient} aria-hidden="true" />
       <div className={styles.shell}>
+        <div className={styles.desktopExperience}>
         <header className={styles.header}>
           <div className={styles.heading}>
             <p>{expertiseText(expertiseContent.eyebrow, language)}</p>
@@ -55,6 +57,9 @@ export default function ExpertiseExperience({ language }: { language: ExpertiseL
         </div>
 
         <footer className={styles.footer}><span>01</span><i /><strong>{expertiseText(expertiseContent.footer, language)}</strong><i /><span>04</span></footer>
+        </div>
+
+        <MobileExpertiseExperience language={language} />
       </div>
     </section>
   );
