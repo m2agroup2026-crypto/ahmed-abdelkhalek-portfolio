@@ -47,8 +47,11 @@ export default function EnterpriseHero({
         <span className={styles.pointerField} />
       </div>
 
-      <div className={`${styles.inner} ${mobileStyles.mobileInner}`}>
-        <div className={styles.copy}>
+      <div
+        className={`${styles.inner} ${mobileStyles.mobileInner}`}
+        data-enterprise-hero-layout
+      >
+        <div className={styles.copy} data-enterprise-hero-copy>
           <div className={styles.identity}>
             <span className={styles.identityMark}>AA</span>
 
@@ -63,7 +66,11 @@ export default function EnterpriseHero({
             <span>{content.status}</span>
           </div>
 
-          <h1 className={styles.title} id="enterprise-hero-title">
+          <h1
+            className={styles.title}
+            id="enterprise-hero-title"
+            data-enterprise-hero-title
+          >
             <span>{content.title.lead}</span>
             <em>{content.title.accent}</em>
           </h1>
