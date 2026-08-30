@@ -6,6 +6,7 @@ import {
   type ProfessionalIdentityLanguage,
 } from "./content";
 import { useProfessionalIdentityMotion } from "./useProfessionalIdentityMotion";
+import MobileProfessionalIdentity from "./MobileProfessionalIdentity";
 
 type ProfessionalIdentityProps = {
   language: ProfessionalIdentityLanguage;
@@ -77,6 +78,7 @@ export default function ProfessionalIdentity({
       </div>
 
       <div className={styles.inner}>
+        <div className={styles.desktopExperience}>
         <header className={styles.header}>
           <div className={styles.headerMeta}>
             <p className={styles.index}>{content.index}</p>
@@ -171,6 +173,9 @@ export default function ProfessionalIdentity({
             <i aria-hidden="true">→</i>
           </aside>
         </div>
+        </div>
+
+        <MobileProfessionalIdentity language={language} />
       </div>
     </section>
   );

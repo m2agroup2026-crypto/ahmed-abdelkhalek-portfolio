@@ -40,6 +40,8 @@
 @media(max-width:900px){.shell{width:min(100% - 30px,1180px)}.workspace{grid-template-columns:220px 1fr}.detail{min-height:0}.detail:after{display:none}}
 @media(max-width:650px){.shell{width:calc(100% - 20px)}}
 @media(prefers-reduced-motion:reduce){.detail:after{animation:none}}
+.desktopExperience{display:block}
+@media(max-width:650px){.desktopExperience{display:none!important}}
 
 /* One typographic voice across headings, descriptions and cards. */
 .section{scroll-margin-top:126px}
