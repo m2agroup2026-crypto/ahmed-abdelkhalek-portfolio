@@ -15,6 +15,7 @@ import "@/app/mobile-cairo-restore.css";
 import "@/app/footer-final-correction.css";
 import "@/app/mobile-accessibility-final.css";
 import "@/app/mobile-production-text-stability.css";
+import "@/app/mobile-site-audit-final.css";
 
 const cairoCritical = localFont({
   src: [

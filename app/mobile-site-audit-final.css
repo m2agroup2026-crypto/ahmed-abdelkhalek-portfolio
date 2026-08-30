@@ -1,0 +1,266 @@
+/*
+ * Final mobile ownership layer.
+ * Fixes the two production failures shown at 360px and establishes consistent
+ * readable contrast without changing the desktop composition.
+ */
+@media (max-width: 900px) {
+  html,
+  body,
+  main {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  main > section,
+  main > footer {
+    min-width: 0;
+  }
+
+  /* Enterprise Systems Method — preserve the desktop hierarchy in one column. */
+  #enterprise-systems-method,
+  #enterprise-systems-method > [class*="EnterpriseSystemsMethod_inner"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #enterprise-systems-method > [class*="EnterpriseSystemsMethod_inner"] {
+    width: min(calc(100% - 32px), 760px) !important;
+    margin-inline: auto !important;
+  }
+
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_header"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 18px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_index"],
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"],
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_intro"],
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] span,
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] em {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    writing-mode: horizontal-tb !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+  }
+
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] span,
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] em {
+    display: block !important;
+  }
+
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_intro"] {
+    color: #42534c !important;
+    opacity: 1 !important;
+  }
+
+  :root[data-theme="dark"] #enterprise-systems-method [class*="EnterpriseSystemsMethod_intro"] {
+    color: #b5c0ba !important;
+  }
+
+  /* Journey — prevent the title from collapsing into a vertical text column. */
+  #journey,
+  #journey > [class*="JourneyExperienceRebuilt_shell"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #journey > [class*="JourneyExperienceRebuilt_shell"] {
+    width: min(calc(100% - 30px), 760px) !important;
+    margin-inline: auto !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_header"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 20px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_header"] > div,
+  #journey [class*="JourneyExperienceRebuilt_header"] h2,
+  #journey [class*="JourneyExperienceRebuilt_header"] h2 span,
+  #journey [class*="JourneyExperienceRebuilt_header"] h2 em,
+  #journey [class*="JourneyExperienceRebuilt_intro"] {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    writing-mode: horizontal-tb !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_header"] h2 {
+    margin-inline: 0 !important;
+    text-align: start !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_intro"] {
+    color: #42534c !important;
+    opacity: 1 !important;
+  }
+
+  :root[data-theme="dark"] #journey [class*="JourneyExperienceRebuilt_intro"] {
+    color: #b5c0ba !important;
+  }
+
+  /* Consistent mobile reading contrast across the remaining main sections. */
+  :root[data-theme="light"] main :where(p, small)[class*="intro"],
+  :root[data-theme="light"] main :where(p, small)[class*="copy"],
+  :root[data-theme="light"] main :where(p, small)[class*="description"] {
+    color: #3f5149 !important;
+    opacity: 1 !important;
+  }
+
+  :root[data-theme="dark"] main :where(p, small)[class*="intro"],
+  :root[data-theme="dark"] main :where(p, small)[class*="copy"],
+  :root[data-theme="dark"] main :where(p, small)[class*="description"] {
+    color: #b6c1bb !important;
+    opacity: 1 !important;
+  }
+
+  main :where(a, button) {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Restrained enterprise palette for light mode; dark mode keeps its cinematic glow. */
+:root[data-theme="light"] #top {
+  --eh-gold: #80601f;
+  --eh-gold-bright: #a98232;
+  --eh-cyan: #285e64;
+  --eh-cyan-bright: #39777c;
+  --eh-muted: #4a5953;
+}
+
+:root[data-theme="light"] #enterprise-systems-method {
+  --esm-gold: #80601f;
+  --esm-gold-bright: #a98232;
+  --esm-cyan: #285e64;
+  --esm-cyan-bright: #39777c;
+  --esm-muted: #4a5953;
+}
+
+:root[data-theme="light"] #professional-identity {
+  --pi-lime: #496b55;
+  --pi-lime-bright: #5f8069;
+  --pi-cyan: #285e64;
+  --pi-cyan-bright: #39777c;
+  --pi-violet: #665c72;
+  --pi-violet-bright: #7a6d85;
+  --pi-gold: #80601f;
+  --pi-gold-bright: #a98232;
+  --pi-muted: #4a5953;
+}
+
+:root[data-theme="light"] #journey {
+  --lime: #496b55;
+  --cyan: #285e64;
+  --cyan2: #39777c;
+  --violet: #665c72;
+  --gold: #80601f;
+  --muted: #4a5953;
+}
+
+:root[data-theme="light"] section[aria-labelledby="command-room-title"] {
+  --cr-lime: #496b55;
+  --cr-cyan: #285e64;
+  --cr-cyan2: #39777c;
+  --cr-muted: #46564f;
+}
+
+:root[data-theme="light"] section[aria-labelledby="operations-center-title"] {
+  --oc-lime: #496b55;
+  --oc-cyan: #285e64;
+  --oc-cyan2: #39777c;
+  --oc-muted: #46564f;
+}
+
+:root[data-theme="light"] #case-study {
+  --cs-lime: #496b55;
+  --cs-cyan: #285e64;
+  --cs-muted: #46564f;
+  --cs-line2: rgba(40, 94, 100, 0.3);
+}
+
+:root[data-theme="light"] #journey-finale {
+  --f-lime: #496b55;
+  --f-cyan: #285e64;
+  --f-violet: #665c72;
+  --f-muted: #43524c;
+}
+
+:root[data-theme="light"] #contact,
+:root[data-theme="light"] #portfolio-footer {
+  --lime: #a98232;
+  --cyan: #6f9c94;
+  --violet: #897a90;
+}
+
+:root[data-theme="light"] #contact [class*="ContactExperience_submitRow"] button {
+  color: #fffdf7 !important;
+  background: linear-gradient(135deg, #73541d, #a98232) !important;
+  box-shadow: 0 12px 30px rgba(75, 54, 20, 0.2) !important;
+}
+
+:root[data-theme="light"] .floating-back-top {
+  color: #fff !important;
+  border-color: rgba(40, 94, 100, 0.32) !important;
+  background: linear-gradient(145deg, #173f3b, #285e64) !important;
+}
+
+@media (max-width: 600px) {
+  #enterprise-systems-method > [class*="EnterpriseSystemsMethod_inner"],
+  #journey > [class*="JourneyExperienceRebuilt_shell"] {
+    width: calc(100% - 24px) !important;
+  }
+
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] {
+    font-size: clamp(32px, 9.5vw, 40px) !important;
+    line-height: 1.48 !important;
+  }
+
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_title"] em {
+    line-height: 1.5 !important;
+  }
+
+  #enterprise-systems-method [class*="EnterpriseSystemsMethod_intro"] {
+    font-size: 14px !important;
+    line-height: 1.9 !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_header"] h2,
+  #journey[data-language="ar"] [class*="JourneyExperienceRebuilt_header"] h2 {
+    font-size: clamp(31px, 9.2vw, 38px) !important;
+    line-height: 1.48 !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_header"] h2 em,
+  #journey[data-language="ar"] [class*="JourneyExperienceRebuilt_header"] h2 em {
+    margin-top: 2px !important;
+    font-size: 0.78em !important;
+    line-height: 1.5 !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_intro"] {
+    margin-top: 16px !important;
+    font-size: 14px !important;
+    line-height: 1.9 !important;
+  }
+
+  #journey [class*="JourneyExperienceRebuilt_meta"] > span {
+    font-size: 11px !important;
+  }
+}
