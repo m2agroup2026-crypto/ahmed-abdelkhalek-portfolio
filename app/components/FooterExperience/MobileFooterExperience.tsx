@@ -6,7 +6,6 @@ export default function MobileFooterExperience({ language }: { language: FooterL
   return (
     <div className={styles.footer} data-mobile-signature-footer>
       <div className={styles.signature}>
-        <div className={styles.monogram}>AA</div>
         <span>{ar ? "الهوية المهنية" : "Professional identity"}</span>
         <h2>{ar ? "أحمد عبد الخالق" : "Ahmed Abdelkhalek"}</h2>
         <h3>{footerText(footerContent.role, language)}</h3>
@@ -31,7 +30,6 @@ export default function MobileFooterExperience({ language }: { language: FooterL
         <small>{footerText(footerContent.copyright, language)}</small>
       </div>
 
-      <a className={styles.top} href="#top" aria-label={footerText(footerContent.top, language)}>↑</a>
     </div>
   );
 }
