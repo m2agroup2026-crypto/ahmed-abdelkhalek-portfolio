@@ -12,7 +12,7 @@
    */
   main.arabic-ui,
   main.arabic-ui * {
-    font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif !important;
+    font-family: inherit !important;
   }
 
   /*
