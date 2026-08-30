@@ -85,3 +85,10 @@
 @media(max-width:1000px){.finalStatement{grid-template-columns:120px minmax(0,1fr)}.footer[dir="rtl"] .statementCopy h2>span:first-child,.footer[dir="rtl"] .statementCopy h2 em>span{white-space:normal}}
 @media(max-width:600px){.footer{padding-bottom:106px}.finalStatement{grid-template-columns:1fr}.finalStatement:after{inset:18px 18px auto auto}.footer[dir="rtl"] .statementCopy h2{font-size:clamp(36px,10.4vw,49px)}.topControl{left:0;bottom:-78px;min-width:190px}.identityDeck{margin-top:20px}.systemBar{padding-bottom:10px}}
 @media(prefers-reduced-motion:reduce){.identityDeck:before{animation:none}}
+
+.desktopExperience{display:block}
+@media(max-width:600px){
+  .footer{padding:48px 0 92px}
+  .shell{width:calc(100% - 20px)}
+  .desktopExperience{display:none!important}
+}

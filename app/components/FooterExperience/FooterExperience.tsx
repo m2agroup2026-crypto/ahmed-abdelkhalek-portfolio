@@ -3,6 +3,7 @@
 import styles from "./FooterExperience.module.css";
 import { footerContent, footerNav, footerText, type FooterLanguage } from "./content";
 import { useFooterMotion } from "./useFooterMotion";
+import MobileFooterExperience from "./MobileFooterExperience";
 
 export default function FooterExperience({ language }: { language: FooterLanguage }) {
   const footerRef = useFooterMotion();
@@ -13,6 +14,7 @@ export default function FooterExperience({ language }: { language: FooterLanguag
     <footer id="portfolio-footer" ref={footerRef} className={styles.footer} dir={ar ? "rtl" : "ltr"}>
       <div className={styles.ambient} aria-hidden="true"><i /><i /><i /></div>
       <div className={styles.shell}>
+        <div className={styles.desktopExperience}>
         <section className={styles.finalStatement} aria-labelledby="footer-statement">
           <div className={styles.core} aria-hidden="true"><span /><span /><i /><strong>AA</strong></div>
           <div className={styles.statementCopy}>
@@ -36,6 +38,8 @@ export default function FooterExperience({ language }: { language: FooterLanguag
 
         <div className={styles.systemBar}><span><i />{footerText(footerContent.status, language)}</span><b>© {new Date().getFullYear()} AHMED ABDELKHALEK</b><small>{footerText(footerContent.copyright, language)}</small></div>
         <a className={styles.topControl} href="#top" onClick={scrollTop} aria-label={footerText(footerContent.top, language)}><span>{footerText(footerContent.top, language)}</span><i><svg viewBox="0 0 24 24"><path d="M12 20V4M5 11l7-7 7 7"/></svg></i></a>
+        </div>
+        <MobileFooterExperience language={language} />
       </div>
     </footer>
   );
