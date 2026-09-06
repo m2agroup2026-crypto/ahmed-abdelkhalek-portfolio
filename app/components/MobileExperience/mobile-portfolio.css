@@ -1,0 +1,11 @@
+.mobile-portfolio-v2 {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .mobile-portfolio-v2 {
+    display: block;
+    padding: 0 20px;
+  }
+}
