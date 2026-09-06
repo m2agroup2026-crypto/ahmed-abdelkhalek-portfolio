@@ -1,0 +1,56 @@
+.mobile-header-v2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+}
+
+.mobile-brand {
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.mobile-menu-button {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mobile-menu-button span {
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+}
+
+.mobile-hero-v2 {
+  min-height: 100svh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+
+.mobile-mark {
+  font-size: 48px;
+  font-weight: 800;
+}
+
+.mobile-hero-v2 h1 {
+  font-size: clamp(34px, 10vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.mobile-portrait-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  border-radius: 32px;
+  background: radial-gradient(circle at top, rgba(32,180,180,.35), transparent 60%);
+}
+
+.mobile-primary-action {
+  width: fit-content;
+  padding: 14px 24px;
+  border-radius: 999px;
+}
